@@ -25,16 +25,16 @@ RESULTS = {"cc":(2,"K"), "ct":(-1,"R"), "tc":(4,"S"), "tt":(1,"E")}
 
 class warrior:
     def __init__(self, filename):
-        print "[!] CREATED WARRIOR -", filename
+        #print "[!] CREATED WARRIOR -", filename
         self.filename = filename
         self.exec_code = self.__build__(os.path.splitext(filename))
-        print "\t", self.exec_code
+        #print "\t", self.exec_code
         
     def __build__(self, a):
         base, ext = a
         if ext == '.py':
             py_compile.compile(self.filename)
-            print 'compiled python: ' + self.filename
+            #print 'compiled python: ' + self.filename
             return ('%s %sc' %( PYTHON_PATH, self.filename))
         
         elif ext =='.lsp':
@@ -42,7 +42,7 @@ class warrior:
             # we mess with stdout/err here to suprress
             # the noisy output of clisp
             if subprocess.call([CLISP_PATH, '-c --silent', self.filename],stdout=subprocess.PIPE,stderr=subprocess.PIPE) == 0:
-                print 'compiled lisp: ' + self.filename
+                #print 'compiled lisp: ' + self.filename
                 return CLISP_PATH + " " + self.filename
         else:
             return self.filename

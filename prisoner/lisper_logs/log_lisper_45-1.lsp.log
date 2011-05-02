@@ -1,0 +1,220 @@
+Finding warriors in ./warriors/
+
+
+Running 1 tournament iterations of 50 matches
+
+Tournament 1 
+--------------------------------------------------------------------------------
+  convergence    Vs.      theves      	Score:  (54, 69)
+  convergence    Vs.     bygones      	Score:  (100, 100)
+  convergence    Vs.     twotats      	Score:  (100, 100)
+  convergence    Vs.     schemer      	Score:  (76, 86)
+  convergence    Vs.      shark       	Score:  (100, 100)
+  convergence    Vs.      random      	Score:  (65, 85)
+  convergence    Vs.   t4t-missile    	Score:  (49, 59)
+  convergence    Vs.    handshake     	Score:  (42, 62)
+  convergence    Vs.  anti-handshake  	Score:  (86, 96)
+  convergence    Vs.      devil       	Score:  (38, 68)
+  convergence    Vs.     antit42t     	Score:  (46, 61)
+  convergence    Vs.     mistrust     	Score:  (58, 53)
+  convergence    Vs.     thieves      	Score:  (50, 75)
+  convergence    Vs.      pavlov      	Score:  (100, 100)
+  convergence    Vs.   lisper_45-1    	Score:  (96, 101)
+  convergence    Vs.     tit4tat      	Score:  (100, 100)
+  convergence    Vs.      angel       	Score:  (100, 100)
+     theves      Vs.     bygones      	Score:  (66, 56)
+     theves      Vs.     twotats      	Score:  (66, 56)
+     theves      Vs.     schemer      	Score:  (136, -4)
+     theves      Vs.      shark       	Score:  (63, 58)
+     theves      Vs.      random      	Score:  (111, 16)
+    bygones      Vs.      pavlov      	Score:  (100, 100)
+    bygones      Vs.   lisper_45-1    	Score:  (51, 66)
+    bygones      Vs.     tit4tat      	Score:  (100, 100)
+    bygones      Vs.      angel       	Score:  (100, 100)
+    twotats      Vs.     schemer      	Score:  (50, 125)
+    twotats      Vs.      shark       	Score:  (100, 100)
+    twotats      Vs.      random      	Score:  (43, 113)
+    twotats      Vs.   t4t-missile    	Score:  (33, 118)
+    twotats      Vs.    handshake     	Score:  (46, 56)
+    twotats      Vs.  anti-handshake  	Score:  (87, 102)
+    twotats      Vs.      devil       	Score:  (46, 56)
+    twotats      Vs.     antit42t     	Score:  (33, 118)
+    twotats      Vs.     mistrust     	Score:  (97, 102)
+    twotats      Vs.     thieves      	Score:  (56, 66)
+    twotats      Vs.      pavlov      	Score:  (100, 100)
+    twotats      Vs.   lisper_45-1    	Score:  (95, 100)
+    twotats      Vs.     tit4tat      	Score:  (100, 100)
+    twotats      Vs.      angel       	Score:  (100, 100)
+    schemer      Vs.      shark       	Score:  (68, 88)
+    schemer      Vs.      random      	Score:  (80, 80)
+    schemer      Vs.   t4t-missile    	Score:  (18, 123)
+    schemer      Vs.    handshake     	Score:  (-12, 143)
+     random      Vs.    handshake     	Score:  (3, 123)
+     random      Vs.  anti-handshake  	Score:  (73, 78)
+     random      Vs.      devil       	Score:  (8, 113)
+     random      Vs.     antit42t     	Score:  (22, 117)
+     random      Vs.     mistrust     	Score:  (82, 72)
+     random      Vs.     thieves      	Score:  (5, 120)
+     random      Vs.      pavlov      	Score:  (55, 95)
+     random      Vs.   lisper_45-1    	Score:  (6, 126)
+     random      Vs.     tit4tat      	Score:  (79, 74)
+     random      Vs.      angel       	Score:  (168, -2)
+  t4t-missile    Vs.    handshake     	Score:  (48, 53)
+  t4t-missile    Vs.  anti-handshake  	Score:  (57, 47)
+  t4t-missile    Vs.      devil       	Score:  (48, 53)
+  t4t-missile    Vs.     antit42t     	Score:  (51, 51)
+  t4t-missile    Vs.     mistrust     	Score:  (55, 50)
+  t4t-missile    Vs.     thieves      	Score:  (54, 49)
+  t4t-missile    Vs.      pavlov      	Score:  (126, 1)
+  t4t-missile    Vs.   lisper_45-1    	Score:  (58, 48)
+  t4t-missile    Vs.     tit4tat      	Score:  (54, 49)
+  t4t-missile    Vs.      angel       	Score:  (166, 1)
+   handshake     Vs.  anti-handshake  	Score:  (59, 44)
+   handshake     Vs.      devil       	Score:  (48, 53)
+    antit42t     Vs.     mistrust     	Score:  (55, 50)
+    antit42t     Vs.     thieves      	Score:  (54, 49)
+    antit42t     Vs.      pavlov      	Score:  (126, 1)
+    antit42t     Vs.   lisper_45-1    	Score:  (58, 48)
+    antit42t     Vs.     tit4tat      	Score:  (54, 49)
+    antit42t     Vs.      angel       	Score:  (166, 1)
+    mistrust     Vs.        theves      Vs.   t4t-missile    	Score:  (49, 54)
+     theves      Vs.    handshake     	Score:  (48, 53)
+     theves      Vs.  anti-handshake  	Score:  (55, 50)
+     theves      Vs.      devil       	Score:  (48, 53)
+     theves      Vs.     antit42t     	Score:  (49, 54)
+     theves      Vs.     mistrust     	Score:  (54, 49)
+     theves      Vs.     thieves      	Score:  (99, 99)
+     theves      Vs.      pavlov      	Score:  (120, 20)
+     theves      Vs.   lisper_45-1    	Score:  (55, 55)
+     theves      Vs.     tit4tat      	Score:  (63, 58)
+     theves      Vs.      angel       	Score:  (180, -20)
+    bygones      Vs.     twotats      	Score:  (100, 100)
+    bygones      Vs.     schemer      	Score:  (59, 114)
+    bygones      Vs.      shark       	Score:  (100, 100)
+    bygones      Vs.      random      	Score:  (69, 74)
+    bygones      Vs.   t4t-missile    	Score:  (49, 54)
+    bygones      Vs.    handshake     	Score:  (48, 53)
+    bygones      Vs.  anti-handshake  	Score:  (91, 96)
+    bygones      Vs.      devil       	Score:  (48, 53)
+    bygones      Vs.     antit42t     	Score:  (49, 54)
+    bygones      Vs.     mistrust     	Score:  (99, 99)
+    bygones      Vs.     thieves      	Score:  (56, 66)
+    schemer      Vs.  anti-handshake  	Score:  (74, 84)
+    schemer      Vs.      devil       	Score:  (-10, 140)
+    schemer      Vs.     antit42t     	Score:  (15, 125)
+    schemer      Vs.     mistrust     	Score:  (82, 82)
+    schemer      Vs.     thieves      	Score:  (-3, 137)
+    schemer      Vs.      pavlov      	Score:  (79, 84)
+    schemer      Vs.   lisper_45-1    	Score:  (2, 132)
+    schemer      Vs.     tit4tat      	Score:  (81, 81)
+    schemer      Vs.      angel       	Score:  (140, 40)
+     shark       Vs.      random      	Score:  (70, 70)
+     shark       Vs.   t4t-missile    	Score:  (49, 54)
+     shark       Vs.    handshake     	Score:  (48, 53)
+     shark       Vs.  anti-handshake  	Score:  (64, 64)
+     shark       Vs.      devil       	Score:  (48, 53)
+     shark       Vs.     antit42t     	Score:  (49, 54)
+     shark       Vs.     mistrust     	Score:  (99, 99)
+     shark       Vs.     thieves      	Score:  (58, 63)
+     shark       Vs.      pavlov      	Score:  (100, 100)
+     shark       Vs.   lisper_45-1    	Score:  (54, 59)
+     shark       Vs.     tit4tat      	Score:  (100, 100)
+     shark       Vs.      angel       	Score:  (100, 100)
+     random      Vs.   t4t-missile    	Score:  (24, 104)
+   handshake     Vs.     antit42t     	Score:  (53, 48)
+   handshake     Vs.     mistrust     	Score:  (54, 49)
+   handshake     Vs.     thieves      	Score:  (53, 48)
+   handshake     Vs.      pavlov      	Score:  (125, 0)
+   handshake     Vs.   lisper_45-1    	Score:  (62, 42)
+   handshake     Vs.     tit4tat      	Score:  (53, 48)
+   handshake     Vs.      angel       	Score:  (200, -50)
+ anti-handshake  Vs.      devil       	Score:  (44, 59)
+ anti-handshake  Vs.     antit42t     	Score:  (47, 57)
+ anti-handshake  Vs.     mistrust     	Score:  (76, 71)
+ anti-handshake  Vs.     thieves      	Score:  (50, 55)
+ anti-handshake  Vs.      pavlov      	Score:  (73, 63)
+ anti-handshake  Vs.   lisper_45-1    	Score:  (56, 51)
+ anti-handshake  Vs.     tit4tat      	Score:  (76, 71)
+ anti-handshake  Vs.      angel       	Score:  (114, 79)
+     devil       Vs.     antit42t     	Score:  (53, 48)
+     devil       Vs.     mistrust     	Score:  (56, 46)
+     devil       Vs.     thieves      	Score:  (53, 48)
+     devil       Vs.      pavlov      	Score:  (125, 0)
+     devil       Vs.   lisper_45-1    	Score:  (62, 42)
+     devil       Vs.     tit4tat      	Score:  (53, 48)
+     devil       Vs.      angel       	Score:  (200, -50)
+     theves      Vs.      theves      	Score:  (99, 99)
+    bygones      Vs.     bygones      	Score:  (100, 100)
+    twotats      Vs.     twotats      	Score:  (100, 100)
+    schemer      Vs.     schemer      	Score:  (83, 78)
+     shark       Vs.      shark       	Score:  (100, 100)
+     random      Vs.      random      	Score:  (98, 43)
+  t4t-missile    Vs.   t4t-missil  thieves      	Score:  (49, 54)
+    mistrust     Vs.      pavlov      	Score:  (67, 67)
+    mistrust     Vs.   lisper_45-1    	Score:  (102, 97)
+    mistrust     Vs.     tit4tat      	Score:  (99, 99)
+    mistrust     Vs.      angel       	Score:  (102, 97)
+    thieves      Vs.      pavlov      	Score:  (120, 20)
+    thieves      Vs.   lisper_45-1    	Score:  (55, 55)
+    thieves      Vs.     tit4tat      	Score:  (63, 58)
+    thieves      Vs.      angel       	Score:  (180, -20)
+     pavlov      Vs.   lisper_45-1    	Score:  (96, 101)
+     pavlov      Vs.     tit4tat      	Score:  (100, 100)
+     pavlov      Vs.      angel       	Score:  (100, 100)
+  lisper_45-1    Vs.     tit4tat      	Score:  (59, 54)
+  lisper_45-1    Vs.      angel       	Score:  (192, -38)
+    tit4tat      Vs.      angel       	Score:  (100, 100)
+  convergence    Vs.   convergence    	Score:  (100, 100)
+e    	Score:  (51, 51)
+   handshake     Vs.    handshake     	Score:  (92, 92)
+ anti-handshake  Vs.  anti-handshake  	Score:  (53, 53)
+     devil       Vs.      devil       	Score:  (50, 50)
+    antit42t     Vs.     antit42t     	Score:  (51, 51)
+    mistrust     Vs.     mistrust     	Score:  (99, 99)
+    thieves      Vs.     thieves      	Score:  (99, 99)
+     pavlov      Vs.      pavlov      	Score:  (100, 100)
+  lisper_45-1    Vs.   lisper_45-1    	Score:  (99, 99)
+    tit4tat      Vs.     tit4tat      	Score:  (100, 100)
+     angel       Vs.      angel       	Score:  (100, 100)
+
+
+angel 738
+schemer 1015
+random 1033
+pavlov 1147
+anti-handshake 1250
+t4t-missile 1334
+mistrust 1340
+twotats 1342
+antit42t 1351
+devil 1353
+convergence 1360
+bygones 1375
+shark 1385
+tit4tat 1389
+handshake 1395
+theves 1430
+thieves 1446
+lisper_45-1 1473
+	Winner is lisper_45-1
+-------------------------------------------------------------------------------- 
+Final Results:
+convergence 0
+theves 0
+anti-handshake 0
+antit42t 0
+schemer 0
+shark 0
+mistrust 0
+tit4tat 0
+handshake 0
+bygones 0
+t4t-missile 0
+random 0
+thieves 0
+twotats 0
+pavlov 0
+angel 0
+devil 0
+lisper_45-1 1
+Final Winner is lisper_45-1!
