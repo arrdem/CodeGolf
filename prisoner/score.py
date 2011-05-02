@@ -98,6 +98,32 @@ def runGame(rounds,p1,p2, printing = False):
         print p1.nicename(pad = False), ha, "\n", p2.nicename(pad = False), hd
     return sa, sd
 
+def challenger(player, players, v = False):
+
+    print "Running %s tournament iterations of %s matches" % (num_iters, NUM_ROUNDS)
+    scores={}
+    pointsFor = 0
+    pointsAgainst = 0
+
+    for p in players:
+        (s1, s2) = runGame(NUM_ROUNDS, player, p, printing = v)
+        if (player == p):
+            scores[p] = (s1 + s2) / 2
+            pointsFor += (s1 + s2) / 2
+        else:
+            scores[p] = s2
+            pointsFor += s1
+            pointsAgainst += s2
+
+    players_sorted = sorted(scores,key=scores.get)
+
+    print "\n"
+    for p in players_sorted:
+        print p.nicename(), scores[p]
+
+    print ""
+    print "\tTotal points for %s: %i" %(player.nicename(pad = False), pointsFor)
+    print "\tTotal points against %s: %i" %(player.nicename(pad = False), pointsAgainst)
 
 def processPlayers(players):    
     for i,p in enumerate(players):
@@ -201,12 +227,13 @@ Usage score [warriors dir] [[rounds] [games/round] [-i]]\n"""
             help_dict = {
                          'list'     : "usage: list [population]\n\twith argument lists the contentsof the population.\n\telse lists populations.",
                          'match'    : "usage: match [champ] [champ] [[rounds] [-v]]\n\tpits two champs against each-other\n\t -v causes the match's play-by play to be printed too.'",
+                         'challenge': "usage: challenge [champ] [population] [[rounds] [-v]]\n\tpits one champ against the others\n\t -v causes the match's play-by play to be printed too.'",
                          'tourney'  : "usage: tourney [population] [[itterations] [rounds]]\n\tplays off all champs against each-other.",
                          'quit'     : "exits this CLI",
                          'del'      : "usage: del [champion] [population] [[count] [-a]]\n\tdeletes count (default 1) instance of champion from the population.\n\t-a deletes all.",
                          'add'      : "usage: add [champion] [population] [[instances]]\n\tadds the specified number of instances of the champion to a given population",
                          'new'      : "usage: new [population name]\n\tcreates an empty list of champions",
-                         ''         : "avalable commands:\nlist, match, tourney, new, add, quit"
+                         ''         : "avalable commands:\nlist, match, challenge, tourney, new, add, quit"
                         }
             
             for champ in players:
@@ -288,6 +315,31 @@ Usage score [warriors dir] [[rounds] [games/round] [-i]]\n"""
                                 except Exception:
                                     print "[!] BAD COMMAND ERROR - TRY THIS COMMAND: help match"
                                     continue
+                        
+                        if(cmd[0] == "challenge"):
+                            rounds = 100
+                            flag = ('-v' in cmd)
+                            chuck_norris
+                            pop = []
+                            try:
+                                chuck_norris = champ_dict[cmd[1]]
+                            except Exception:
+                                print "[!] BAD CHAMPION PROVIDED - TRY THIS COMMAND: help challenge OR: list default"
+                                continue
+                            
+                            try:
+                                pop = pop_dict[cmd[2]]
+                            except Exception:
+                                print "[!] BAD POPULATION PROVIDED - TRY THIS COMMAND: help challenge OR: list"
+                                continue
+                                
+                            try:
+                                rounds = int(cmd[3])
+                            except Exception:
+                                pass
+                            
+                            for dude in pop:
+                                runGame(rounds, chuck_norris, pop, printing = flag)
                         
                         if(cmd[0] == "tourney"):
                             itters = 5
