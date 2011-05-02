@@ -20,6 +20,9 @@ import string
 # config
 PYTHON_PATH = '/usr/bin/python' #path to python executable
 CLISP_PATH = '/usr/bin/clisp'   #path to clisp executable
+JAVAC_PATH = '/usr/bin/javac'   #path to java compiler
+JAVA_PATH = '/usr/bin/java'   #path to java vm
+
 NUM_ROUNDS = 100
 RESULTS = {"cc":(2,"K"), "ct":(-1,"R"), "tc":(4,"S"), "tt":(1,"E")}
 
@@ -38,12 +41,18 @@ class warrior:
             return ('%s %sc' %( PYTHON_PATH, self.filename))
         
         elif ext =='.lsp':
-            
             # we mess with stdout/err here to suprress
             # the noisy output of clisp
             if subprocess.call([CLISP_PATH, '-c --silent', self.filename],stdout=subprocess.PIPE,stderr=subprocess.PIPE) == 0:
                 #print 'compiled lisp: ' + self.filename
                 return CLISP_PATH + " " + self.filename
+                
+        elif ext == '.java':
+            if subprocess.call([JAVAC_PATH, self.filename]) == 0:
+                print 'compiled java: ' + self.filename
+                classname = re.sub('\.java$', '', self.filename)
+                classname = re.sub('/', '.', classname);
+                return JAVA_PATH + " " + classname
         else:
             return self.filename
         

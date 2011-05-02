@@ -17,7 +17,7 @@
   lisper_40-6    Vs.      random      	Score:  (102, 22)
   lisper_40-6    Vs.   lisper_40-6    	Score:  (99, 99)
 lisper_40-6 1520
-lisper_40-6 1
+
   convergence    Vs.   lisper_5-51    	Score:  (54, 59)
      theves      Vs.   lisper_5-51    	Score:  (58, 53)
   lisper_5-51    Vs.     thieves      	Score:  (53, 58)
@@ -37,7 +37,7 @@ lisper_40-6 1
   lisper_5-51    Vs.     mistrust     	Score:  (97, 102)
   lisper_5-51    Vs.   lisper_5-51    	Score:  (99, 99)
 lisper_5-51 1523
-lisper_5-51 1
+
   convergence    Vs.   lisper_10-46   	Score:  (94, 99)
     bygones      Vs.   lisper_10-46   	Score:  (98, 98)
     twotats      Vs.   lisper_10-46   	Score:  (95, 100)
@@ -57,7 +57,7 @@ lisper_5-51 1
   lisper_10-46   Vs.      angel       	Score:  (192, -38)
   lisper_10-46   Vs.   lisper_10-46   	Score:  (99, 99)
 lisper_10-46 1555
-lisper_10-46 1
+
   convergence    Vs.   lisper_25-56   	Score:  (98, 98)
     twotats      Vs.   lisper_25-56   	Score:  (95, 100)
      random      Vs.   lisper_25-56   	Score:  (12, 122)
@@ -77,7 +77,7 @@ lisper_10-46 1
   lisper_25-56   Vs.      angel       	Score:  (192, -38)
   lisper_25-56   Vs.   lisper_25-56   	Score:  (99, 99)
 lisper_25-56 1566
-lisper_25-56 1
+
   convergence    Vs.   lisper_15-1    	Score:  (98, 93)
      theves      Vs.   lisper_15-1    	Score:  (61, 51)
   lisper_15-1    Vs.     thieves      	Score:  (51, 61)
@@ -97,7 +97,7 @@ lisper_25-56 1
   lisper_15-1    Vs.     mistrust     	Score:  (97, 102)
   lisper_15-1    Vs.   lisper_15-1    	Score:  (99, 99)
 lisper_15-1 1460
-lisper_15-1 1
+
   convergence    Vs.   lisper_5-61    	Score:  (98, 98)
     twotats      Vs.   lisper_5-61    	Score:  (95, 100)
      random      Vs.   lisper_5-61    	Score:  (24, 99)
@@ -117,7 +117,7 @@ lisper_15-1 1
   lisper_5-61    Vs.      angel       	Score:  (192, -38)
   lisper_5-61    Vs.   lisper_5-61    	Score:  (99, 99)
 lisper_5-61 1478
-lisper_5-61 1
+
   convergence    Vs.   lisper_45-76   	Score:  (91, 96)
     twotats      Vs.   lisper_45-76   	Score:  (95, 100)
     schemer      Vs.   lisper_45-76   	Score:  (6, 131)
@@ -137,7 +137,7 @@ lisper_5-61 1
      random      Vs.   lisper_45-76   	Score:  (14, 114)
   lisper_45-76   Vs.   lisper_45Vs.     mistrust     	Score:  (55, 50)
 lisper_45-76 1455
-lisper_45-76 1
+
   convergence    Vs.   lisper_25-46   	Score:  (92, 97)
     twotats      Vs.   lisper_25-46   	Score:  (95, 100)
      random      Vs.   lisper_25-46   	Score:  (12, 117)
@@ -157,7 +157,7 @@ lisper_45-76 1
   lisper_25-46   Vs.      angel       	Score:  (192, -38)
   lisper_25-46   Vs.   lisper_25-46   	Score:  (99, 99)
 lisper_25-46 1456
-lisper_25-46 1
+
   convergence    Vs.   lisper_20-61   	Score:  (56, 56)
     twotats      Vs.   lisper_20-61   	Score:  (95, 100)
      random      Vs.   lisper_20-61   	Score:  (18, 108)
@@ -177,7 +177,7 @@ lisper_25-46 1
   lisper_20-61   Vs.      angel       	Score:  (192, -38)
   lisper_20-61   Vs.   lisper_20-61   	Score:  (99, 99)
 lisper_20-61 1514
-lisper_20-61 1
+
   convergence    Vs.   lisper_40-16   	Score:  (53, 63)
      theves      Vs.   lisper_40-16   	Score:  (58, 53)
     twotats      Vs.   lisper_40-16   	Score:  (95, 100)
@@ -197,7 +197,7 @@ lisper_20-61 1
   lisper_40-16   Vs.      random      	Score:  (124, 9)
   lisper_40-16   Vs.   lisper_40-16   	Score:  (99, 99)
 lisper_40-16 1533
-lisper_40-16 1
+
   convergence    Vs.   lisper_30-1    	Score:  (95, 100)
     twotats      Vs.   lisper_30-1    	Score:  (95, 100)
      random      Vs.   lisper_30-1    	Score:  (20, 105)
@@ -217,7 +217,7 @@ lisper_40-16 1
   lisper_30-1    Vs.      angel       	Score:  (192, -38)
   lisper_30-1    Vs.   lisper_30-1    	Score:  (99, 99)
 lisper_30-1 1555
-lisper_30-1 1
+
   convergence    Vs.   lisper_5-71    	Score:  (95, 100)
     twotats      Vs.   lisper_5-71    	Score:  (95, 100)
      random      Vs.   lisper_5-71    	Score:  (16, 111)
@@ -237,7 +237,7 @@ lisper_30-1 1
   lisper_5-71    Vs.      angel       	Score:  (192, -38)
   lisper_5-71    Vs.   lisper_5-71    	Score:  (99, 99)
 lisper_5-71 1457
-lisper_5-71 1
+
   convergence    Vs.   lisper_10-26   	Score:  (94, 99)
     bygones      Vs.   lisper_10-26   	Score:  (98, 98)
     twotats      Vs.   lisper_10-26   	Score:  (95, 100)
@@ -256,7 +256,7 @@ lisper_5-71 1
     tit4tat      Vs.   lisper_10-26   	Score:  (98, 98)
   lisper_10-26   Vs.      angel       	Score:  (192, -38)
 lisper_10-26 1464
-lisper_10-26 1
+
   convergence    Vs.   lisper_25-11   	Score:  (95, 95)
      theves      Vs.   lisper_25-11   	Score:  (61, 51)
   lisper_25-11   Vs.     thieves      	Score:  (51, 61)
@@ -276,7 +276,7 @@ lisper_10-26 1
   lisper_25-11   Vs.     mistrust     	Score:  (97, 102)
   lisper_25-11   Vs.   lisper_25-11   	Score:  (99, 99)
 lisper_25-11 1541
-lisper_25-11 1
+
   convergence    Vs.   lisper_10-36   	Score:  (54, 64)
     twotats      Vs.   lisper_10-36   	Score:  (95, 100)
      random      Vs.   lisper_10-36   	Score:  (22, 102)
@@ -296,7 +296,7 @@ lisper_25-11 1
   lisper_10-36   Vs.      angel       	Score:  (192, -38)
   lisper_10-36   Vs.   lisper_10-36   	Score:  (99, 99)
 lisper_10-36 1522
-lisper_10-36 1
+
   convergence    Vs.   lisper_30-6    	Score:  (97, 97)
     bygones      Vs.   lisper_30-6    	Score:  (98, 98)
     twotats      Vs.   lisper_30-6    	Score:  (95, 100)
@@ -316,7 +316,7 @@ lisper_10-36 1
   lisper_30-6    Vs.      angel       	Score:  (192, -38)
   lisper_30-6    Vs.   lisper_30-6    	Score:  (99, 99)
 lisper_30-6 1546
-lisper_30-6 1
+
   convergence    Vs.   lisper_20-11   	Score:  (91, 101)
     twotats      Vs.   lisper_20-11   	Score:  (95, 100)
      random      Vs.   lisper_20-11   	Score:  (33, 103)
@@ -336,7 +336,7 @@ lisper_30-6 1
   lisper_20-11   Vs.      angel       	Score:  (192, -38)
   lisper_20-11   Vs.   lisper_20-11   	Score:  (99, 99)
 lisper_20-11 1474
-lisper_20-11 1
+
   convergence    Vs.   lisper_20-41   	Score:  (99, 94)
      theves      Vs.   lisper_20-41   	Score:  (58, 53)
     twotats      Vs.   lisper_20-41   	Score:  (95, 100)
@@ -356,7 +356,7 @@ lisper_20-11 1
   lisper_20-41   Vs.      angel       	Score:  (192, -38)
   lisper_20-41   Vs.   lisper_20-41   	Score:  (99, 99)
 lisper_20-41 1558
-lisper_20-41 1
+
   convergence    Vs.   lisper_35-16   	Score:  (93, 93)
   lisper_35-16   Vs.      theves      	Score:  (53, 58)
   lisper_35-16   Vs.     bygones      	Score:  (98, 98)
@@ -376,7 +376,7 @@ lisper_20-41 1
   lisper_35-16   Vs.      angel       	Score:  (192, -38)
   lisper_35-16   Vs.   lisper_35-16   	Score:  (99, 99)
 lisper_35-16 1540
-lisper_35-16 1
+
   convergence    Vs.    lisper_5-1    	Score:  (95, 100)
     twotats      Vs.    lisper_5-1    	Score:  (95, 100)
      random      Vs.    lisper_5-1    	Score:  (26, 101)
@@ -396,7 +396,7 @@ lisper_35-16 1
    lisper_5-1    Vs.      angel       	Score:  (192, -38)
    lisper_5-1    Vs.    lisper_5-1    	Score:  (99, 99)
 lisper_5-1 1453
-lisper_5-1 1
+
   convergence    Vs.   lisper_20-31   	Score:  (100, 95)
      theves      Vs.   lisper_20-31   	Score:  (58, 53)
     twotats      Vs.   lisper_20-31   	Score:  (95, 100)
@@ -416,7 +416,7 @@ lisper_5-1 1
   lisper_20-31   Vs.      random      	Score:  (109, 19)
   lisper_20-31   Vs.   lisper_20-31   	Score:  (99, 99)
 lisper_20-31 1550
-lisper_20-31 1
+
   convergence    Vs.   lisper_25-76   	Score:  (96, 96)
     bygones      Vs.   lisper_25-76   	Score:  (98, 98)
     twotats      Vs.   lisper_25-76   	Score:  (95, 100)
@@ -436,7 +436,7 @@ lisper_20-31 1
   lisper_25-76   Vs.      angel       	Score:  (192, -38)
   lisper_25-76   Vs.   lisper_25-76   	Score:  (99, 99)
 lisper_25-76 1558
-lisper_25-76 1
+
   convergence    Vs.   lisper_40-26   	Score:  (98, 98)
     twotats      Vs.   lisper_40-26   	Score:  (95, 100)
      random      Vs.   lisper_40-26   	Score:  (36, 91)
@@ -456,7 +456,7 @@ lisper_25-76 1
   lisper_40-26   Vs.      angel       	Score:  (192, -38)
   lisper_40-26   Vs.   lisper_40-26   	Score:  (99, 99)
 lisper_40-26 1537
-lisper_40-26 1
+
   convergence    Vs.   lisper_15-91   	Score:  (97, 97)
     bygones      Vs.   lisper_15-91   	Score:  (98, 98)
     twotats      Vs.   lisper_15-91   	Score:  (95, 100)
@@ -476,7 +476,7 @@ lisper_40-26 1
   lisper_15-91   Vs.      angel       	Score:  (192, -38)
   lisper_15-91   Vs.   lisper_15-91   	Score:  (99, 99)
 lisper_15-91 1547
-lisper_15-91 1
+
   convergence    Vs.   lisper_5-46    	Score:  (90, 100)
      theves      Vs.   lisper_5-46    	Score:  (61, 51)
   lisper_5-46    Vs.     thieves      	Score:  (51, 61)
@@ -496,7 +496,7 @@ lisper_15-91 1
   lisper_5-46    Vs.     mistrust     	Score:  (97, 102)
   lisper_5-46    Vs.   lisper_5-46    	Score:  (99, 99)
 lisper_5-46 1511
-lisper_5-46 1
+
   convergence    Vs.   lisper_15-46   	Score:  (57, 62)
     twotats      Vs.   lisper_15-46   	Score:  (95, 100)
     schemer      Vs.   lisper_15-46   	Score:  (20, 120)
@@ -516,7 +516,7 @@ lisper_5-46 1
   lisper_15-46   Vs.      angel       	Score:  (192, -38)
   lisper_15-46   Vs.   lisper_15-46   	Score:  (99, 99)
 lisper_15-46 1513
-lisper_15-46 1
+
   convergence    Vs.   lisper_5-11    	Score:  (97, 97)
     bygones      Vs.   lisper_5-11    	Score:  (98, 98)
     twotats      Vs.   lisper_5-11    	Score:  (95, 100)
@@ -536,7 +536,7 @@ lisper_15-46 1
   lisper_5-11    Vs.      angel       	Score:  (192, -38)
   lisper_5-11    Vs.   lisper_5-11    	Score:  (99, 99)
 lisper_5-11 1468
-lisper_5-11 1
+
   convergence    Vs.   lisper_35-11   	Score:  (57, 62)
      theves      Vs.   lisper_35-11   	Score:  (58, 53)
     twotats      Vs.   lisper_35-11   	Score:  (95, 100)
@@ -556,7 +556,7 @@ lisper_5-11 1
   lisper_35-11   Vs.      angel       	Score:  (192, -38)
   lisper_35-11   Vs.   lisper_35-11   	Score:  (99, 99)
 lisper_35-11 1537
-lisper_35-11 1
+
   convergence    Vs.   lisper_25-16   	Score:  (102, 92)
      theves      Vs.   lisper_25-16   	Score:  (61, 51)
     twotats      Vs.   lisper_25-16   	Score:  (95, 100)
@@ -576,7 +576,7 @@ lisper_35-11 1
   lisper_25-16   Vs.      random      	Score:  (90, 55)
   lisper_25-16   Vs.   lisper_25-16   	Score:  (99, 99)
 lisper_25-16 1480
-lisper_25-16 1
+
   convergence    Vs.   lisper_40-76   	Score:  (97, 97)
      theves      Vs.   lisper_40-76   	Score:  (58, 53)
     twotats      Vs.   lisper_40-76   	Score:  (95, 100)
@@ -596,7 +596,7 @@ lisper_25-16 1
   lisper_40-76   Vs.      random      	Score:  (117, 12)
   lisper_40-76   Vs.   lisper_40-76   	Score:  (99, 99)
 lisper_40-76 1564
-lisper_40-76 1
+
   convergence    Vs.   lisper_25-26   	Score:  (92, 102)
     bygones      Vs.   lisper_25-26   	Score:  (98, 98)
     twotats      Vs.   lisper_25-26   	Score:  (95, 100)
@@ -616,7 +616,7 @@ lisper_40-76 1
   lisper_25-26   Vs.      angel       	Score:  (192, -38)
   lisper_25-26   Vs.   lisper_25-26   	Score:  (99, 99)
 lisper_25-26 1551
-lisper_25-26 1
+
   convergence    Vs.   lisper_40-6    	Score:  (50, 70)
      theves      Vs.   lisper_40-6    	Score:  (58, 53)
     twotats      Vs.   lisper_40-6    	Score:  (95, 100)
@@ -636,7 +636,7 @@ lisper_25-26 1
   lisper_40-6    Vs.      random      	Score:  (102, 22)
   lisper_40-6    Vs.   lisper_40-6    	Score:  (99, 99)
 lisper_40-6 1520
-lisper_40-6 1
+
   convergence    Vs.   lisper_5-51    	Score:  (54, 59)
      theves      Vs.   lisper_5-51    	Score:  (58, 53)
   lisper_5-51    Vs.     thieves      	Score:  (53, 58)
@@ -656,7 +656,7 @@ lisper_40-6 1
   lisper_5-51    Vs.     mistrust     	Score:  (97, 102)
   lisper_5-51    Vs.   lisper_5-51    	Score:  (99, 99)
 lisper_5-51 1523
-lisper_5-51 1
+
   convergence    Vs.   lisper_10-46   	Score:  (94, 99)
     bygones      Vs.   lisper_10-46   	Score:  (98, 98)
     twotats      Vs.   lisper_10-46   	Score:  (95, 100)
@@ -676,7 +676,7 @@ lisper_5-51 1
   lisper_10-46   Vs.      angel       	Score:  (192, -38)
   lisper_10-46   Vs.   lisper_10-46   	Score:  (99, 99)
 lisper_10-46 1555
-lisper_10-46 1
+
   convergence    Vs.   lisper_25-56   	Score:  (98, 98)
     twotats      Vs.   lisper_25-56   	Score:  (95, 100)
      random      Vs.   lisper_25-56   	Score:  (12, 122)
@@ -696,7 +696,7 @@ lisper_10-46 1
   lisper_25-56   Vs.      angel       	Score:  (192, -38)
   lisper_25-56   Vs.   lisper_25-56   	Score:  (99, 99)
 lisper_25-56 1566
-lisper_25-56 1
+
   convergence    Vs.   lisper_15-1    	Score:  (98, 93)
      theves      Vs.   lisper_15-1    	Score:  (61, 51)
   lisper_15-1    Vs.     thieves      	Score:  (51, 61)
@@ -716,7 +716,7 @@ lisper_25-56 1
   lisper_15-1    Vs.     mistrust     	Score:  (97, 102)
   lisper_15-1    Vs.   lisper_15-1    	Score:  (99, 99)
 lisper_15-1 1460
-lisper_15-1 1
+
   convergence    Vs.   lisper_5-61    	Score:  (98, 98)
     twotats      Vs.   lisper_5-61    	Score:  (95, 100)
      random      Vs.   lisper_5-61    	Score:  (24, 99)
@@ -736,7 +736,7 @@ lisper_15-1 1
   lisper_5-61    Vs.      angel       	Score:  (192, -38)
   lisper_5-61    Vs.   lisper_5-61    	Score:  (99, 99)
 lisper_5-61 1478
-lisper_5-61 1
+
   convergence    Vs.   lisper_45-76   	Score:  (91, 96)
     twotats      Vs.   lisper_45-76   	Score:  (95, 100)
     schemer      Vs.   lisper_45-76   	Score:  (6, 131)
@@ -756,7 +756,7 @@ lisper_5-61 1
      random      Vs.   lisper_45-76   	Score:  (14, 114)
   lisper_45-76   Vs.   lisper_45Vs.     mistrust     	Score:  (55, 50)
 lisper_45-76 1455
-lisper_45-76 1
+
   convergence    Vs.   lisper_25-46   	Score:  (92, 97)
     twotats      Vs.   lisper_25-46   	Score:  (95, 100)
      random      Vs.   lisper_25-46   	Score:  (12, 117)
@@ -776,7 +776,7 @@ lisper_45-76 1
   lisper_25-46   Vs.      angel       	Score:  (192, -38)
   lisper_25-46   Vs.   lisper_25-46   	Score:  (99, 99)
 lisper_25-46 1456
-lisper_25-46 1
+
   convergence    Vs.   lisper_20-61   	Score:  (56, 56)
     twotats      Vs.   lisper_20-61   	Score:  (95, 100)
      random      Vs.   lisper_20-61   	Score:  (18, 108)
@@ -796,7 +796,7 @@ lisper_25-46 1
   lisper_20-61   Vs.      angel       	Score:  (192, -38)
   lisper_20-61   Vs.   lisper_20-61   	Score:  (99, 99)
 lisper_20-61 1514
-lisper_20-61 1
+
   convergence    Vs.   lisper_40-16   	Score:  (53, 63)
      theves      Vs.   lisper_40-16   	Score:  (58, 53)
     twotats      Vs.   lisper_40-16   	Score:  (95, 100)
@@ -816,7 +816,7 @@ lisper_20-61 1
   lisper_40-16   Vs.      random      	Score:  (124, 9)
   lisper_40-16   Vs.   lisper_40-16   	Score:  (99, 99)
 lisper_40-16 1533
-lisper_40-16 1
+
   convergence    Vs.   lisper_30-1    	Score:  (95, 100)
     twotats      Vs.   lisper_30-1    	Score:  (95, 100)
      random      Vs.   lisper_30-1    	Score:  (20, 105)
@@ -836,7 +836,7 @@ lisper_40-16 1
   lisper_30-1    Vs.      angel       	Score:  (192, -38)
   lisper_30-1    Vs.   lisper_30-1    	Score:  (99, 99)
 lisper_30-1 1555
-lisper_30-1 1
+
   convergence    Vs.   lisper_5-71    	Score:  (95, 100)
     twotats      Vs.   lisper_5-71    	Score:  (95, 100)
      random      Vs.   lisper_5-71    	Score:  (16, 111)
@@ -856,7 +856,7 @@ lisper_30-1 1
   lisper_5-71    Vs.      angel       	Score:  (192, -38)
   lisper_5-71    Vs.   lisper_5-71    	Score:  (99, 99)
 lisper_5-71 1457
-lisper_5-71 1
+
   convergence    Vs.   lisper_10-26   	Score:  (94, 99)
     bygones      Vs.   lisper_10-26   	Score:  (98, 98)
     twotats      Vs.   lisper_10-26   	Score:  (95, 100)
@@ -875,7 +875,7 @@ lisper_5-71 1
     tit4tat      Vs.   lisper_10-26   	Score:  (98, 98)
   lisper_10-26   Vs.      angel       	Score:  (192, -38)
 lisper_10-26 1464
-lisper_10-26 1
+
   convergence    Vs.   lisper_25-11   	Score:  (95, 95)
      theves      Vs.   lisper_25-11   	Score:  (61, 51)
   lisper_25-11   Vs.     thieves      	Score:  (51, 61)
@@ -895,7 +895,7 @@ lisper_10-26 1
   lisper_25-11   Vs.     mistrust     	Score:  (97, 102)
   lisper_25-11   Vs.   lisper_25-11   	Score:  (99, 99)
 lisper_25-11 1541
-lisper_25-11 1
+
   convergence    Vs.   lisper_10-36   	Score:  (54, 64)
     twotats      Vs.   lisper_10-36   	Score:  (95, 100)
      random      Vs.   lisper_10-36   	Score:  (22, 102)
@@ -915,7 +915,7 @@ lisper_25-11 1
   lisper_10-36   Vs.      angel       	Score:  (192, -38)
   lisper_10-36   Vs.   lisper_10-36   	Score:  (99, 99)
 lisper_10-36 1522
-lisper_10-36 1
+
   convergence    Vs.   lisper_30-6    	Score:  (97, 97)
     bygones      Vs.   lisper_30-6    	Score:  (98, 98)
     twotats      Vs.   lisper_30-6    	Score:  (95, 100)
@@ -935,7 +935,7 @@ lisper_10-36 1
   lisper_30-6    Vs.      angel       	Score:  (192, -38)
   lisper_30-6    Vs.   lisper_30-6    	Score:  (99, 99)
 lisper_30-6 1546
-lisper_30-6 1
+
   convergence    Vs.   lisper_20-11   	Score:  (91, 101)
     twotats      Vs.   lisper_20-11   	Score:  (95, 100)
      random      Vs.   lisper_20-11   	Score:  (33, 103)
@@ -955,7 +955,7 @@ lisper_30-6 1
   lisper_20-11   Vs.      angel       	Score:  (192, -38)
   lisper_20-11   Vs.   lisper_20-11   	Score:  (99, 99)
 lisper_20-11 1474
-lisper_20-11 1
+
   convergence    Vs.   lisper_20-41   	Score:  (99, 94)
      theves      Vs.   lisper_20-41   	Score:  (58, 53)
     twotats      Vs.   lisper_20-41   	Score:  (95, 100)
@@ -975,7 +975,7 @@ lisper_20-11 1
   lisper_20-41   Vs.      angel       	Score:  (192, -38)
   lisper_20-41   Vs.   lisper_20-41   	Score:  (99, 99)
 lisper_20-41 1558
-lisper_20-41 1
+
   convergence    Vs.   lisper_35-16   	Score:  (93, 93)
   lisper_35-16   Vs.      theves      	Score:  (53, 58)
   lisper_35-16   Vs.     bygones      	Score:  (98, 98)
@@ -995,7 +995,7 @@ lisper_20-41 1
   lisper_35-16   Vs.      angel       	Score:  (192, -38)
   lisper_35-16   Vs.   lisper_35-16   	Score:  (99, 99)
 lisper_35-16 1540
-lisper_35-16 1
+
   convergence    Vs.    lisper_5-1    	Score:  (95, 100)
     twotats      Vs.    lisper_5-1    	Score:  (95, 100)
      random      Vs.    lisper_5-1    	Score:  (26, 101)
@@ -1015,7 +1015,7 @@ lisper_35-16 1
    lisper_5-1    Vs.      angel       	Score:  (192, -38)
    lisper_5-1    Vs.    lisper_5-1    	Score:  (99, 99)
 lisper_5-1 1453
-lisper_5-1 1
+
   convergence    Vs.   lisper_20-31   	Score:  (100, 95)
      theves      Vs.   lisper_20-31   	Score:  (58, 53)
     twotats      Vs.   lisper_20-31   	Score:  (95, 100)
@@ -1035,7 +1035,7 @@ lisper_5-1 1
   lisper_20-31   Vs.      random      	Score:  (109, 19)
   lisper_20-31   Vs.   lisper_20-31   	Score:  (99, 99)
 lisper_20-31 1550
-lisper_20-31 1
+
   convergence    Vs.   lisper_25-76   	Score:  (96, 96)
     bygones      Vs.   lisper_25-76   	Score:  (98, 98)
     twotats      Vs.   lisper_25-76   	Score:  (95, 100)
@@ -1055,7 +1055,7 @@ lisper_20-31 1
   lisper_25-76   Vs.      angel       	Score:  (192, -38)
   lisper_25-76   Vs.   lisper_25-76   	Score:  (99, 99)
 lisper_25-76 1558
-lisper_25-76 1
+
   convergence    Vs.   lisper_40-26   	Score:  (98, 98)
     twotats      Vs.   lisper_40-26   	Score:  (95, 100)
      random      Vs.   lisper_40-26   	Score:  (36, 91)
@@ -1075,7 +1075,7 @@ lisper_25-76 1
   lisper_40-26   Vs.      angel       	Score:  (192, -38)
   lisper_40-26   Vs.   lisper_40-26   	Score:  (99, 99)
 lisper_40-26 1537
-lisper_40-26 1
+
   convergence    Vs.   lisper_15-91   	Score:  (97, 97)
     bygones      Vs.   lisper_15-91   	Score:  (98, 98)
     twotats      Vs.   lisper_15-91   	Score:  (95, 100)
@@ -1095,7 +1095,7 @@ lisper_40-26 1
   lisper_15-91   Vs.      angel       	Score:  (192, -38)
   lisper_15-91   Vs.   lisper_15-91   	Score:  (99, 99)
 lisper_15-91 1547
-lisper_15-91 1
+
   convergence    Vs.   lisper_5-46    	Score:  (90, 100)
      theves      Vs.   lisper_5-46    	Score:  (61, 51)
   lisper_5-46    Vs.     thieves      	Score:  (51, 61)
@@ -1115,7 +1115,7 @@ lisper_15-91 1
   lisper_5-46    Vs.     mistrust     	Score:  (97, 102)
   lisper_5-46    Vs.   lisper_5-46    	Score:  (99, 99)
 lisper_5-46 1511
-lisper_5-46 1
+
   convergence    Vs.   lisper_15-46   	Score:  (57, 62)
     twotats      Vs.   lisper_15-46   	Score:  (95, 100)
     schemer      Vs.   lisper_15-46   	Score:  (20, 120)
@@ -1135,7 +1135,7 @@ lisper_5-46 1
   lisper_15-46   Vs.      angel       	Score:  (192, -38)
   lisper_15-46   Vs.   lisper_15-46   	Score:  (99, 99)
 lisper_15-46 1513
-lisper_15-46 1
+
   convergence    Vs.   lisper_5-11    	Score:  (97, 97)
     bygones      Vs.   lisper_5-11    	Score:  (98, 98)
     twotats      Vs.   lisper_5-11    	Score:  (95, 100)
@@ -1155,7 +1155,7 @@ lisper_15-46 1
   lisper_5-11    Vs.      angel       	Score:  (192, -38)
   lisper_5-11    Vs.   lisper_5-11    	Score:  (99, 99)
 lisper_5-11 1468
-lisper_5-11 1
+
   convergence    Vs.   lisper_35-11   	Score:  (57, 62)
      theves      Vs.   lisper_35-11   	Score:  (58, 53)
     twotats      Vs.   lisper_35-11   	Score:  (95, 100)
@@ -1175,7 +1175,7 @@ lisper_5-11 1
   lisper_35-11   Vs.      angel       	Score:  (192, -38)
   lisper_35-11   Vs.   lisper_35-11   	Score:  (99, 99)
 lisper_35-11 1537
-lisper_35-11 1
+
   convergence    Vs.   lisper_25-16   	Score:  (102, 92)
      theves      Vs.   lisper_25-16   	Score:  (61, 51)
     twotats      Vs.   lisper_25-16   	Score:  (95, 100)
@@ -1195,7 +1195,7 @@ lisper_35-11 1
   lisper_25-16   Vs.      random      	Score:  (90, 55)
   lisper_25-16   Vs.   lisper_25-16   	Score:  (99, 99)
 lisper_25-16 1480
-lisper_25-16 1
+
   convergence    Vs.   lisper_40-76   	Score:  (97, 97)
      theves      Vs.   lisper_40-76   	Score:  (58, 53)
     twotats      Vs.   lisper_40-76   	Score:  (95, 100)
@@ -1215,7 +1215,7 @@ lisper_25-16 1
   lisper_40-76   Vs.      random      	Score:  (117, 12)
   lisper_40-76   Vs.   lisper_40-76   	Score:  (99, 99)
 lisper_40-76 1564
-lisper_40-76 1
+
   convergence    Vs.   lisper_25-26   	Score:  (92, 102)
     bygones      Vs.   lisper_25-26   	Score:  (98, 98)
     twotats      Vs.   lisper_25-26   	Score:  (95, 100)
@@ -1235,7 +1235,7 @@ lisper_40-76 1
   lisper_25-26   Vs.      angel       	Score:  (192, -38)
   lisper_25-26   Vs.   lisper_25-26   	Score:  (99, 99)
 lisper_25-26 1551
-lisper_25-26 1
+
   convergence    Vs.   lisper_10-56   	Score:  (98, 93)
      theves      Vs.   lisper_10-56   	Score:  (61, 51)
   lisper_10-56   Vs.     twotats      	Score:  (100, 95)
@@ -1255,7 +1255,7 @@ lisper_25-26 1
     bygones      Vs.   lisper_10-56   	Score:  (98, 98)
   lisper_10-56   Vs.   lisper_10-56   	Score:  (99, 99)
 lisper_10-56 1474
-lisper_10-56 1
+
   convergence    Vs.   lisper_25-21   	Score:  (96, 96)
     twotats      Vs.   lisper_25-21   	Score:  (95, 100)
      random      Vs.   lisper_25-21   	Score:  (16, 116)
@@ -1275,7 +1275,7 @@ lisper_10-56 1
   lisper_25-21   Vs.      angel       	Score:  (192, -38)
   lisper_25-21   Vs.   lisper_25-21   	Score:  (99, 99)
 lisper_25-21 1558
-lisper_25-21 1
+
   convergence    Vs.   lisper_5-86    	Score:  (96, 101)
     twotats      Vs.   lisper_5-86    	Score:  (95, 100)
      random      Vs.   lisper_5-86    	Score:  (14, 114)
@@ -1294,7 +1294,7 @@ lisper_25-21 1
   lisper_5-86    Vs.     tit4tat      	Score:  (98, 98)
   lisper_5-86    Vs.      angel       	Score:  (192, -38)
 lisper_5-86 1568
-lisper_5-86 1
+
   convergence    Vs.   lisper_15-11   	Score:  (98, 88)
     twotats      Vs.   lisper_15-11   	Score:  (95, 100)
     schemer      Vs.   lisper_15-11   	Score:  (124, 54)
@@ -1314,7 +1314,7 @@ lisper_5-86 1
   lisper_15-11   Vs.      angel       	Score:  (192, -38)
   lisper_15-11   Vs.   lisper_15-11   	Score:  (99, 99)
 lisper_15-11 1460
-lisper_15-11 1
+
   convergence    Vs.   lisper_35-41   	Score:  (89, 104)
      theves      Vs.   lisper_35-41   	Score:  (55, 55)
     twotats      Vs.   lisper_35-41   	Score:  (95, 100)
@@ -1334,7 +1334,7 @@ lisper_15-11 1
   lisper_35-41   Vs.      angel       	Score:  (192, -38)
   lisper_35-41   Vs.   lisper_35-41   	Score:  (99, 99)
 lisper_35-41 1467
-lisper_35-41 1
+
     antit42t     Vs.     m  lisper_20-16   Vs.   convergence    	Score:  (98, 98)
   lisper_20-16   Vs.      theves      	Score:  (51, 61)
   lisper_20-16   Vs.     bygones      	Score:  (98, 98)
@@ -1354,7 +1354,7 @@ lisper_35-41 1
   lisper_20-16   Vs.      angel       	Score:  (192, -38)
   lisper_20-16   Vs.   lisper_20-16   	Score:  (99, 99)
 lisper_20-16 1467
-lisper_20-16 1
+
   convergence    Vs.   lisper_25-1    	Score:  (93, 103)
     twotats      Vs.   lisper_25-1    	Score:  (95, 100)
     schemer      Vs.   lisper_25-1    	Score:  (55, 100)
@@ -1368,13 +1368,13 @@ lisper_20-16 1
   lisper_25-1    Vs.      pavlov      	Score:  (101, 96)
   lisper_25-1    Vs.     tit4tat      	Score:  (98, 98)
   lisper_25-1    Vs.      angel       	Score:  (192, -38)
-    antit42     theves      Vs.   lisper_25-1    	Score:  (61, 51)
+     theves      Vs.   lisper_25-1    	Score:  (61, 51)
     bygones      Vs.   lisper_25-1    	Score:  (98, 98)
      shark       Vs.   lisper_25-1    	Score:  (98, 98)
      random      Vs.   lisper_25-1    	Score:  (14, 114)
-  lisper_25-1    Vs.   lisper_25-t     Vs.     mistrust     	Score:  (55, 50)
+  lisper_25-1    Vs.   lisper_25-t      Score:  (55, 50)
 lisper_25-1 1533
-lisper_25-1 1
+
   convergence    Vs.   lisper_5-41    	Score:  (91, 101)
      theves      Vs.   lisper_5-41    	Score:  (61, 51)
     twotats      Vs.   lisper_5-41    	Score:  (95, 100)
@@ -1394,7 +1394,7 @@ lisper_25-1 1
   lisper_5-41    Vs.      angel       	Score:  (192, -38)
   lisper_5-41    Vs.   lisper_5-41    	Score:  (99, 99)
 lisper_5-41 1466
-lisper_5-41 1
+
   convergence    Vs.    lisper_5-6    	Score:  (95, 100)
     twotats      Vs.    lisper_5-6    	Score:  (95, 100)
      random      Vs.    lisper_5-6    	Score:  (14, 119)
@@ -1414,7 +1414,7 @@ lisper_5-41 1
    lisper_5-6    Vs.      angel       	Score:  (192, -38)
    lisper_5-6    Vs.    lisper_5-6    	Score:  (99, 99)
 lisper_5-6 1474
-lisper_5-6 1
+
   convergence    Vs.   lisper_10-41   	Score:  (96, 96)
     twotats      Vs.   lisper_10-41   	Score:  (95, 100)
      random      Vs.   lisper_10-41   	Score:  (87, 67)
@@ -1434,7 +1434,7 @@ lisper_5-6 1
   lisper_10-41   Vs.      angel       	Score:  (192, -38)
   lisper_10-41   Vs.   lisper_10-41   	Score:  (99, 99)
 lisper_10-41 1459
-lisper_10-41 1
+
   convergence    Vs.   lisper_10-76   	Score:  (99, 94)
      theves      Vs.   lisper_10-76   	Score:  (64, 49)
   lisper_10-76   Vs.     twotats      	Score:  (100, 95)
@@ -1454,7 +1454,7 @@ lisper_10-41 1
     bygones      Vs.   lisper_10-76   	Score:  (98, 98)
   lisper_10-76   Vs.   lisper_10-76   	Score:  (99, 99)
 lisper_10-76 1457
-lisper_10-76 1
+
   convergence    Vs.   lisper_5-56    	Score:  (98, 98)
     twotats      Vs.   lisper_5-56    	Score:  (95, 100)
      random      Vs.   lisper_5-56    	Score:  (29, 94)
@@ -1474,7 +1474,7 @@ lisper_10-76 1
   lisper_5-56    Vs.      angel       	Score:  (192, -38)
   lisper_5-56    Vs.   lisper_5-56    	Score:  (99, 99)
 lisper_5-56 1450
-lisper_5-56 1
+
   convergence    Vs.   lisper_30-76   	Score:  (98, 98)
      theves      Vs.   lisper_30-76   	Score:  (58, 53)
   lisper_30-76   Vs.     thieves      	Score:  (53, 58)
@@ -1494,7 +1494,7 @@ lisper_5-56 1
   lisper_30-76   Vs.     mistrust     	Score:  (97, 102)
   lisper_30-76   Vs.   lisper_30-76   	Score:  (99, 99)
 lisper_30-76 1543
-lisper_30-76 1
+
   convergence    Vs.   lisper_10-31   	Score:  (100, 90)
     twotats      Vs.   lisper_10-31   	Score:  (95, 100)
      random      Vs.   lisper_10-31   	Score:  (12, 117)
@@ -1514,7 +1514,7 @@ lisper_30-76 1
   lisper_10-31   Vs.      angel       	Score:  (192, -38)
   lisper_10-31   Vs.   lisper_10-31   	Score:  (99, 99)
 lisper_10-31 1541
-lisper_10-31 1
+
   convergence    Vs.   lisper_30-21   	Score:  (98, 98)
     bygones      Vs.   lisper_30-21   	Score:  (98, 98)
     twotats      Vs.   lisper_30-21   	Score:  (95, 100)
@@ -1534,7 +1534,7 @@ lisper_10-31 1
   lisper_30-21   Vs.      angel       	Score:  (192, -38)
   lisper_30-21   Vs.   lisper_30-21   	Score:  (99, 99)
 lisper_30-21 1562
-lisper_30-21 1
+
   convergence    Vs.   lisper_10-51   	Score:  (96, 101)
     bygones      Vs.   lisper_10-51   	Score:  (51, 66)
     twotats      Vs.   lisper_10-51   	Score:  (95, 100)
@@ -1554,7 +1554,7 @@ lisper_30-21 1
   lisper_10-51   Vs.      angel       	Score:  (192, -38)
   lisper_10-51   Vs.   lisper_10-51   	Score:  (99, 99)
 lisper_10-51 1449
-lisper_10-51 1
+
   convergence    Vs.   lisper_25-6    	Score:  (100, 95)
      theves      Vs.   lisper_25-6    	Score:  (58, 53)
   lisper_25-6    Vs.     thieves      	Score:  (53, 58)
@@ -1574,7 +1574,7 @@ lisper_10-51 1
   lisper_25-6    Vs.     mistrust     	Score:  (97, 102)
   lisper_25-6    Vs.   lisper_25-6    	Score:  (99, 99)
 lisper_25-6 1533
-lisper_25-6 1
+
   convergence    Vs.   lisper_40-11   	Score:  (90, 100)
     twotats      Vs.   lisper_40-11   	Score:  (95, 100)
      random      Vs.   lisper_40-11   	Score:  (10, 120)
@@ -1594,7 +1594,7 @@ lisper_25-6 1
   lisper_40-11   Vs.      angel       	Score:  (192, -38)
   lisper_40-11   Vs.   lisper_40-11   	Score:  (99, 99)
 lisper_40-11 1578
-lisper_40-11 1
+
   convergence    Vs.   lisper_25-41   	Score:  (95, 100)
      theves      Vs.   lisper_25-41   	Score:  (58, 53)
   lisper_25-41   Vs.     thieves      	Score:  (53, 58)
@@ -1614,7 +1614,7 @@ lisper_40-11 1
   lisper_25-41   Vs.     mistrust     	Score:  (97, 102)
   lisper_25-41   Vs.   lisper_25-41   	Score:  (99, 99)
 lisper_25-41 1562
-lisper_25-41 1
+
   convergence    Vs.   lisper_10-91   	Score:  (94, 99)
     twotats      Vs.   lisper_10-91   	Score:  (95, 100)
     schemer      Vs.   lisper_10-91   	Score:  (65, 90)
@@ -1634,7 +1634,7 @@ lisper_25-41 1
   lisper_10-91   Vs.      angel       	Score:  (192, -38)
   lisper_10-91   Vs.   lisper_10-91   	Score:  (99, 99)
 lisper_10-91 1513
-lisper_10-91 1
+
   convergence    Vs.   lisper_30-41   	Score:  (91, 101)
     bygones      Vs.   lisper_30-41   	Score:  (98, 98)
     twotats      Vs.   lisper_30-41   	Score:  (95, 100)
@@ -1654,7 +1654,7 @@ lisper_10-91 1
   lisper_30-41   Vs.      angel       	Score:  (192, -38)
   lisper_30-41   Vs.   lisper_30-41   	Score:  (99, 99)
 lisper_30-41 1558
-lisper_30-41 1
+
   convergence    Vs.   lisper_35-6    	Score:  (91, 101)
     bygones      Vs.   lisper_35-6    	Score:  (98, 98)
     twotats      Vs.   lisper_35-6    	Score:  (95, 100)
@@ -1674,7 +1674,7 @@ lisper_30-41 1
   lisper_35-6    Vs.      angel       	Score:  (192, -38)
   lisper_35-6    Vs.   lisper_35-6    	Score:  (99, 99)
 lisper_35-6 1541
-lisper_35-6 1
+
   convergence    Vs.   lisper_40-1    	Score:  (97, 97)
     bygones      Vs.   lisper_40-1    	Score:  (98, 98)
     twotats      Vs.   lisper_40-1    	Score:  (95, 100)
@@ -1694,7 +1694,7 @@ lisper_35-6 1
   lisper_40-1    Vs.      angel       	Score:  (192, -38)
   lisper_40-1    Vs.   lisper_40-1    	Score:  (99, 99)
 lisper_40-1 1559
-lisper_40-1 1
+
   convergence    Vs.   lisper_20-21   	Score:  (94, 99)
      theves      Vs.   lisper_20-21   	Score:  (58, 53)
   lisper_20-21   Vs.     twotats      	Score:  (100, 95)
@@ -1714,7 +1714,7 @@ lisper_40-1 1
     bygones      Vs.   lisper_20-21   	Score:  (98, 98)
   lisper_20-21   Vs.   lisper_20-21   	Score:  (99, 99)
 lisper_20-21 1546
-lisper_20-21 1
+
   convergence    Vs.   lisper_35-26   	Score:  (94, 99)
      theves      Vs.   lisper_35-26   	Score:  (58, 53)
     twotats      Vs.   lisper_35-26   	Score:  (95, 100)
@@ -1734,7 +1734,7 @@ lisper_20-21 1
   lisper_35-26   Vs.      random      	Score:  (120, 15)
   lisper_35-26   Vs.   lisper_35-26   	Score:  (99, 99)
 lisper_35-26 1569
-lisper_35-26 1
+
   convergence    Vs.   lisper_30-56   	Score:  (56, 56)
     twotats      Vs.   lisper_30-56   	Score:  (95, 100)
      random      Vs.   lisper_30-56   	Score:  (10, 125)
@@ -1754,7 +1754,7 @@ lisper_35-26 1
   lisper_30-56   Vs.      angel       	Score:  (192, -38)
   lisper_30-56   Vs.   lisper_30-56   	Score:  (99, 99)
 lisper_30-56 1531
-lisper_30-56 1
+
   convergence    Vs.   lisper_15-6    	Score:  (91, 101)
      theves      Vs.   lisper_15-6    	Score:  (61, 51)
   lisper_15-6    Vs.     thieves      	Score:  (51, 61)
@@ -1774,7 +1774,7 @@ lisper_30-56 1
   lisper_15-6    Vs.     mistrust     	Score:  (97, 102)
   lisper_15-6    Vs.   lisper_15-6    	Score:  (99, 99)
 lisper_15-6 1481
-lisper_15-6 1
+
   convergence    Vs.   lisper_20-56   	Score:  (97, 97)
      theves      Vs.   lisper_20-56   	Score:  (58, 53)
   lisper_20-56   Vs.     thieves      	Score:  (53, 58)
@@ -1794,7 +1794,7 @@ lisper_15-6 1
   lisper_20-56   Vs.     mistrust     	Score:  (97, 102)
   lisper_20-56   Vs.   lisper_20-56   	Score:  (99, 99)
 lisper_20-56 1525
-lisper_20-56 1
+
   convergence    Vs.   lisper_25-31   	Score:  (53, 63)
      theves      Vs.   lisper_25-31   	Score:  (58, 53)
   lisper_25-31   Vs.     thieves      	Score:  (53, 58)
@@ -1833,7 +1833,7 @@ lisper_25-31 1
   lisper_30-16   Vs.     tit4tat      	Score:  (98, 98)
   lisper_30-16   Vs.      angel       	Score:  (192, -38)
 lisper_30-16 1520
-lisper_30-16 1
+
   convergence    Vs.   lisper_30-11   	Score:  (93, 98)
      theves      Vs.   lisper_30-11   	Score:  (58, 53)
     twotats      Vs.   lisper_30-11   	Score:  (95, 100)
@@ -1853,7 +1853,7 @@ lisper_30-16 1
   lisper_30-11   Vs.      random      	Score:  (114, 14)
   lisper_30-11   Vs.   lisper_30-11   	Score:  (99, 99)
 lisper_30-11 1554
-lisper_30-11 1
+
   convergence    Vs.   lisper_5-91    	Score:  (91, 101)
      theves      Vs.   lisper_5-91    	Score:  (61, 51)
   lisper_5-91    Vs.     thieves      	Score:  (51, 61)
@@ -1873,7 +1873,7 @@ lisper_30-11 1
   lisper_5-91    Vs.     mistrust     	Score:  (97, 102)
   lisper_5-91    Vs.   lisper_5-91    	Score:  (99, 99)
 lisper_5-91 1499
-lisper_5-91 1
+
     antit42t     Vs.       lisper_35-1    Vs.   convergence    	Score:  (60, 55)
   lisper_35-1    Vs.      theves      	Score:  (53, 58)
   lisper_35-1    Vs.     bygones      	Score:  (98, 98)
@@ -1893,7 +1893,7 @@ lisper_5-91 1
   lisper_35-1    Vs.      angel       	Score:  (192, -38)
   lisper_35-1    Vs.   lisper_35-1    	Score:  (99, 99)
 lisper_35-1 1498
-lisper_35-1 1
+
   convergence    Vs.   lisper_5-36    	Score:  (98, 93)
      theves      Vs.   lisper_5-36    	Score:  (58, 53)
   lisper_5-36    Vs.     thieves      	Score:  (53, 58)
@@ -1913,7 +1913,7 @@ lisper_35-1 1
   lisper_5-36    Vs.     mistrust     	Score:  (97, 102)
   lisper_5-36    Vs.   lisper_5-36    	Score:  (99, 99)
 lisper_5-36 1551
-lisper_5-36 1
+
   convergence    Vs.   lisper_15-21   	Score:  (95, 95)
     bygones      Vs.   lisper_15-21   	Score:  (98, 98)
     twotats      Vs.   lisper_15-21   	Score:  (95, 100)
@@ -1933,7 +1933,7 @@ lisper_5-36 1
   lisper_15-21   Vs.      angel       	Score:  (192, -38)
   lisper_15-21   Vs.   lisper_15-21   	Score:  (99, 99)
 lisper_15-21 1511
-lisper_15-21 1
+
   convergence    Vs.   lisper_35-76   	Score:  (96, 101)
     twotats      Vs.   lisper_35-76   	Score:  (95, 100)
      random      Vs.   lisper_35-76   	Score:  (28, 93)
@@ -1953,7 +1953,7 @@ lisper_15-21 1
   lisper_35-76   Vs.      angel       	Score:  (192, -38)
   lisper_35-76   Vs.   lisper_35-76   	Score:  (99, 99)
 lisper_35-76 1547
-lisper_35-76 1
+
   convergence    Vs.   lisper_15-41   	Score:  (96, 96)
     bygones      Vs.   lisper_15-41   	Score:  (98, 98)
     twotats      Vs.   lisper_15-41   	Score:  (95, 100)
@@ -1973,7 +1973,7 @@ lisper_35-76 1
   lisper_15-41   Vs.      angel       	Score:  (192, -38)
   lisper_15-41   Vs.   lisper_15-41   	Score:  (99, 99)
 lisper_15-41 1523
-lisper_15-41 1
+
   convergence    Vs.   lisper_15-61   	Score:  (97, 97)
     twotats      Vs.   lisper_15-61   	Score:  (95, 100)
      random      Vs.   lisper_15-61   	Score:  (24, 104)
@@ -1993,7 +1993,7 @@ lisper_15-41 1
   lisper_15-61   Vs.      angel       	Score:  (192, -38)
   lisper_15-61   Vs.   lisper_15-61   	Score:  (99, 99)
 lisper_15-61 1539
-lisper_15-61 1
+
   convergence    Vs.   lisper_45-1    	Score:  (96, 101)
     bygones      Vs.   lisper_45-1    	Score:  (51, 66)
     twotats      Vs.   lisper_45-1    	Score:  (95, 100)
@@ -2013,7 +2013,7 @@ lisper_15-61 1
   lisper_45-1    Vs.      angel       	Score:  (192, -38)
   lisper_45-1    Vs.   lisper_45-1    	Score:  (99, 99)
 lisper_45-1 1473
-lisper_45-1 1
+
   convergence    Vs.   lisper_20-6    	Score:  (95, 100)
     twotats      Vs.   lisper_20-6    	Score:  (95, 100)
      random      Vs.   lisper_20-6    	Score:  (98, 68)
@@ -2033,7 +2033,7 @@ lisper_45-1 1
   lisper_20-6    Vs.      angel       	Score:  (192, -38)
   lisper_20-6    Vs.   lisper_20-6    	Score:  (99, 99)
 lisper_20-6 1481
-lisper_20-6 1
+
   convergence    Vs.   lisper_30-91   	Score:  (88, 103)
     twotats      Vs.   lisper_30-91   	Score:  (95, 100)
      random      Vs.   lisper_30-91   	Score:  (14, 114)
@@ -2053,7 +2053,7 @@ lisper_20-6 1
   lisper_30-91   Vs.      angel       	Score:  (192, -38)
   lisper_30-91   Vs.   lisper_30-91   	Score:  (99, 99)
 lisper_30-91 1466
-lisper_30-91 1
+
   convergence    Vs.   lisper_45-16   	Score:  (90, 100)
      theves      Vs.   lisper_45-16   	Score:  (55, 55)
     twotats      Vs.   lisper_45-16   	Score:  (95, 100)
@@ -2073,7 +2073,7 @@ lisper_30-91 1
   lisper_45-16   Vs.      random      	Score:  (120, 10)
   lisper_45-16   Vs.   lisper_45-16   	Score:  (99, 99)
 lisper_45-16 1466
-lisper_45-16 1
+
   convergence    Vs.   lisper_20-76   	Score:  (91, 101)
      theves      Vs.   lisper_20-76   	Score:  (61, 51)
   lisper_20-76   Vs.     twotats      	Score:  (100, 95)
@@ -2093,7 +2093,7 @@ lisper_45-16 1
     bygones      Vs.   lisper_20-76   	Score:  (98, 98)
   lisper_20-76   Vs.   lisper_20-76   	Score:  (99, 99)
 lisper_20-76 1488
-lisper_20-76 1
+
   convergence    Vs.   lisper_20-46   	Score:  (95, 100)
     twotats      Vs.   lisper_20-46   	Score:  (95, 100)
      random      Vs.   lisper_20-46   	Score:  (23, 113)
@@ -2113,7 +2113,7 @@ lisper_20-76 1
   lisper_20-46   Vs.      angel       	Score:  (192, -38)
   lisper_20-46   Vs.   lisper_20-46   	Score:  (99, 99)
 lisper_20-46 1557
-lisper_20-46 1
+
   convergence    Vs.   lisper_10-61   	Score:  (104, 89)
     twotats      Vs.   lisper_10-61   	Score:  (95, 100)
     schemer      Vs.   lisper_10-61   	Score:  (53, 98)
@@ -2133,7 +2133,7 @@ lisper_20-46 1
   lisper_10-61   Vs.      angel       	Score:  (192, -38)
   lisper_10-61   Vs.   lisper_10-61   	Score:  (99, 99)
 lisper_10-61 1493
-lisper_10-61 1
+
   convergence    Vs.   lisper_5-31    	Score:  (92, 102)
     bygones      Vs.   lisper_5-31    	Score:  (98, 98)
     twotats      Vs.   lisper_5-31    	Score:  (95, 100)
@@ -2153,7 +2153,7 @@ lisper_10-61 1
   lisper_5-31    Vs.      angel       	Score:  (192, -38)
   lisper_5-31    Vs.   lisper_5-31    	Score:  (99, 99)
 lisper_5-31 1510
-lisper_5-31 1
+
   convergence    Vs.   lisper_25-61   	Score:  (49, 74)
   lisper_25-61   Vs.      theves      	Score:  (53, 58)
   lisper_25-61   Vs.     bygones      	Score:  (98, 98)
@@ -2173,7 +2173,7 @@ lisper_5-31 1
   lisper_25-61   Vs.      angel       	Score:  (192, -38)
   lisper_25-61   Vs.   lisper_25-61   	Score:  (99, 99)
 lisper_25-61 1539
-lisper_25-61 1
+
   convergence    Vs.   lisper_20-91   	Score:  (53, 63)
     twotats      Vs.   lisper_20-91   	Score:  (95, 100)
      random      Vs.   lisper_20-91   	Score:  (33, 103)
@@ -2193,7 +2193,7 @@ lisper_25-61 1
   lisper_20-91   Vs.      angel       	Score:  (192, -38)
   lisper_20-91   Vs.   lisper_20-91   	Score:  (99, 99)
 lisper_20-91 1506
-lisper_20-91 1
+
   convergence    Vs.   lisper_25-91   	Score:  (91, 101)
      theves      Vs.   lisper_25-91   	Score:  (58, 53)
     twotats      Vs.   lisper_25-91   	Score:  (95, 100)
@@ -2213,7 +2213,7 @@ lisper_20-91 1
   lisper_25-91   Vs.      random      	Score:  (111, 16)
   lisper_25-91   Vs.   lisper_25-91   	Score:  (99, 99)
 lisper_25-91 1564
-lisper_25-91 1
+
   convergence    Vs.   lisper_5-26    	Score:  (96, 101)
     twotats      Vs.   lisper_5-26    	Score:  (95, 100)
      random      Vs.   lisper_5-26    	Score:  (16, 111)
@@ -2233,7 +2233,7 @@ lisper_25-91 1
   lisper_5-26    Vs.      angel       	Score:  (192, -38)
   lisper_5-26    Vs.   lisper_5-26    	Score:  (99, 99)
 lisper_5-26 1466
-lisper_5-26 1
+
   convergence    Vs.   lisper_10-71   	Score:  (94, 99)
     bygones      Vs.   lisper_10-71   	Score:  (52, 62)
     twotats      Vs.   lisper_10-71   	Score:  (95, 100)
@@ -2253,7 +2253,7 @@ lisper_5-26 1
   lisper_10-71   Vs.      angel       	Score:  (192, -38)
   lisper_10-71   Vs.   lisper_10-71   	Score:  (99, 99)
 lisper_10-71 1464
-lisper_10-71 1
+
   convergence    Vs.   lisper_20-26   	Score:  (60, 60)
     twotats      Vs.   lisper_20-26   	Score:  (95, 100)
     schemer      Vs.   lisper_20-26   	Score:  (80, 80)
@@ -2273,7 +2273,7 @@ lisper_10-71 1
   lisper_20-26   Vs.      angel       	Score:  (192, -38)
   lisper_20-26   Vs.   lisper_20-26   	Score:  (99, 99)
 lisper_20-26 1461
-lisper_20-26 1
+
   convergence    Vs.   lisper_50-16   	Score:  (88, 103)
      theves      Vs.   lisper_50-16   	Score:  (55, 55)
   lisper_50-16   Vs.     thieves      	Score:  (55, 55)
@@ -2293,7 +2293,7 @@ lisper_20-26 1
   lisper_50-16   Vs.     mistrust     	Score:  (97, 102)
   lisper_50-16   Vs.   lisper_50-16   	Score:  (99, 99)
 lisper_50-16 1450
-lisper_50-16 1
+
   convergence    Vs.   lisper_30-26   	Score:  (53, 68)
     twotats      Vs.   lisper_30-26   	Score:  (95, 100)
      random      Vs.   lisper_30-26   	Score:  (14, 114)
@@ -2313,7 +2313,7 @@ lisper_50-16 1
   lisper_30-26   Vs.      angel       	Score:  (192, -38)
   lisper_30-26   Vs.   lisper_30-26   	Score:  (99, 99)
 lisper_30-26 1531
-lisper_30-26 1
+
   convergence    Vs.   lisper_15-76   	Score:  (96, 96)
      theves      Vs.   lisper_15-76   	Score:  (61, 51)
     twotats      Vs.   lisper_15-76   	Score:  (95, 100)
@@ -2333,7 +2333,7 @@ lisper_30-26 1
   lisper_15-76   Vs.      random      	Score:  (114, 14)
   lisper_15-76   Vs.   lisper_15-76   	Score:  (99, 99)
 lisper_15-76 1471
-lisper_15-76 1
+
   convergence    Vs.   lisper_15-31   	Score:  (96, 96)
     bygones      Vs.   lisper_15-31   	Score:  (98, 98)
     twotats      Vs.   lisper_15-31   	Score:  (95, 100)
@@ -2353,4 +2353,3 @@ lisper_15-76 1
   lisper_15-31   Vs.      angel       	Score:  (192, -38)
   lisper_15-31   Vs.   lisper_15-31   	Score:  (99, 99)
 lisper_15-31 1543
-lisper_15-31 1
