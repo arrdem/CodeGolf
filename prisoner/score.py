@@ -98,15 +98,15 @@ def runGame(rounds,p1,p2, printing = False):
         print p1.nicename(pad = False), ha, "\n", p2.nicename(pad = False), hd
     return sa, sd
 
-def challenger(player, players, v = False):
+def challenger(player, players, rounds = NUM_ROUNDS, v = False):
 
-    print "Running %s tournament iterations of %s matches" % (num_iters, NUM_ROUNDS)
+    print "Running %s tournament iterations of %s matches" % (num_iters, rounds)
     scores={}
     pointsFor = 0
     pointsAgainst = 0
 
     for p in players:
-        (s1, s2) = runGame(NUM_ROUNDS, player, p, printing = v)
+        (s1, s2) = runGame(rounds, player, p, printing = v)
         if (player == p):
             scores[p] = (s1 + s2) / 2
             pointsFor += (s1 + s2) / 2
@@ -338,8 +338,7 @@ Usage score [warriors dir] [[rounds] [games/round] [-i]]\n"""
                             except Exception:
                                 pass
                             
-                            for dude in pop:
-                                runGame(rounds, chuck_norris, pop, printing = flag)
+                            challenger(chuck_norris, pop, rounds = rounds, v = flag)
                         
                         if(cmd[0] == "tourney"):
                             itters = 5
