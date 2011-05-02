@@ -240,142 +240,142 @@ Usage score [warriors dir] [[rounds] [games/round] [-i]]\n"""
                 champ_dict[champ.nicename(pad = False)] = champ
             
             while 1:
-                try:
-                    foo = raw_input("\n[]> ")
-                    if(foo == ""):
-                        continue
+                #try:
+                foo = raw_input("\n[]> ")
+                if(foo == ""):
+                    continue
+                else:
+                    if(" " in foo):
+                        cmd = foo.split(" ")
                     else:
-                        if(" " in foo):
-                            cmd = foo.split(" ")
-                        else:
-                            cmd = [foo]
-                        
-                        if(cmd[0] == ("help" or "?")):
-                            try:
-                                print help_dict[cmd[1]]
-                            except Exception:
-                                print help_dict['']
-                        
-                        if(cmd[0] == "add"):
-                            try:
-                                i = 1
-                                if cmd[3]: i = int(cmd[3])
-                                for foo in xrange(i):
-                                    pop_dict[cmd[2]].append(champ_dict[cmd[1]])
-                            except Exception:
-                                print "[!] BAD COMMAND ERROR - TRY THIS COMMAND: help add"
-                                
-                        if(cmd[0] == 'new'):
-                            try:
-                                if cmd[1] in pop_dict:
-                                    print "[!] *WARNING* - POPULATION EXISTS"
-                                    if not ('y' == raw_input("(y/n) > ")):
-                                        continue
-                                pop_dict[cmd[1]] = []
-                            except Exception:
-                                print "[!] BAD COMMAND ERROR - TRY THIS COMMAND: help new"
-                                
-                        if(cmd[0] == 'del'):
-                            try:
-                                if(cmd[3]):
-                                    try:
-                                        count = int(cmd[3])
-                                    except Exception:
-                                        print "[*] EXTERMINATE! EXTERMINATE! EXTERMINATE!"
-                                        count = int(1e300000)
-                                for c in range(0, len(pop_dict[cmd[2]])):
-                                    if (pop_dict[cmd[2]][c] == champ_dict[cmd[1]]):
-                                        if(count > 0):
-                                            pop_dict[cmd[2]][c].pop()
-                            except Exception:
-                                print "[!] BAD COMMAND ERROR - TRY THIS COMMAND: help del OR MAYBE: list default"
-                        
-                        if(cmd[0] == "list"):
-                            try:
-                                if(cmd[1]):
-                                    print "Avalible champs in " + cmd[1] + ":"
-                                    for c in pop_dict[cmd[1]]:
-                                        print "\t", c.nicename(pad = False)
-                                else:
-                                    print "Avalible populations:"
-                                    for c in pop_dict:
-                                        print "\t", c
-                            except Exception:
+                        cmd = [foo]
+                    
+                    if(cmd[0] == ("help" or "?")):
+                        try:
+                            print help_dict[cmd[1]]
+                        except Exception:
+                            print help_dict['']
+                    
+                    if(cmd[0] == "add"):
+                        try:
+                            i = 1
+                            if cmd[3]: i = int(cmd[3])
+                            for foo in xrange(i):
+                                pop_dict[cmd[2]].append(champ_dict[cmd[1]])
+                        except Exception:
+                            print "[!] BAD COMMAND ERROR - TRY THIS COMMAND: help add"
+                            
+                    if(cmd[0] == 'new'):
+                        try:
+                            if cmd[1] in pop_dict:
+                                print "[!] *WARNING* - POPULATION EXISTS"
+                                if not ('y' == raw_input("(y/n) > ")):
+                                    continue
+                            pop_dict[cmd[1]] = []
+                        except Exception:
+                            print "[!] BAD COMMAND ERROR - TRY THIS COMMAND: help new"
+                            
+                    if(cmd[0] == 'del'):
+                        try:
+                            if(cmd[3]):
+                                try:
+                                    count = int(cmd[3])
+                                except Exception:
+                                    print "[*] EXTERMINATE! EXTERMINATE! EXTERMINATE!"
+                                    count = int(1e300000)
+                            for c in range(0, len(pop_dict[cmd[2]])):
+                                if (pop_dict[cmd[2]][c] == champ_dict[cmd[1]]):
+                                    if(count > 0):
+                                        pop_dict[cmd[2]][c].pop()
+                        except Exception:
+                            print "[!] BAD COMMAND ERROR - TRY THIS COMMAND: help del OR MAYBE: list default"
+                    
+                    if(cmd[0] == "list"):
+                        try:
+                            if(cmd[1]):
+                                print "Avalible champs in " + cmd[1] + ":"
+                                for c in pop_dict[cmd[1]]:
+                                    print "\t", c.nicename(pad = False)
+                            else:
                                 print "Avalible populations:"
                                 for c in pop_dict:
                                     print "\t", c
+                        except Exception:
+                            print "Avalible populations:"
+                            for c in pop_dict:
+                                print "\t", c
 
-                        if(cmd[0] == "match"):
-                            flag = ('-v' in cmd)
+                    if(cmd[0] == "match"):
+                        flag = ('-v' in cmd)
+                        try:
+                            runGame(int(cmd[3]), champ_dict[cmd[1]], champ_dict[cmd[2]], printing = flag)
+                        except Exception:
                             try:
-                                runGame(int(cmd[3]), champ_dict[cmd[1]], champ_dict[cmd[2]], printing = flag)
+                                runGame(50, champ_dict[cmd[1]], champ_dict[cmd[2]], printing = flag)
                             except Exception:
-                                try:
-                                    runGame(50, champ_dict[cmd[1]], champ_dict[cmd[2]], printing = flag)
-                                except Exception:
-                                    print "[!] BAD COMMAND ERROR - TRY THIS COMMAND: help match"
-                                    continue
-                        
-                        if(cmd[0] == "challenge"):
-                            rounds = 100
-                            flag = ('-v' in cmd)
-                            chuck_norris
-                            pop = []
-                            try:
-                                chuck_norris = champ_dict[cmd[1]]
-                            except Exception:
-                                print "[!] BAD CHAMPION PROVIDED - TRY THIS COMMAND: help challenge OR: list default"
+                                print "[!] BAD COMMAND ERROR - TRY THIS COMMAND: help match"
                                 continue
-                            
-                            try:
-                                pop = pop_dict[cmd[2]]
-                            except Exception:
-                                print "[!] BAD POPULATION PROVIDED - TRY THIS COMMAND: help challenge OR: list"
-                                continue
-                                
-                            try:
-                                rounds = int(cmd[3])
-                            except Exception:
-                                pass
-                            
-                            challenger(chuck_norris, pop, rounds = rounds, v = flag)
-                        
-                        if(cmd[0] == "tourney"):
-                            itters = 5
-                            rounds = 100
-                            pop = []
-                            try:
-                                pop = pop_dict[cmd[1]]
-                            except Exception:
-                                print "[!] BAD POPULATION PROVIDED - TRY THIS COMMAND: help tourney OR: list"
-                                continue
-                            
-                            try:
-                                itters = int(cmd[2])
-                            except Exception:
-                                pass
-                                
-                            try:
-                                rounds = int(cmd[3])
-                            except Exception:
-                                pass
                     
-                            tourney(itters, rounds, pop)
+                    if(cmd[0] == "challenge"):
+                        rounds = 100
+                        flag = ('-v' in cmd)
+                        chuck_norris = None
+                        pop = []
+                        try:
+                            chuck_norris = champ_dict[cmd[1]]
+                        except Exception:
+                            print "[!] BAD CHAMPION PROVIDED - TRY THIS COMMAND: help challenge OR: list default"
+                            continue
                         
-                        if("quit" in cmd):
-                            print "Bye.\n"
-                            break
-                        
-                        else:
+                        try:
+                            pop = pop_dict[cmd[2]]
+                        except Exception:
+                            print "[!] BAD POPULATION PROVIDED - TRY THIS COMMAND: help challenge OR: list"
                             continue
                             
-                except Exception:
-                    print "[!] ERROR IN REPL"
-                    continue
+                        try:
+                            rounds = int(cmd[3])
+                        except Exception:
+                            pass
+                        
+                        challenger(chuck_norris, pop, rounds = rounds, v = flag)
+                    
+                    if(cmd[0] == "tourney"):
+                        itters = 5
+                        rounds = 100
+                        pop = []
+                        try:
+                            pop = pop_dict[cmd[1]]
+                        except Exception:
+                            print "[!] BAD POPULATION PROVIDED - TRY THIS COMMAND: help tourney OR: list"
+                            continue
+                        
+                        try:
+                            itters = int(cmd[2])
+                        except Exception:
+                            pass
+                            
+                        try:
+                            rounds = int(cmd[3])
+                        except Exception:
+                            pass
                 
-                except (EOFError or KeyboardInterrupt):
-                    print "Bye."
-                    break
+                        tourney(itters, rounds, pop)
+                    
+                    if("quit" in cmd):
+                        print "Bye.\n"
+                        break
+                    
+                    else:
+                        continue
+                        
+                #except Exception:
+                #    print "[!] ERROR IN REPL"
+                #    continue
+                
+                #except (EOFError or KeyboardInterrupt):
+                #    print "Bye."
+                #    break
         
         else:
             tourney(num_iters, NUM_ROUNDS, players)
