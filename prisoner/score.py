@@ -7,7 +7,7 @@
 #
 # Author: dmckee (http://codegolf.stackexchange.com/users/78/dmckee)
 # Improved by : casey (http://codegolf.stackexchange.com/users/1375/casey)
-# and : Josh Caswell (http://codegolf.stackexchange.com/users/1384/josh-caswell)
+#         and : Josh Caswell (http://codegolf.stackexchange.com/users/1384/josh-caswell)
 # Major edits and CLI by: rmckenzie (http://codegolf.stackexchange.com/users/1370/rmckenzie)
 
 import subprocess 
@@ -32,7 +32,7 @@ RESULTS = {"cc":(2,"K"), "ct":(-1,"R"), "tc":(4,"S"), "tt":(1,"E")}
 
 class warrior:
     def __init__(self, filename):
-        print "[!] CREATED WARRIOR -", filename
+        print "[!] CREATED WARRIOR -", filename, "\t",
         self.filename = filename
         self.exec_code = self.__build__(os.path.splitext(filename))
         #print "\t", self.exec_code
@@ -41,19 +41,19 @@ class warrior:
         base, ext = a
         if ext == '.py':
             py_compile.compile(self.filename)
-            print 'compiled python: ' + self.filename
+            print 'compiled python '# + self.filename
             return ('%s %sc' %( PYTHON_PATH, self.filename))
         
         elif ext =='.lsp':
             # we mess with stdout/err here to suprress
             # the noisy output of clisp
             if subprocess.call([CLISP_PATH, '-c --silent', self.filename],stdout=subprocess.PIPE,stderr=subprocess.PIPE) == 0:
-                print 'compiled lisp: ' + self.filename
+                print 'compiled lisp '# + self.filename
                 return CLISP_PATH + " " + self.filename
           
         elif ext == '.java':
             if subprocess.call([JAVAC_PATH, self.filename]) == 0:
-                print 'compiled java: ' + self.filename
+                print 'compiled java '# + self.filename
                 classname = re.sub('\.java$', '', self.filename)
                 classname = re.sub('/', '.', classname);
                 return JAVA_PATH + " " + classname
@@ -65,9 +65,11 @@ class warrior:
             if (len(dir) > 0):
                 dir = "-cp " + dir + " "
             classname = re.sub('\\.class$', '', classname);
+            print ""
             return JAVA_PATH + " " + dir + classname
         
         else:
+            print ""
             return self.filename
         
     def run(self, history):
@@ -118,14 +120,21 @@ def challenger(player, players, rounds = NUM_ROUNDS, v = False):
     scores={}
     pointsFor = 0
     pointsAgainst = 0
-
-    for p in players:
-        (s1, s2) = runGame(rounds, player, p, printing = v)
-        if (player == p):
-            scores[p] = (s1 + s2) / 2
-            pointsFor += (s1 + s2) / 2
-        else:
-            scores[p] = s2
+    pairs = []
+    
+    for foo in players:
+        pairs.append((player, foo))
+        scores[foo] = 0
+    
+    pool = multiprocessing.Pool(None) # None = use cpu_count processes
+    results = pool.map(runGameWork, pairs)
+    
+    for (s1,s2),(p1,p2) in zip(results,pairs):
+            if(p1 == p2):
+                s1 /= 2
+                s2 /= 2
+            scores[p1] += s1
+            scores[p2] += s2
             pointsFor += s1
             pointsAgainst += s2
 
@@ -203,7 +212,7 @@ def tourney(num_iters, num_rounds, players, play_self = True):
 
 if __name__ == "__main__":
     if((len(sys.argv) < 2) or (('-?' in sys.argv) or ('--help') in sys.argv)):
-        print """\nscore - Author: dmckee (http://codegolf.stackexchange.com/users/78/dmckee)
+        print """\nscore.py\nAuthor: dmckee (http://codegolf.stackexchange.com/users/78/dmckee)
 Improved by : casey (http://codegolf.stackexchange.com/users/1375/casey)
         and : Josh Caswell (http://codegolf.stackexchange.com/users/1384/josh-caswell)
 Major edits and CLI by: rmckenzie (http://codegolf.stackexchange.com/users/1370/rmckenzie)\n
@@ -218,15 +227,22 @@ Usage: score [warriors dir] [[rounds] [games/round] [-i]]\n"""
                 base, ext = os.path.splitext(filename)
                 
                 if (ext == '.c') or (ext == '.cpp'):
+                    print "[!] COMPILING ", foo, 
                     subprocess.call(["gcc", "-o", warriors_dir + "/" + base, "./src/" + foo])
+                    print ", DONE!"
                 
                 elif (ext == '.java'):
+                    print "[!] COMPILING ", foo,
                     subprocess.call([JAVAC_PATH, "-d", warriors_dir, "./src/" + foo])
+                    print ", [DONE]"
+                
+                elif(ext == ".class"):
+                    pass
                 
                 else:
                     print "No compiler registered for ", foo
                 
-            print "Finding warriors in " + warriors_dir
+            print "\nFinding warriors in " + warriors_dir
             players = [warriors_dir+"/"+exe for exe in os.listdir(warriors_dir) if (os.access(warriors_dir+"/"+exe,os.X_OK) or os.path.splitext(exe)[-1] == '.class')]
             players = processPlayers(players)
         else:
