@@ -211,17 +211,16 @@ def tourney(num_iters, num_rounds, players, play_self = True):
     print "Final Winner is " + winner.nicename(pad = False) + "!"
 
 if __name__ == "__main__":
-    if((len(sys.argv) < 2) or (('-?' in sys.argv) or ('--help') in sys.argv)):
+    if(('-?' in sys.argv) or ('--help' in sys.argv)):
         print """\nscore.py\nAuthor: dmckee (http://codegolf.stackexchange.com/users/78/dmckee)
 Improved by : casey (http://codegolf.stackexchange.com/users/1375/casey)
         and : Josh Caswell (http://codegolf.stackexchange.com/users/1384/josh-caswell)
 Major edits and CLI by: rmckenzie (http://codegolf.stackexchange.com/users/1370/rmckenzie)\n
-Usage: score [warriors dir] [[rounds] [games/round] [-i]]\n"""
+Usage: score [[rounds] [games/round] [-i]]\n"""
     
     else:
-        warriors_dir = re.sub('/$', '', sys.argv[1])
-        if os.path.isdir(warriors_dir):
-        
+        warriors_dir = "./warriors/"
+        if (os.path.isdir(warriors_dir) and os.path.isdir("./src/")):
             for foo in os.listdir("./src/"): # build all c/c++/java champs first.
                 filename = os.path.split(foo)[-1]
                 base, ext = os.path.splitext(filename)
@@ -246,17 +245,17 @@ Usage: score [warriors dir] [[rounds] [games/round] [-i]]\n"""
             players = [warriors_dir+"/"+exe for exe in os.listdir(warriors_dir) if (os.access(warriors_dir+"/"+exe,os.X_OK) or os.path.splitext(exe)[-1] == '.class')]
             players = processPlayers(players)
         else:
-            print "[!] ERROR - bad warriors dir"
+            print "[!] ERROR - FILESYSTEM IS WRONG - FIX SOURCE OR MOVE TARGETS"
             exit(1)
 
         num_iters = 1
         try:
-            num_iters = int(sys.argv[2])
+            num_iters = int(sys.argv[1])
         except Exception:
             pass
             
         try:
-            NUM_ROUNDS = int(sys.argv[3])
+            NUM_ROUNDS = int(sys.argv[2])
         except Exception:
             pass
         
