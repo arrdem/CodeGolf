@@ -27,7 +27,7 @@ CLISP_PATH = '/usr/bin/clisp'   #path to clisp executable
 JAVAC_PATH = '/usr/bin/javac'   #path to java compiler
 JAVA_PATH = '/usr/bin/java'   #path to java vm
 
-NUM_ROUNDS = 100
+NUM_ROUNDS = 50
 RESULTS = {"cc":(2,"K"), "ct":(-1,"R"), "tc":(4,"S"), "tt":(1,"E")}
 
 class warrior:

@@ -95,7 +95,7 @@ for i in range(1,num_iters+1):
 print '-'*10
 print "Final Results:"
 players_sorted = sorted(total_scores,key=total_scores.get)
-for p in players_sorted:
-    print (p, total_scores[p])
+#for p in players_sorted:
+#    print p, total_scores[p]
 winner = max(total_scores, key=total_scores.get)
 print "Final Winner is " + winner
