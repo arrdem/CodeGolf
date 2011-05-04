@@ -10,6 +10,7 @@
 #         and : Josh Caswell (http://codegolf.stackexchange.com/users/1384/josh-caswell)
 # Major edits and CLI by: rmckenzie (http://codegolf.stackexchange.com/users/1370/rmckenzie)
 
+####    DEPENDS
 import subprocess 
 import os
 import sys
@@ -20,87 +21,18 @@ import multiprocessing
 import string
 import re
 
-###
-# config
-PYTHON_PATH = '/usr/bin/python' #path to python executable
-CLISP_PATH = '/usr/bin/clisp'   #path to clisp executable
-JAVAC_PATH = '/usr/bin/javac'   #path to java compiler
-JAVA_PATH = '/usr/bin/java'   #path to java vm
+############## CRITICAL IMPORT ############
+from bot import *
+
+####    CONFIG
+WARRIORS_DIR    = "./warriors/"     # path to the final executable bots
+SRC_DIR         = "./src"           # path to the bot source code
 
 NUM_ROUNDS = 50
+
 RESULTS = {"cc":(2,"K"), "ct":(-1,"R"), "tc":(4,"S"), "tt":(1,"E")}
 
-class warrior:
-    def __init__(self, filename):
-        print "[!] CREATED WARRIOR -", filename, "\t",
-        self.filename = filename
-        self.exec_code = self.__build__(os.path.splitext(filename))
-        #print "\t", self.exec_code
-        
-    def __build__(self, a):
-        base, ext = a
-        if ext == '.py':
-            py_compile.compile(self.filename)
-            print 'compiled python '# + self.filename
-            return ('%s %sc' %( PYTHON_PATH, self.filename))
-        
-        elif ext =='.lsp':
-            # we mess with stdout/err here to suprress
-            # the noisy output of clisp
-            if subprocess.call([CLISP_PATH, '-c --silent', self.filename],stdout=subprocess.PIPE,stderr=subprocess.PIPE) == 0:
-                print 'compiled lisp '# + self.filename
-                return CLISP_PATH + " " + self.filename
-          
-        elif ext == '.java':
-            if subprocess.call([JAVAC_PATH, self.filename]) == 0:
-                print 'compiled java '# + self.filename
-                classname = re.sub('\.java$', '', self.filename)
-                classname = re.sub('/', '.', classname);
-                return JAVA_PATH + " " + classname
-        
-        elif ext == '.class':
-            # We assume further down in compilation and here that Java classes are in the default package
-            classname = re.sub('.*[/\\\\]', '', self.filename)
-            dir = self.filename[0:(len(self.filename)-len(classname))]
-            if (len(dir) > 0):
-                dir = "-cp " + dir + " "
-            classname = re.sub('\\.class$', '', classname);
-            print ""
-            return JAVA_PATH + " " + dir + classname
-        
-        else:
-            print ""
-            return self.filename
-        
-    def run(self, history):
-        process = subprocess.Popen(self.exec_code+" "+history,stdout=subprocess.PIPE,shell=True)
-        return process.communicate()[0].strip().lower()
-        
-    def nicename(self, pad = True):
-        if pad:
-            return string.center(os.path.splitext(os.path.split(self.filename)[1])[0], 16)
-        else:
-            return os.path.splitext(os.path.split(self.filename)[1])[0]
-
-def scoreRound(r1,r2):
-    return RESULTS.get(r1[0]+r2[0],0)
-
-def runRound(p1,p2,h1,h2):
-    """Run both processes, and score the results"""
-    r1 = p1.run(h1)
-    r2 = p2.run(h2)
-    (s1, L1), (s2, L2) = scoreRound(r1,r2), scoreRound(r2,r1)
-    return (s1, L1+h1),  (s2, L2+h2)
-
-def runGameWork( pair):
-    global NUM_ROUNDS
-    try:
-        foo = runGame(NUM_ROUNDS,*pair)
-        return foo
-    except Exception:
-        print "[!] FATAL ERROR IN CONTEST"
-        return ''
-
+####    FUNCTIONS
 def runGame(rounds,p1,p2, printing = False):
     print p1.nicename(),"Vs.", p2.nicename(),"\t",
     sa, sd = 0, 0
@@ -114,6 +46,38 @@ def runGame(rounds,p1,p2, printing = False):
         print p1.nicename(pad = False), ha, "\n", p2.nicename(pad = False), hd
     return sa, sd
 
+def runGameLoader(pair):
+    global NUM_ROUNDS
+    try:
+        return runGame(NUM_ROUNDS,*pair)
+    except Exception:
+        print "[!] FATAL ERROR IN CONTEST"
+        return ''
+
+def runRound(p1,p2,h1,h2):
+    """Run both processes, and score the results"""
+    r1 = p1.run(h1)
+    r2 = p2.run(h2)
+    (s1, L1), (s2, L2) = scoreRound(r1,r2), scoreRound(r2,r1)
+    return (s1, L1+h1),  (s2, L2+h2)
+
+def scoreRound(r1,r2):
+    return RESULTS.get(r1[0]+r2[0],0)
+
+def runPairs(pairs):
+    pool = multiprocessing.Pool(None) # None = use cpu_count processes
+    results = pool.map(runGameLoader, pairs)
+    
+    for (s1,s2),(p1,p2) in zip(results,pairs):
+        if (p1 == p2):
+            scores[p1] += (s1 + s2)/2
+        else:
+            scores[p1] += s1
+            scores[p2] += s2
+
+    return sorted(scores,key=scores.get)
+
+
 def challenger(player, players, rounds = NUM_ROUNDS, v = False):
 
     print "Running %s tournament iterations of %s matches" % (num_iters, rounds)
@@ -126,39 +90,20 @@ def challenger(player, players, rounds = NUM_ROUNDS, v = False):
         pairs.append((player, foo))
         scores[foo] = 0
     
-    pool = multiprocessing.Pool(None) # None = use cpu_count processes
-    results = pool.map(runGameWork, pairs)
-    
-    for (s1,s2),(p1,p2) in zip(results,pairs):
-            if(p1 == p2):
-                s1 /= 2
-                s2 /= 2
-            scores[p1] += s1
-            scores[p2] += s2
-            pointsFor += s1
-            pointsAgainst += s2
-
-    players_sorted = sorted(scores,key=scores.get)
+    players_sorted = runPairs(pairs)
 
     print "\n"
     for p in players_sorted:
         print p.nicename(), scores[p]
 
-    print ""
-    print "\tTotal points for %s: %i" %(player.nicename(pad = False), pointsFor)
+    print "\n\tTotal points for %s: %i" %(player.nicename(pad = False), pointsFor)
     print "\tTotal points against %s: %i" %(player.nicename(pad = False), pointsAgainst)
-
-def processPlayers(players):    
-    for i,p in enumerate(players):
-        players[i] = warrior(p)
-        
-    print "\n"
-    return players
 
 def tourney(num_iters, num_rounds, players, play_self = True):
     total_scores={}
     global NUM_ROUNDS
     NUM_ROUNDS = num_rounds   
+    
     for p in players:
         total_scores[p] = 0
     
@@ -173,24 +118,11 @@ def tourney(num_iters, num_rounds, players, play_self = True):
         
         # create the round robin pairs
         pairs = list( itertools.combinations( players, 2) )
-        #print len(players)
         if(play_self):
             for foo in players:
-            #    a, b = foo
-            #    print a.nicename(), "\t", b.nicename()
                 pairs.append([foo, foo])
-                
-        pool = multiprocessing.Pool(None) # None = use cpu_count processes
-        results = pool.map(runGameWork, pairs)
         
-        for (s1,s2),(p1,p2) in zip(results,pairs):
-            if (p1 == p2):
-                scores[p1] += (s1 + s2)/2
-            else:
-                scores[p1] += s1
-                scores[p2] += s2
-
-        players_sorted = sorted(scores,key=scores.get)
+        results_sorted = runPairs(pairs)
         
         print "\n"
         for p in players_sorted:
@@ -219,34 +151,7 @@ Major edits and CLI by: rmckenzie (http://codegolf.stackexchange.com/users/1370/
 Usage: score [[rounds] [games/round] [-i]]\n"""
     
     else:
-        warriors_dir = "./warriors/"
-        if (os.path.isdir(warriors_dir) and os.path.isdir("./src/")):
-            for foo in os.listdir("./src/"): # build all c/c++/java champs first.
-                filename = os.path.split(foo)[-1]
-                base, ext = os.path.splitext(filename)
-                
-                if (ext == '.c') or (ext == '.cpp'):
-                    print "[!] COMPILING ", foo, 
-                    subprocess.call(["gcc", "-o", warriors_dir + "/" + base, "./src/" + foo])
-                    print ", DONE!"
-                
-                elif (ext == '.java'):
-                    print "[!] COMPILING ", foo,
-                    subprocess.call([JAVAC_PATH, "-d", warriors_dir, "./src/" + foo])
-                    print ", [DONE]"
-                
-                elif(ext == ".class"):
-                    pass
-                
-                else:
-                    print "No compiler registered for ", foo
-                
-            print "\nFinding warriors in " + warriors_dir
-            players = [warriors_dir+"/"+exe for exe in os.listdir(warriors_dir) if (os.access(warriors_dir+"/"+exe,os.X_OK) or os.path.splitext(exe)[-1] == '.class')]
-            players = processPlayers(players)
-        else:
-            print "[!] ERROR - FILESYSTEM IS WRONG - FIX SOURCE OR MOVE TARGETS"
-            exit(1)
+        players = buildBots(WARRIORS_DIR, SRC_DIR)
 
         num_iters = 1
         try:
@@ -412,12 +317,12 @@ Usage: score [[rounds] [games/round] [-i]]\n"""
                             continue
                         
                 except Exception:
-                    print "[!] ERROR IN REPL"
-                    continue
-                
-                except (EOFError or KeyboardInterrupt):
-                    print "Bye."
-                    break
+                    if Exception in (EOFError or KeyboardInterrupt):
+                        print "Bye."
+                        exit(0)
+                    else:
+                        print "[!] ERROR IN REPL LOOP - TOP LEVEL"
+                        continue
         
         else:
             tourney(num_iters, NUM_ROUNDS, players)
