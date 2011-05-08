@@ -127,7 +127,7 @@ class bot:
         
     def nicename(self, pad = True):
         if pad:
-            return string.center(os.path.splitext(os.path.split(self.filename)[1])[0], 16)
+            return string.center(os.path.splitext(os.path.split(self.filename)[1])[0], 20)
         else:
             return os.path.splitext(os.path.split(self.filename)[1])[0]
 
@@ -146,7 +146,7 @@ def buildBots(bots_dir, src_dir):
                 
                 elif (ext == '.java'):
                     print "[!] COMPILING ", foo,
-                    subprocess.call([JAVAC_PATH, "-d", bots_dir, "./src/" + foo])
+                    subprocess.call([JAVAC_PATH, "-d ."+bots_dir, "./src/" + foo])
                     print ", [DONE]"
                 
                 else:
