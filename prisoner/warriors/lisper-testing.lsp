@@ -1,4 +1,4 @@
-(setf *margin* (/ (+ 40 (random 11)) 100))
+(setf *margin* (/ (+ 30 (random 21)) 100))
 (setf *r* 0.0)
 (setf *s* 0.0)
 (setf *k* 0.0)
