@@ -1,9 +1,3 @@
-/*
-Mistrust (variant)
-
-By Joey
-http://codegolf.stackexchange.com/questions/2357/1p5-iterated-prisoners-dilemma/2358#2358
-*/
 #include <stdio.h>
 #include <string.h>
 

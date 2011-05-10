@@ -127,13 +127,13 @@ class bot:
         
     def nicename(self, pad = True):
         if pad:
-            return string.center(os.path.splitext(os.path.split(self.filename)[1])[0], 16)
+            return string.center(os.path.splitext(os.path.split(self.filename)[1])[0], 20)
         else:
             return os.path.splitext(os.path.split(self.filename)[1])[0]
 
 ####    FUNCTIONS
 
-def buildBots(bots_dir, src_dir):
+def buildBots(bots_dir, src_dir, botType = bot):
     if (os.path.isdir(bots_dir) and os.path.isdir(src_dir)):
             for foo in os.listdir(src_dir):
                 filename = os.path.split(foo)[-1]
@@ -146,7 +146,7 @@ def buildBots(bots_dir, src_dir):
                 
                 elif (ext == '.java'):
                     print "[!] COMPILING ", foo,
-                    subprocess.call([JAVAC_PATH, "-d", bots_dir, "./src/" + foo])
+                    subprocess.call([JAVAC_PATH, "-d ."+bots_dir, "./src/" + foo])
                     print ", [DONE]"
                 
                 else:
@@ -156,7 +156,7 @@ def buildBots(bots_dir, src_dir):
             players = [bots_dir+"/"+exe for exe in os.listdir(bots_dir) if (os.access(bots_dir+"/"+exe,os.X_OK) or os.path.splitext(exe)[-1] == '.class')]
             
             for i,p in enumerate(players):
-                players[i] = bot(p)
+                players[i] = botType(p)
     else:
         print "[!] ERROR - FILESYSTEM IS WRONG - FIX SOURCE OR MOVE TARGETS"
         exit(1)

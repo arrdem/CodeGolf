@@ -1,5 +1,3 @@
-package warriors;
-
 import java.util.*;
 
 public class HyperrationalWasp
@@ -125,4 +123,3 @@ public class HyperrationalWasp
     }
 
 }
-

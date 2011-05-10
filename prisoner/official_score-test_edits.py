@@ -12,10 +12,14 @@ import os
 import sys
 import random
 import py_compile
+import re
 
 ###
 # config
 PYTHON_PATH = '/usr/bin/python' #path to python executable
+CLISP_PATH  = '/usr/bin/clisp'  #path to clisp executable
+JAVAC_PATH  = '/usr/bin/javac'  #path to java compiler
+JAVA_PATH   = '/usr/bin/java'   #path to java vm
 
 RESULTS = {"cc":(2,"K"), "ct":(-1,"R"), "tc":(4,"S"), "tt":(1,"E")}
 
@@ -42,7 +46,7 @@ def runGame(rounds,p1,p2):
         (na, ha), (nd, hd) = runRound(p1,p2,ha,hd)
         sa += na
         sd += nd
-    print "\t", p1, "\t", ha, "\n\t", p2, "\t", hd, "\n"
+    #print "\t", p1, "\t", ha, "\n\t", p2, "\t", hd, "\n"
     return sa, sd
 
 
@@ -54,6 +58,14 @@ def processPlayers(players):
             players[i] = '%s %sc' %( PYTHON_PATH, p)
         if ext == '.lsp':
             players[i] = '%s %s' %( "clisp", p)
+        elif ext == '.class':
+            # We assume further down in compilation and here that Java classes are in the default package
+            classname = re.sub('.*[/\\\\]', '', p)
+            dir = p[0:(len(p)-len(classname))]
+            if (len(dir) > 0):
+                dir = "-cp " + dir + " "
+            classname = re.sub('\\.class$', '', classname);
+            players[i] = (JAVA_PATH + " " + dir + classname)
     return players
 
 print "Finding warriors in " + sys.argv[1]
@@ -76,10 +88,10 @@ for i in range(1,num_iters+1):
         for i2 in range(i1,len(players)):
             p2=players[i2];
 #        rounds = random.randint(50,200)
-            rounds = 50
-            #print "Running %s against %s (%s rounds)." %(p1,p2,rounds)
+            rounds = 100
+            print "Running %s against %s (%s rounds)." %(p1,p2,rounds), "\t", 
             s1,s2 = runGame(rounds,p1,p2)
-            #print (s1, s2)
+            print (s1, s2)
             if (p1 == p2):
                 scores[p1] += (s1 + s2)/2
             else:

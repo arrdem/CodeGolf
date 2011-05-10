@@ -4,7 +4,6 @@
 Simpleton, by Josh Caswell
 
 Quick to anger, quick to forget, unable to take advantage of opportunity.
-http://codegolf.stackexchange.com/questions/2357/1p5-iterated-prisoners-dilemma/2409#2409
 """
 
 import sys

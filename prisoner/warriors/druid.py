@@ -4,7 +4,6 @@
 Druid, by Josh Caswell
 
 Druids are slow to anger, but do not forget.
-http://codegolf.stackexchange.com/questions/2357/1p5-iterated-prisoners-dilemma/2404#2404
 """
 
 import sys
