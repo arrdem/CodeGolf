@@ -162,12 +162,12 @@ Usage: ./blackjack_contest.py [[matches to run]]\n"""
                          'list'     : "usage: list [population]\n\twith argument lists the contents of the population.\n\telse lists populations.",
                          'match'    : "usage: match [champ] [[rounds] [-v]]\n\tpits one champ against the dealer.\n\t -v causes the match's play-by play to be printed too.'",
                          #'challenge': "usage: challenge [champ] [population] [[rounds] [-v]]\n\tpits one champ against the others\n\t -v causes the match's play-by play to be printed too.'",
-                         'run'      : "usage: run [population] [[hands]]\n\tplays off all champs against each-other.",
+                         'run'      : "usage: run [population] [[hands]]\n\truns all champs against the house.",
                          'quit'     : "exits this CLI",
                          'del'      : "usage: del [champion] [population] [[count] [-a]]\n\tdeletes count (default 1) instance of champion from the population.\n\t-a deletes all.",
                          'add'      : "usage: add [champion] [population] [[instances]]\n\tadds the specified number of instances of the champion to a given population",
                          'new'      : "usage: new [population name]\n\tcreates an empty list of champions",
-                         ''         : "avalable commands:\nlist, match, challenge, tourney, new, add, quit"
+                         ''         : "avalable commands:\nlist, match, run, new, add, quit"
                         }
             
             for champ in players:
