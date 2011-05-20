@@ -59,7 +59,6 @@ def doShit(player, d, c, isFirstMove):
 
 def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
     numHandsPerDeck = 52/(len(players)*4)
-    print range(hands/numHandsPerDeck)
     for i in range(hands/numHandsPerDeck):
         d = deck()
         c = []
@@ -97,7 +96,15 @@ def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
                     p.chips += (2*p.stake)
                 else:
                     print "[-]\t",
-                print p.nicename(), p.__score__()
+                print p.nicename(), p.__score__(), 
+                
+                print " "*(12-len(str(p.__score__()))),
+                for a in range(len(p.hand)):
+                    print p.hand[a],
+                    if(0 <= a < len(p.hand)-1):
+                        print " "*(20-len(str(p.hand[a-1]))),
+                
+                print ""
                 p.hand = []
                 p.stake = 0
                 
