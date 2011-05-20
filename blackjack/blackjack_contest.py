@@ -6,13 +6,8 @@
 # binary combinations (including self-plays (which only count once!)).
 #
 # Author: rmckenzie (http://codegolf.stackexchange.com/users/1370/rmckenzie)
-# Credit for base code goes to
-#   dmckee (http://codegolf.stackexchange.com/users/78/dmckee)
-#   casey (http://codegolf.stackexchange.com/users/1375/casey)
-#   Josh Caswell (http://codegolf.stackexchange.com/users/1384/josh-caswell)
 
 ####    DEPENDS
-import subprocess 
 import os
 import sys
 import random
@@ -23,69 +18,125 @@ import string
 
 ############## CRITICAL IMPORT ############
 from bot import *
+from cardshark import *
+from deck import *
+from errors import *
 
 ####    CONFIG
 WARRIORS_DIR    = "./warriors/"     # path to the final executable bots
 SRC_DIR         = "./src"           # path to the bot source code
+NUM_ROUNDS = 1
 
-NUM_ROUNDS = 100
+DEALER = cardshark("./dealer.py")
 
 ####    FUNCTIONS
 
-def scoreRound(r1,r2):
-    #TODO
-    @TODO
+def doShit(player, d, c, isFirstMove):
+    try:
+        s = player.run(c).split(" ")
+        if "b" in s:
+            # then s should be of the format ['b', '50'] or something like
+            b = abs(int(s[1])) # just in case
+            player.dChips(-1*b)
+            players.stake += b
+        
+        if "h" in s:
+            c.append(d.draw())
+            player.append(c[-1])
+        
+        if ("d" in s) and isFirstMove:
+            c.append(d.draw())
+            player.append(c[-1])
+            player.stand = True
+            player.dChips(player.stake)
+            player.stake *= 2
+            
+        if "p" in s:
+            # UNSUPPPORTED
+            player.__die__()
+    except AttributeError:
+        player.stand = True
 
-def runGame(rounds,p1,p2, printing = False):
-    @TODO
+def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
+    numHandsPerDeck = 52/(len(players)*4)
+    print range(hands/numHandsPerDeck)
+    for i in range(hands/numHandsPerDeck):
+        d = deck()
+        c = []
+        
+        for j in range(numHandsPerDeck):
+            isFirstMove = True
+
+            # subtract the buy-in cost, deal
+            for i in range(len(players)):
+                player = players[i]
+                if player.hasDough:
+                    player.dChips(-10)
+                    c.append(d.draw())
+                    player.append(c[-1])
+                    player.stake = 10
+                else:
+                    player.stand = True
+            
+            c.append(d.draw())
+            dealer.append(c[-1])
+                
+            # now let them play....   
+            while (False in map(lambda x: x.stand, players)): # while SOMEONE is still up,
+                for player in players:
+                    if not player.stand:
+                        doShit(player, d, c, isFirstMove)
+                        
+            while dealer.__score__() < 17:
+                doShit(dealer, d, c, False)
+            print "[DEALER]\t",dealer.__score__()
+                
+            for p in players:
+                if p.__score__() > dealer.__score__():
+                    print "[+]\t", 
+                    p.chips += (2*p.stake)
+                else:
+                    print "[-]\t",
+                print p.nicename(), p.__score__()
+                p.hand = []
+                p.stake = 0
+                
+            dealer.hand = []
+                
+    for player in players:
+        print player.nicename(), player.chips
+        player.__reset__()
+        
+def scores(players):
+    a=[]
+    for i in players: a.append((i.chips, i))
+    return a
     
-def runPairs(pairs):
-    pool = multiprocessing.Pool(None) # None = use cpu_count processes
-    results = pool.map(runGameLoader, pairs)
-    
-    for (s1,s2),(p1,p2) in zip(results,pairs):
-        if (p1 == p2):
-            scores[p1] += (s1 + s2)/2
-        else:
-            scores[p1] += s1
-            scores[p2] += s2
-
-    return sorted(scores,key=scores.get)
-
-
-def challenger(player, players, rounds = NUM_ROUNDS, v = False):
-
-    print "Running %s tournament iterations of %s matches" % (num_iters, rounds)
-    scores={}
-    pointsFor = 0
-    pointsAgainst = 0
-    pairs = []
-    
-    for foo in players:
-        pairs.append((player, foo))
-        scores[foo] = 0
-    
-    players_sorted = runPairs(pairs)
-
-    print "\n"
-    for p in players_sorted:
-        print p.nicename(), scores[p]
-
-    print "\n\tTotal points for %s: %i" %(player.nicename(pad = False), pointsFor)
-    print "\tTotal points against %s: %i" %(player.nicename(pad = False), pointsAgainst)
+        
+def tourney(players, NUM_ROUNDS = 1, NUM_HANDS = 3):
+    for i in range(NUM_ROUNDS):
+        print "-"*80, "\n", "ROUND NUMBER", i, "\n", "-"*80
+        sets = list(itertools.combinations(players, 4))
+        
+        for f in sets:
+            runTable(f, hands = NUM_HANDS)
+        
+        print "\n","-"*80
+        for p in players:
+            print p.nicename(pad = False), p.chips
+        
+        winner = max(scores(players))
+        print "\tWinner is %s" %(winner[1].nicename(pad = False))
 
 if __name__ == "__main__":
     if(('-?' in sys.argv) or ('--help' in sys.argv)):
-        print """\nscore.py\nAuthor: dmckee (http://codegolf.stackexchange.com/users/78/dmckee)
-Improved by : casey (http://codegolf.stackexchange.com/users/1375/casey)
-        and : Josh Caswell (http://codegolf.stackexchange.com/users/1384/josh-caswell)
-Major edits and CLI by: rmckenzie (http://codegolf.stackexchange.com/users/1370/rmckenzie)\n
-Usage: score [[rounds] [games/round] [-i]]\n"""
+        print """\nblackjack_contest.py\nAuthor: rmckenzie (http://codegolf.stackexchange.com/users/1370/rmckenzie)\n
+Usage: ./blackjack_contest.py [[rounds] [games/round] [-i]]\n"""
     
     else:
-        players = buildBots(WARRIORS_DIR, SRC_DIR)
-
+        players = buildBots(WARRIORS_DIR, SRC_DIR, botType=cardshark)
         num_iters = 1
+        
         try:
             num_iters = int(sys.argv[1])
         except Exception:
@@ -257,4 +308,4 @@ Usage: score [[rounds] [games/round] [-i]]\n"""
                         continue
         
         else:
-            tourney(num_iters, NUM_ROUNDS, players)
+            tourney(players, NUM_ROUNDS = num_iters)

@@ -77,21 +77,19 @@ class bot:
         base, ext = a
         if ext == '.py':
             py_compile.compile(self.filename)
-            print 'compiled python '# + self.filename
+            print 'compiled python '
             return ('%s %sc' %( PYTHON_PATH, self.filename))
         
         elif (ext in ('.lsp', '.lisp')):
-            # we mess with stdout/err here to suprress
-            # the noisy output of clisp
             if subprocess.call([CLISP_PATH, '-c --silent', self.filename],stdout=subprocess.PIPE,stderr=subprocess.PIPE) == 0:
-                print 'compiled lisp '# + self.filename
+                print 'compiled lisp '
                 return CLISP_PATH + " " + self.filename
             else:
                 self.__die__()
           
         elif ext == '.java':
             if subprocess.call([JAVAC_PATH, self.filename]) == 0:
-                print 'compiled java '# + self.filename
+                print 'compiled java '
                 classname = re.sub('\.java$', '', self.filename)
                 classname = re.sub('/', '.', classname);
                 return JAVA_PATH + " " + classname
@@ -99,7 +97,6 @@ class bot:
                 self.__die__()
         
         elif ext == '.class':
-            # We assume further down in compilation and here that Java classes are in the default package
             classname = re.sub('.*[/\\\\]', '', self.filename)
             dir = self.filename[0:(len(self.filename)-len(classname))]
             if (len(dir) > 0):
@@ -111,11 +108,12 @@ class bot:
         else:
             print ""
             return self.filename
+            
+    def __call__(self):
+        self.__test__()
     
     def __test__(self):
         process = subprocess.Popen(self.exec_code+" ",stdout=subprocess.PIPE,shell=True)
-        if (process.communicate()[0].strip().lower() not in ("c", "t")):
-            self.__die__()
         
     def __die__(self):
         print "\n[!] FATAL ERROR IN (", self.nicename(pad = False), ") - ABORTING CONTEST"

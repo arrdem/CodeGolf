@@ -64,7 +64,15 @@ class deck:
             s += c.__str__()
             s += "\n"
         return s
-            
+
+"""
+class polydeck(deck):
+    def __init__(self, jokers = False, decks = 3):
+        self.__deck__ = []
+        self.__clean__ = self.__cleandeck__()
+        self.shuffle()
+"""
+
 if __name__ == "__main__":
     d = deck()
     print d

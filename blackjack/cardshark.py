@@ -59,6 +59,7 @@ class cardshark(bot):
         self.chips = chips
         self.stake = 0
         self.wins = 0
+        self.hasDough = True
         
     def __reset__(self):
         self.hand = []
@@ -88,20 +89,22 @@ class cardshark(bot):
         
     def dChips(self, s):
         self.chips += s
+        self.hasDough = (self.chips > 0)
         
     def run(self, cards_dealt):
-        process = subprocess.Popen(self.exec_code+" "+\
-                                   str(self.__score__())+" "+\
-                                   self.__hand__(self.hand)+" "+\
-                                   self.__hand__(cards_dealt)+" "+\
-                                   str(self.stake)+" "+\
-                                   str(self.chips),stdout=subprocess.PIPE,shell=True)
-        o = process.communicate()[0].strip().lower()
-        
-        if o=="s":
-            self.stand = True
-        
-        return o
+        if self.hasDough:
+            process = subprocess.Popen(self.exec_code+" "+\
+                                       str(self.__score__())+" "+\
+                                       self.__hand__(self.hand)+" "+\
+                                       self.__hand__(cards_dealt)+" "+\
+                                       str(self.stake)+" "+\
+                                       str(self.chips),stdout=subprocess.PIPE,shell=True)
+            o = process.communicate()[0].strip().lower()
+            
+            if o=="s":
+                self.stand = True
+            
+            return o
     
     def append(self, c):
         if type(c) == type(card("Clubs", "Nine")):

@@ -91,7 +91,8 @@ class card:
         self.value = self.score()
     
     def isAce(self):
-        return self.type == __CARDS[0]
+        global __CARDS
+        return (self.type == "Ace")
     
     def score(self, aceEleven = False):
         if not self.type == "Ace":
@@ -100,6 +101,14 @@ class card:
             if aceEleven:
                 return SCORES[self.type][1]
         return SCORES[self.type][0]
+        
+    def letter(self):
+        if 1 < self.score() < 10:
+            return str(self.score())
+        return str(self)[0].lower()
+    
+    def __call__(self):
+        return self
         
     def __str__(self):
         return str(self.type) + " of " + self.suit
