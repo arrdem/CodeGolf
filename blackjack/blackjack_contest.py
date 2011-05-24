@@ -29,8 +29,15 @@ NUM_ROUNDS = 1
 HOUSE_SCORE = 17
 DEALER = cardshark("./dealer.py")
 
+VERBOSE = False
+            # TODO:
+            # make VARBOSE an integer range 0,2
+            # 0 - basic printing
+            # 1 - reasonable debugging
+            # 2 - blow-by-blow
+
 ####    FUNCTIONS
-def doShit(player, d, c, isFirstMove, v = False):
+def doShit(player, d, c, isFirstMove, v = VERBOSE):
     try:
         if player.__score__() > 21:
             raise Exception
@@ -187,11 +194,14 @@ def tourney(players, NUM_ROUNDS = 1, NUM_HANDS = 3):
 if __name__ == "__main__":
     if(('-?' in sys.argv) or ('--help' in sys.argv)):
         print """\nblackjack_contest.py\nAuthor: rmckenzie (http://codegolf.stackexchange.com/users/1370/rmckenzie)\n
-Usage: ./blackjack_contest.py [[matches to run]]\n"""
+Usage: ./blackjack_contest.py [[matches to run] [-i] [-vv]]\n\t-i specifies interactive mode via a simple cli\n\t-v enables a very verbose printing of players' moves\n"""
     
     else:
         players = buildBots(WARRIORS_DIR, SRC_DIR, botType=cardshark)
         num_iters = 1
+        
+        VERBOSE = "-vv" in sys.argv
+        
         try:
             num_iters = int(sys.argv[1])
         except Exception:
@@ -205,13 +215,13 @@ Usage: ./blackjack_contest.py [[matches to run]]\n"""
 """
 ########################################################################
 ## \\\\/\\\\/ELCOME to the BlackJack Contest CLI                          ##
-##  Use quit to exit                                                  ##
+##  Use quit, ctrl-d or ctr-c to exit the interpreter                 ##
 ##  Use help to list commands, Help [command] for more information    ##
 ##                                                                    ##
 ##  WARNING:                                                          ##
-##      DO NOT CTRL+C OR CTRL+D WHILE THE CONTEST IS RUNNING          ##
+##      DO NOT CTRL+C OR CTRL+D WHILE THE CONTEST IS RUNNING.         ##
 ##      AT PRESENT, THIS SOFTWARE DOESN'T HAVE SUPPORT FOR THOSE      ##
-##      ERRORS AND THE SCORING CODE WILL CRASH                        ##
+##      ERRORS WHILE RUNNING CONTESTS AND THE SCORING CODE WILL CRASH ##
 ########################################################################
 """
             # CLI implimentation here
@@ -333,10 +343,14 @@ Usage: ./blackjack_contest.py [[matches to run]]\n"""
                         else:
                             continue
                         
-                except Exception:
-                    if Exception in (EOFError, KeyboardInterrupt):
-                        print "Bye."
+                except EOFError:
+                        print "\n\nBye.\n"
                         exit(0)
-                    else:
+                
+                except KeyboardInterrupt:
+                        print "\n\nBye.\n"
+                        exit(0)
+                        
+                except Exception:
                         print "[!] ERROR IN REPL LOOP - TOP LEVEL"
                         continue
