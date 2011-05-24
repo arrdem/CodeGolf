@@ -37,7 +37,7 @@ VERBOSE = False
             # 2 - blow-by-blow
 
 ####    FUNCTIONS
-def doShit(player, d, c, isFirstMove, v = VERBOSE):
+def doShit(player, d, c, isFirstMove, v = False):
     try:
         if player.__score__() > 21:
             raise Exception
@@ -54,7 +54,7 @@ def doShit(player, d, c, isFirstMove, v = VERBOSE):
         
         if "b" in s:
             # then s should be of the format ['b', '50'] or something like
-            b = abs(int(s[1])) # just in case
+            b = abs(int(s[1])) # just in case bots try to make negative bets... >:-)
             player.dChips(-1*b)
             players.stake += b
             if v: print "Bet $",b
@@ -100,6 +100,7 @@ def deal(player, d, c):
     return d, c
 
 def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
+    global VERBOSE
     for hand in range(hands):
         print "\n\n","*"*80
         print "#### Deck number: "+str(hand)
@@ -128,10 +129,10 @@ def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
             while (False in map(lambda x: x.stand, players)): # while SOMEONE is still up,
                 for player in players:
                     if not player.stand:
-                        d,c = doShit(player, d, c, isFirstMove)
+                        d,c = doShit(player, d, c, isFirstMove, v = VERBOSE)
                         
             while not dealer.stand:
-                d, c = doShit(dealer, d, c, False)
+                d, c = doShit(dealer, d, c, False, v = VERBOSE)
             print "\n[DEALER]\t",dealer.__score__()
                 
             for p in players:
@@ -200,7 +201,8 @@ Usage: ./blackjack_contest.py [[matches to run] [-i] [-vv]]\n\t-i specifies inte
         players = buildBots(WARRIORS_DIR, SRC_DIR, botType=cardshark)
         num_iters = 1
         
-        VERBOSE = "-vv" in sys.argv
+        global VERBOSE
+        VERBOSE = "-v" in sys.argv
         
         try:
             num_iters = int(sys.argv[1])
