@@ -67,6 +67,8 @@ def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
         print "*"*80
         d = deck()
         c = []
+        s=list(players)
+        s.append(dealer)
         
         for j in range(5):
             isFirstMove = True
@@ -98,7 +100,7 @@ def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
                     if not player.stand:
                         doShit(player, d, c, isFirstMove)
                         
-            while dealer.__score__() < HOUSE_SCORE:
+            while not dealer.stand:
                 doShit(dealer, d, c, False)
             print "\n[DEALER]\t",dealer.__score__()
                 
@@ -122,9 +124,10 @@ def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
                 p.stand = False
                 
             dealer.hand = []
-                
-    for player in players:
-        print player.nicename(), player.chips
+    
+    for player in s:
+        if player != dealer:
+            print player.nicename(), player.chips
         player.__reset__()
         
 def scores(players):
