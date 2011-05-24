@@ -30,35 +30,67 @@ HOUSE_SCORE = 17
 DEALER = cardshark("./dealer.py")
 
 ####    FUNCTIONS
-def doShit(player, d, c, isFirstMove):
+def doShit(player, d, c, isFirstMove, v = False):
     try:
         if player.__score__() > 21:
             raise Exception
+        if v:
+            print "    ||",player.nicename(pad = False),"has: ",
+            for a in range(len(player.hand)):
+                print player.hand[a],
+                if(0 <= a < len(player.hand)-1):
+                    print " "*(20-len(str(player.hand[a-1]))),
         
-        s = player.run(c).split(" ")
+            print "\n    ||      chose to :",
+        
+        s = player.run(c).strip("\n").split(" ")
+        
         if "b" in s:
             # then s should be of the format ['b', '50'] or something like
             b = abs(int(s[1])) # just in case
             player.dChips(-1*b)
             players.stake += b
+            if v: print "Bet $",b
         
-        if "h" in s:
-            c.append(d.draw())
-            player.append(c[-1])
+        elif "h" in s:
+            d,c = deal(player, d, c)
+            if v: print "Draw, got:", c[-1]
         
-        if ("d" in s) and isFirstMove:
-            c.append(d.draw())
-            player.append(c[-1])
+        elif ("d" in s) and isFirstMove:
+            d, c = deal(player, d, c)
             player.stand = True
             player.dChips(player.stake)
             player.stake *= 2
+            if v: print "DoubleDown, got:", c[-1]
             
-        if "p" in s:
+        elif "s" in s:
+            if v: print "Stand"
+            player.stand = True
+            
+        elif "p" in s:
             # UNSUPPPORTED
             player.__die__()
-    
+        
+        else:
+            if v: print "[!] WARNING - NO ACTION TAKEN\n\n     ORIGINAL OUTPUT WAS:",s,"\n\n[!] CONTINUING\n\n"
+             
     except Exception:
         player.stand = True
+    finally:
+        return d, c
+
+def deal(player, d, c):
+    while True:
+        try:
+            c.append(d.draw())
+            player.append(c[-1])
+            break
+        except IndexError:
+            # the deck is empty....
+            # deal from a new deck or something...
+            d = deck()
+            continue
+    return d, c
 
 def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
     for hand in range(hands):
@@ -77,31 +109,22 @@ def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
             for i in range(len(players)):
                 player = players[i]
                 if player.hasDough:
-                    try:
-                        player.dChips(-10)
-                        c.append(d.draw())
-                        player.append(c[-1])
-                        player.stake = 10
-                    except Exception:   # just use a new deck.
-                        d = deck()
-                        player.dChips(-10)
-                        c.append(d.draw())
-                        player.append(c[-1])
-                        player.stake = 10
+                    player.dChips(-10)
+                    d, c = deal(player, d, c)
+                    player.stake = 10                    
                 else:
                     player.stand = True
+        
+            d, c = deal(dealer, d, c)
             
-            c.append(d.draw())
-            dealer.append(c[-1])
-                
             # now let them play....   
             while (False in map(lambda x: x.stand, players)): # while SOMEONE is still up,
                 for player in players:
                     if not player.stand:
-                        doShit(player, d, c, isFirstMove)
+                        d,c = doShit(player, d, c, isFirstMove)
                         
             while not dealer.stand:
-                doShit(dealer, d, c, False)
+                d, c = doShit(dealer, d, c, False)
             print "\n[DEALER]\t",dealer.__score__()
                 
             for p in players:
