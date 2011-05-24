@@ -29,7 +29,7 @@ NUM_ROUNDS = 1
 HOUSE_SCORE = 17
 DEALER = cardshark("./dealer.py")
 
-VERBOSE = False
+VERBOSE = 0
             # TODO:
             # make VARBOSE an integer range 0,2
             # 0 - basic printing
@@ -37,11 +37,11 @@ VERBOSE = False
             # 2 - blow-by-blow
 
 ####    FUNCTIONS
-def doShit(player, d, c, isFirstMove, v = False):
+def doShit(player, d, c, isFirstMove, v = 0):
     try:
         if player.__score__() > 21:
             raise Exception
-        if v:
+        if v>1:
             print "    ||",player.nicename(pad = False),"has: ",
             for a in range(len(player.hand)):
                 print player.hand[a],
@@ -57,21 +57,21 @@ def doShit(player, d, c, isFirstMove, v = False):
             b = abs(int(s[1])) # just in case bots try to make negative bets... >:-)
             player.dChips(-1*b)
             players.stake += b
-            if v: print "Bet $",b
+            if v>1: print "Bet $",b
         
         elif "h" in s:
             d,c = deal(player, d, c)
-            if v: print "Draw, got:", c[-1]
+            if v>1: print "Draw, got:", c[-1]
         
         elif ("d" in s) and isFirstMove:
             d, c = deal(player, d, c)
             player.stand = True
             player.dChips(player.stake)
             player.stake *= 2
-            if v: print "DoubleDown, got:", c[-1]
+            if v>1: print "DoubleDown, got:", c[-1]
             
         elif "s" in s:
-            if v: print "Stand"
+            if v>1: print "Stand"
             player.stand = True
             
         elif "p" in s:
@@ -79,7 +79,7 @@ def doShit(player, d, c, isFirstMove, v = False):
             player.__die__()
         
         else:
-            if v: print "[!] WARNING - NO ACTION TAKEN\n\n     ORIGINAL OUTPUT WAS:",s,"\n\n[!] CONTINUING\n\n"
+            if True: print "[!] WARNING - NO ACTION TAKEN\n\n     ORIGINAL OUTPUT WAS:",s,"\n\n[!] CONTINUING\n\n"
              
     except Exception:
         player.stand = True
@@ -101,6 +101,7 @@ def deal(player, d, c):
 
 def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
     global VERBOSE
+    v = VERBOSE
     for hand in range(hands):
         print "\n\n","*"*80
         print "#### Deck number: "+str(hand)
@@ -195,14 +196,19 @@ def tourney(players, NUM_ROUNDS = 1, NUM_HANDS = 3):
 if __name__ == "__main__":
     if(('-?' in sys.argv) or ('--help' in sys.argv)):
         print """\nblackjack_contest.py\nAuthor: rmckenzie (http://codegolf.stackexchange.com/users/1370/rmckenzie)\n
-Usage: ./blackjack_contest.py [[matches to run] [-i] [-vv]]\n\t-i specifies interactive mode via a simple cli\n\t-v enables a very verbose printing of players' moves\n"""
+Usage: ./blackjack_contest.py [[matches to run] [-i] [-v|-vv]]\n\t-i specifies interactive mode via a simple cli\n\t-v enables a very verbose printing of players' moves\n-vv makes the scoring code print EVERYTHING\n"""
     
     else:
         players = buildBots(WARRIORS_DIR, SRC_DIR, botType=cardshark)
         num_iters = 1
         
         global VERBOSE
-        VERBOSE = "-v" in sys.argv
+        if "-v" in sys.argv:
+            VERBOSE = 1
+        elif "-vv" in sys.argv:
+            VERBOSE = 2
+        else:
+            VERBOSE = 0
         
         try:
             num_iters = int(sys.argv[1])
