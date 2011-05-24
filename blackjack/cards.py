@@ -42,7 +42,6 @@
 #               CARD OF SUIT "BANANA" IF YOU WANT TO.
 
 __CARDS =  [ "Ace",
-           "One",
            "Two",
            "Three",
            "Four",
@@ -62,8 +61,7 @@ __SUITS = [ "Clubs",
           "Hearts",
           "Diamonds" ]
 
-__SCORES = { "Ace"    :(1,11),
-           "One"    :1,
+__SCORES = {"Ace"   :(1,11),
            "Two"    :2,
            "Three"  :3,
            "Four"   :4,
@@ -95,7 +93,7 @@ class card:
         return (self.type == "Ace")
     
     def score(self, aceEleven = False):
-        if not self.type == "Ace":
+        if not self.isAce():
             return SCORES[self.type]
         else:
             if aceEleven:

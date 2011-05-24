@@ -72,7 +72,7 @@ class cardshark(bot):
             self.__die__()
             
     def __score__(self):
-        s = sum(map(lambda x: x.score(), self.hand))
+        s = sum(map(lambda x: x.score(aceEleven = True), self.hand))
         if True in map(lambda x: x.isAce(), self.hand):
             if s > 21:
                 s = sum(map(lambda x: x.score(aceEleven = False), self.hand))

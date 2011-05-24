@@ -26,13 +26,15 @@ from errors import *
 WARRIORS_DIR    = "./warriors/"     # path to the final executable bots
 SRC_DIR         = "./src"           # path to the bot source code
 NUM_ROUNDS = 1
-
+HOUSE_SCORE = 17
 DEALER = cardshark("./dealer.py")
 
 ####    FUNCTIONS
-
 def doShit(player, d, c, isFirstMove):
     try:
+        if player.__score__() > 21:
+            raise Exception
+        
         s = player.run(c).split(" ")
         if "b" in s:
             # then s should be of the format ['b', '50'] or something like
@@ -54,26 +56,36 @@ def doShit(player, d, c, isFirstMove):
         if "p" in s:
             # UNSUPPPORTED
             player.__die__()
-    except AttributeError:
+    
+    except Exception:
         player.stand = True
 
 def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
-    numHandsPerDeck = 52/(len(players)*4)
-    for i in range(hands/numHandsPerDeck):
+    for hand in range(hands):
+        print "\n\n","*"*80
+        print "#### Deck number: "+str(hand)
+        print "*"*80
         d = deck()
         c = []
         
-        for j in range(numHandsPerDeck):
+        for j in range(5):
             isFirstMove = True
 
             # subtract the buy-in cost, deal
             for i in range(len(players)):
                 player = players[i]
                 if player.hasDough:
-                    player.dChips(-10)
-                    c.append(d.draw())
-                    player.append(c[-1])
-                    player.stake = 10
+                    try:
+                        player.dChips(-10)
+                        c.append(d.draw())
+                        player.append(c[-1])
+                        player.stake = 10
+                    except Exception:   # just use a new deck.
+                        d = deck()
+                        player.dChips(-10)
+                        c.append(d.draw())
+                        player.append(c[-1])
+                        player.stake = 10
                 else:
                     player.stand = True
             
@@ -86,19 +98,19 @@ def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
                     if not player.stand:
                         doShit(player, d, c, isFirstMove)
                         
-            while dealer.__score__() < 17:
+            while dealer.__score__() < HOUSE_SCORE:
                 doShit(dealer, d, c, False)
-            print "[DEALER]\t",dealer.__score__()
+            print "\n[DEALER]\t",dealer.__score__()
                 
             for p in players:
                 if p.__score__() > dealer.__score__():
-                    print "[+]\t", 
+                    print "[+]"+" "*4, 
                     p.chips += (2*p.stake)
                 else:
-                    print "[-]\t",
-                print p.nicename(), p.__score__(), 
+                    print "[-]"+" "*4,
+                print p.nicename(),"\t", p.__score__(), "\t", p.chips,
                 
-                print " "*(12-len(str(p.__score__()))),
+                print " "*(12-len(str(p.__score__())+str(p.chips))),
                 for a in range(len(p.hand)):
                     print p.hand[a],
                     if(0 <= a < len(p.hand)-1):
@@ -107,6 +119,7 @@ def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
                 print ""
                 p.hand = []
                 p.stake = 0
+                p.stand = False
                 
             dealer.hand = []
                 
@@ -119,21 +132,31 @@ def scores(players):
     for i in players: a.append((i.chips, i))
     return a
     
+def trimBrokes(players):
+    l=[]
+    for i in players:
+        if i.hasDough:
+            l.append(i)
+    return l
         
 def tourney(players, NUM_ROUNDS = 1, NUM_HANDS = 3):
     for i in range(NUM_ROUNDS):
-        print "-"*80, "\n", "ROUND NUMBER", i, "\n", "-"*80
+        print "-"*80, "\n", "ROUND NUMBER", (i+1), "\n", "-"*80
         sets = list(itertools.combinations(players, 4))
         
         for f in sets:
-            runTable(f, hands = NUM_HANDS)
+            f=trimBrokes(f)
+            if f != []:
+                runTable(f, hands = NUM_HANDS)
         
-        print "\n","-"*80
-        for p in players:
-            print p.nicename(pad = False), p.chips
         
-        winner = max(scores(players))
-        print "\tWinner is %s" %(winner[1].nicename(pad = False))
+    #### FORMAL RESULTS PRINTING
+    print "\n","-"*80
+    for p in players:
+        print p.nicename(pad = False), p.chips
+        
+    winner = max(scores(players))
+    print "\tWinner is %s" %(winner[1].nicename(pad = False))
 
 if __name__ == "__main__":
     if(('-?' in sys.argv) or ('--help' in sys.argv)):
@@ -152,6 +175,19 @@ Usage: ./blackjack_contest.py [[matches to run]]\n"""
             tourney(players, NUM_ROUNDS = num_iters)
         
         else:
+            print \
+"""
+########################################################################
+## \\\\/\\\\/ELCOME to the BlackJack Contest CLI                          ##
+##  Use quit to exit                                                  ##
+##  Use help to list commands, Help [command] for more information    ##
+##                                                                    ##
+##  WARNING:                                                          ##
+##      DO NOT CTRL+C OR CTRL+D WHILE THE CONTEST IS RUNNING          ##
+##      AT PRESENT, THIS SOFTWARE DOESN'T HAVE SUPPORT FOR THOSE      ##
+##      ERRORS AND THE SCORING CODE WILL CRASH                        ##
+########################################################################
+"""
             # CLI implimentation here
             champ_dict = {}
             for foo in players:
@@ -262,7 +298,7 @@ Usage: ./blackjack_contest.py [[matches to run]]\n"""
                             except Exception:
                                 pass
                     
-                            runTable(dealer, pop)
+                            tourney(pop, NUM_ROUNDS = itters)
                         
                         if("quit" in cmd):
                             print "Bye.\n"
@@ -272,7 +308,7 @@ Usage: ./blackjack_contest.py [[matches to run]]\n"""
                             continue
                         
                 except Exception:
-                    if Exception in (EOFError or KeyboardInterrupt):
+                    if Exception in (EOFError, KeyboardInterrupt):
                         print "Bye."
                         exit(0)
                     else:
