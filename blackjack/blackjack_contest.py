@@ -27,7 +27,7 @@ WARRIORS_DIR    = "./warriors/"     # path to the final executable bots
 SRC_DIR         = "./src"           # path to the bot source code
 NUM_ROUNDS = 1
 HOUSE_SCORE = 17
-
+global VERBOSE
 VERBOSE = 0 # VARBOSE an integer range 0,2
             # 0 - basic printing
             # 1 - reasonable debugging
@@ -134,7 +134,7 @@ def runTable(players, hands = NUM_ROUNDS):
             if sum(map(lambda x: x.score(), dealer)) > 21:
                 dealer = []
             try:
-                print "\n[DEALER]\t",sum(map(lambda x: x.score(), dealer))
+                print "\n[DEALER] "+20*"-"+"> ",sum(map(lambda x: x.score(), dealer))
             except Exception:
                 print 0
             
@@ -144,13 +144,12 @@ def runTable(players, hands = NUM_ROUNDS):
                     p.chips += (2*p.stake)
                 else:
                     print "[-]"+" "*4,
-                print p.nicename(),"\t", p.__score__(), "\t", p.chips,
+                l=len(p.nicename())
+                print p.nicename()," "*2, p.__score__(), " "*(8-len(str(p.__score__()))), p.chips,
                 
                 print " "*(12-len(str(p.__score__())+str(p.chips))),
                 for a in range(len(p.hand)):
-                    print p.hand[a],
-                    if(0 <= a < len(p.hand)-1):
-                        print " "*(20-len(str(p.hand[a-1]))),
+                    print p.hand[a].letter(),
                 
                 print ""
                 p.hand = []
@@ -203,7 +202,6 @@ Usage: ./blackjack_contest.py [[matches to run] [-i] [-v|-vv]]\n\t-i specifies i
         players = buildBots(WARRIORS_DIR, SRC_DIR, botType=cardshark)
         num_iters = 1
         
-        global VERBOSE
         if "-v" in sys.argv:
             VERBOSE = 1
         elif "-vv" in sys.argv:

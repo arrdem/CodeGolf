@@ -41,7 +41,7 @@
 #               THERE IS NO ERROR CHECKING IN THIS CLASS. YOU CAN MAKE A
 #               CARD OF SUIT "BANANA" IF YOU WANT TO.
 
-__CARDS =  [ "Ace",
+__CARDS = ["Ace",
            "Two",
            "Three",
            "Four",
@@ -53,8 +53,7 @@ __CARDS =  [ "Ace",
            "Ten",
            "Jack",
            "Queen",
-           "King"
-         ]
+           "King" ]
 
 __SUITS = [ "Clubs",
           "Spades",
@@ -73,8 +72,7 @@ __SCORES = {"Ace"   :(1,11),
            "Ten"    :10,
            "Jack"   :10,
            "Queen"  :10,
-           "King"   :10
-         }
+           "King"   :10}
 
 # some error protection, so that stupid devs can override defaults
 SCORES = __SCORES
