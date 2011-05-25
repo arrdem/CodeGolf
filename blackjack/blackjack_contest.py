@@ -63,7 +63,7 @@ def doShit(player, d, c, isFirstMove, v = 0):
         elif ("d" in s) and isFirstMove:
             d, c = deal(player, d, c)
             player.stand = True
-            player.dChips(player.stake)
+            player.dChips(-1*player.stake)
             player.stake *= 2
             if v>1: print "DoubleDown, got:", c[-1]
             
