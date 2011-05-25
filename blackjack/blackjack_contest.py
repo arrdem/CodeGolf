@@ -67,6 +67,9 @@ def doShit(player, d, c, isFirstMove, v = 0):
             player.stake *= 2
             if v>1: print "DoubleDown, got:", c[-1]
             
+        elif ("d" in s) and not isFirstMove:
+            player.stand = True
+            
         elif "s" in s:
             if v>1: print "Stand"
             player.stand = True
@@ -109,7 +112,6 @@ def runTable(players, hands = NUM_ROUNDS):
         s=list(players)
         
         for j in range(5):
-            isFirstMove = True
 
             # subtract the buy-in cost, deal
             for i in range(len(players)):
@@ -120,6 +122,7 @@ def runTable(players, hands = NUM_ROUNDS):
                     player.stake = 10                    
                 else:
                     player.stand = True
+            isFirstMove = False
                     
             d,c = deal(dealer, d, c)
             
@@ -128,6 +131,7 @@ def runTable(players, hands = NUM_ROUNDS):
                 for player in players:
                     if not player.stand:
                         d,c = doShit(player, d, c, isFirstMove, v = VERBOSE)
+                isFirstMove = False
                         
             while sum(map(lambda x: x.score(), dealer)) < 17:
                 d,c = deal(dealer, d, c)
