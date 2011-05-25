@@ -133,7 +133,7 @@ def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
                         d,c = doShit(player, d, c, isFirstMove, v = VERBOSE)
                         
             while not dealer.stand:
-                d, c = doShit(dealer, d, c, False, v = VERBOSE)
+                d, c = doShit(dealer, d, c, False, v = 2)
             print "\n[DEALER]\t",dealer.__score__()
                 
             for p in players:
