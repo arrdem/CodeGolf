@@ -27,11 +27,8 @@ WARRIORS_DIR    = "./warriors/"     # path to the final executable bots
 SRC_DIR         = "./src"           # path to the bot source code
 NUM_ROUNDS = 1
 HOUSE_SCORE = 17
-DEALER = cardshark("./dealer.py")
 
-VERBOSE = 0
-            # TODO:
-            # make VARBOSE an integer range 0,2
+VERBOSE = 0 # VARBOSE an integer range 0,2
             # 0 - basic printing
             # 1 - reasonable debugging
             # 2 - blow-by-blow
@@ -99,7 +96,7 @@ def deal(player, d, c):
             continue
     return d, c
 
-def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
+def runTable(players, hands = NUM_ROUNDS):
     global VERBOSE
     v = VERBOSE
     for hand in range(hands):
@@ -108,8 +105,8 @@ def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
         print "*"*80
         d = deck()
         c = []
+        dealer=[]
         s=list(players)
-        s.append(dealer)
         
         for j in range(5):
             isFirstMove = True
@@ -123,8 +120,8 @@ def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
                     player.stake = 10                    
                 else:
                     player.stand = True
-        
-            d, c = deal(dealer, d, c)
+                    
+            d,c = deal(dealer, d, c)
             
             # now let them play....   
             while (False in map(lambda x: x.stand, players)): # while SOMEONE is still up,
@@ -132,12 +129,17 @@ def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
                     if not player.stand:
                         d,c = doShit(player, d, c, isFirstMove, v = VERBOSE)
                         
-            while not dealer.stand:
-                d, c = doShit(dealer, d, c, False, v = 2)
-            print "\n[DEALER]\t",dealer.__score__()
-                
+            while sum(map(lambda x: x.score(), dealer)) < 17:
+                d,c = deal(dealer, d, c)
+            if sum(map(lambda x: x.score(), dealer)) > 21:
+                dealer = []
+            try:
+                print "\n[DEALER]\t",sum(map(lambda x: x.score(), dealer))
+            except Exception:
+                print 0
+            
             for p in players:
-                if p.__score__() > dealer.__score__():
+                if p.__score__() > sum(map(lambda x: x.score(), dealer)):
                     print "[+]"+" "*4, 
                     p.chips += (2*p.stake)
                 else:
@@ -155,7 +157,7 @@ def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
                 p.stake = 0
                 p.stand = False
                 
-            dealer.hand = []
+            dealer = []
     
     for player in s:
         if player != dealer:
@@ -183,8 +185,7 @@ def tourney(players, NUM_ROUNDS = 1, NUM_HANDS = 3):
             f=trimBrokes(f)
             if f != []:
                 runTable(f, hands = NUM_HANDS)
-        
-        
+
     #### FORMAL RESULTS PRINTING
     print "\n","-"*80
     for p in players:
