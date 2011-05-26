@@ -16,7 +16,7 @@ import itertools
 import multiprocessing
 import string
 
-############## CRITICAL IMPORT ############
+############## CRITICAL IMPORTS ############
 from bot import *
 from cardshark import *
 from deck import *
@@ -112,8 +112,6 @@ def runTable(players, hands = NUM_ROUNDS):
         s=list(players)
         
         for j in range(5):
-
-            # subtract the buy-in cost, deal
             for i in range(len(players)):
                 player = players[i]
                 if player.hasDough:
@@ -165,6 +163,7 @@ def runTable(players, hands = NUM_ROUNDS):
     for player in s:
         if player != dealer:
             print player.nicename(), player.chips
+        player.rounds += 1
         player.__reset__()
         
 def scores(players):
@@ -187,7 +186,9 @@ def tourney(players, NUM_ROUNDS = 1, NUM_HANDS = 3):
         for f in sets:
             f=trimBrokes(f)
             if f != []:
-                runTable(f, hands = NUM_HANDS)
+                r_min = min(map(lambda x: x.rounds, f))
+                s = [t for t in f if t.rounds == r_min]
+                runTable(s, hands = NUM_HANDS)
 
     #### FORMAL RESULTS PRINTING
     print "\n","-"*80

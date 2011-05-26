@@ -60,6 +60,7 @@ class cardshark(bot):
         self.stake = 0
         self.wins = 0
         self.hasDough = True
+        self.rounds = 0
         
     def __reset__(self):
         self.hand = []
