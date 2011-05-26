@@ -52,9 +52,10 @@ def doShit(player, d, c, isFirstMove, v = 0):
         if "b" in s:
             # then s should be of the format ['b', '50'] or something like
             b = abs(int(s[1])) # just in case bots try to make negative bets... >:-)
-            player.dChips(-1*b)
-            players.stake += b
-            if v>1: print "Bet $",b
+            if player.chips >= b:
+                player.dChips(-1*b)
+                players.stake += b
+                if v>1: print "Bet $",b
         
         elif "h" in s:
             d,c = deal(player, d, c)
