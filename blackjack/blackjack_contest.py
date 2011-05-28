@@ -104,9 +104,9 @@ def runTable(players, hands = NUM_ROUNDS):
     global VERBOSE
     v = VERBOSE
     for hand in range(hands):
-        print "\n\n","*"*80
-        print "#### Deck number: "+str(hand)
-        print "*"*80
+        print "\n\n","-"*80
+        print "**** Deck number: "+str(hand)
+        print "-"*80
         d = deck()
         c = []
         dealer=[]
