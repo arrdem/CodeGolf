@@ -55,6 +55,7 @@
 #                   Jack    :   'J'
 #                   Queen   :   'Q'
 #                   King    :   'K'
+#                   "Hidden":   '#'
 #           TODO:
 #               THERE IS NO ERROR CHECKING IN THIS CLASS. YOU CAN MAKE A
 #               CARD OF SUIT "BANANA" IF YOU WANT TO.
@@ -103,6 +104,7 @@ class card:
         self.suit = suit
         self.type = face
         self.value = self.score()
+        self.hidden = False
     
     def isAce(self):
         global __CARDS
@@ -117,9 +119,11 @@ class card:
         return SCORES[self.type][0]
         
     def letter(self):
-        if 1 < self.score() < 10:
-            return str(self.score())
-        return str(self)[0].lower()
+        if not self.hidden:
+            if 1 < self.score() < 10:
+                return str(self.score())
+            return str(self)[0].lower()
+        return "#"
     
     def __call__(self):
         return self

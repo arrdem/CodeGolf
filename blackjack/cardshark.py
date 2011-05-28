@@ -45,7 +45,6 @@
 import subprocess 
 from cards import card
 from bot import *
-import errors
 
 DEFAULT_CHIPS = 200
 TEST_CASE = "21 KJA KQKJA3592A 25 145"
@@ -80,6 +79,7 @@ class cardshark(bot):
         if s > 21:
             self.stand = True
             self.hand = []
+            s = 0
         return s
         
     def __hand__(self, cards):

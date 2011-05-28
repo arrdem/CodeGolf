@@ -20,14 +20,15 @@ import string
 from bot import *
 from cardshark import *
 from deck import *
-from errors import *
 
 ####    CONFIG
+global VERBOSE, WARRIORS_DIR, SRC_DIR, NUM_ROUNDS, NUM_HANDS, HOUSE_SCORE
+
 WARRIORS_DIR    = "./warriors/"     # path to the final executable bots
 SRC_DIR         = "./src"           # path to the bot source code
 NUM_ROUNDS = 1
+NUM_HANDS = 5
 HOUSE_SCORE = 17
-global VERBOSE
 VERBOSE = 0 # VARBOSE an integer range 0,2
             # 0 - basic printing
             # 1 - reasonable debugging
@@ -100,10 +101,10 @@ def deal(player, d, c):
             continue
     return d, c
 
-def runTable(players, hands = NUM_ROUNDS):
+def runTable(players, rounds = NUM_ROUNDS, hands = NUM_HANDS):
     global VERBOSE
     v = VERBOSE
-    for hand in range(hands):
+    for hand in range(rounds):
         print "\n\n","-"*80
         print "**** Deck number: "+str(hand)
         print "-"*80
@@ -112,18 +113,27 @@ def runTable(players, hands = NUM_ROUNDS):
         dealer=[]
         s=list(players)
         
-        for j in range(5):
-            for i in range(len(players)):
-                player = players[i]
-                if player.hasDough:
-                    player.dChips(-10)
-                    d, c = deal(player, d, c)
-                    player.stake = 10                    
-                else:
-                    player.stand = True
-            isFirstMove = False
+        # Outermost game loop
+        for j in range(hands):
+            
+            for jj in [0,1]:            # do this twice..
+                for i in players:       # for each player:
+                    if i.hasDough and (jj == 0):    # if this is the first pass
+                        i.dChips(-10)               # charge 'em money
+                        i.stake = 10
+                        
+                    if i.hasDough:                  # if he's got the money
+                        d, c = deal(i, d, c)        # deal him in
+                        
+                    else:
+                        player.stand = True         # gtfo broke
                     
-            d,c = deal(dealer, d, c)
+                d,c = deal(dealer, d, c)
+                
+            # now hide one of the dealer's cards...
+            random.choice(dealer).hidden = True
+            
+            isFirstMove = True
             
             # now let them play....   
             while (False in map(lambda x: x.stand, players)): # while SOMEONE is still up,
