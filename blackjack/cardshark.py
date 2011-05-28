@@ -80,8 +80,8 @@ class cardshark(bot):
             for m in range(len(aces)):                
                 sb = sum(map(lambda x: x.score(aceEleven = False), nonaces))
                 for i in range(len(aces)):
-                    s = sb + sum(map(lambda x: x.score(aceEleven = False), aces[0:i]))
-                    if s > 21:
+                    s = sb + sum(map(lambda x: x.score(aceEleven = False), aces[0:i])) +sum(map(lambda x: x.score(aceEleven = False), aces[i-1::]))
+                    if s <= 21:
                         break
                         
         if s > 21:
