@@ -35,8 +35,26 @@
 #               sets up the card
 #           __str__()
 #               builds the card into a pretty string for printing
-#           score()
+#           score(aceEleven = True)
 #               gets the integer value of the card
+#               the aceEleven argument serves to specify whether or not 
+#               aces should be scored as 11 or 1 point
+#           letter()
+#               gets the letter used to identify the card in a string  
+#               LETTER MAPPINGS  
+#                   Ace     :   'A'
+#                   Two     :   '2'
+#                   Three   :   '3'
+#                   Four    :   '4'
+#                   Five    :   '5'
+#                   Six     :   '6'
+#                   Seven   :   '7'
+#                   Eight   :   '8'
+#                   Nine    :   '9'
+#                   Ten     :   'T'
+#                   Jack    :   'J'
+#                   Queen   :   'Q'
+#                   King    :   'K'
 #           TODO:
 #               THERE IS NO ERROR CHECKING IN THIS CLASS. YOU CAN MAKE A
 #               CARD OF SUIT "BANANA" IF YOU WANT TO.

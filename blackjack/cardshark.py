@@ -34,7 +34,7 @@
 #          <stake>          the  number of chips which the bot has bet this hand
 #          <chips>          the number of chips which the bot has
 #       SAMPLE INPUT
-#          $ ./foo.bar KJA KQKJA3592A 25 145
+#          $ ./foo.bar 21 KJA KQKJA3592A 25 145
 #
 #       OUTPUT SPECIFICATION
 #          "H"|"S"|"D"      (no quotes in output)
