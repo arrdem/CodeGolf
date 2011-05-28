@@ -74,8 +74,16 @@ class cardshark(bot):
     def __score__(self):
         s = sum(map(lambda x: x.score(aceEleven = True), self.hand))
         if True in map(lambda x: x.isAce(), self.hand):
-            if s > 21:
-                s = sum(map(lambda x: x.score(aceEleven = False), self.hand))
+            aces = [a for a in self.hand if a.isAce()]
+            nonaces = [c for c in self.hand if not (c in aces)]
+            
+            for m in range(len(aces)):                
+                sb = sum(map(lambda x: x.score(aceEleven = False), nonaces))
+                for i in range(len(aces)):
+                    s = sb + sum(map(lambda x: x.score(aceEleven = False), aces[0:i]))
+                    if s > 21:
+                        break
+                        
         if s > 21:
             self.stand = True
             self.hand = []
