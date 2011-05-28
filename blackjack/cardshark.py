@@ -86,7 +86,6 @@ class cardshark(bot):
                         
         if s > 21:
             self.stand = True
-            self.hand = []
             s = 0
         return s
         

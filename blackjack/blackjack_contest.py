@@ -81,7 +81,7 @@ def doShit(player, d, c, isFirstMove, v = 0):
             player.__die__()
         
         else:
-            if True: print "[!] WARNING - NO ACTION TAKEN\n\n     ORIGINAL OUTPUT WAS:",s,"\n\n[!] CONTINUING\n\n"
+            if True: print "[!] WARNING - NO ACTION TAKEN BY "+player.nicename(pad=False)+"\n\n     ORIGINAL OUTPUT WAS:",s,"\n\n[!] CONTINUING\n\n"
              
     except Exception:
         player.stand = True
@@ -98,84 +98,85 @@ def deal(player, d, c):
             # the deck is empty....
             # deal from a new deck or something...
             d = deck()
+            sys.stderr.write("\n[WARNING] - NEW DECK CREATED\n")
             continue
     return d, c
 
-def runTable(players, rounds = NUM_ROUNDS, hands = NUM_HANDS):
+def runTable(players, hands = NUM_HANDS):
     global VERBOSE
     v = VERBOSE
-    for hand in range(rounds):
-        print "\n\n","-"*80
-        print "**** Deck number: "+str(hand)
-        print "-"*80
-        d = deck()
-        c = []
-        dealer=[]
-        s=list(players)
-        
-        # Outermost game loop
-        for j in range(hands):
-            
-            for jj in [0,1]:            # do this twice..
-                for i in players:       # for each player:
-                    if i.hasDough and (jj == 0):    # if this is the first pass
-                        i.dChips(-10)               # charge 'em money
-                        i.stake = 10
-                        
-                    if i.hasDough:                  # if he's got the money
-                        d, c = deal(i, d, c)        # deal him in
-                        
-                    else:
-                        player.stand = True         # gtfo broke
-                    
-                d,c = deal(dealer, d, c)
-                
-            # now hide one of the dealer's cards...
-            random.choice(dealer).hidden = True
-            
-            isFirstMove = True
-            
-            # now let them play....   
-            while (False in map(lambda x: x.stand, players)): # while SOMEONE is still up,
-                for player in players:
-                    if not player.stand:
-                        d,c = doShit(player, d, c, isFirstMove, v = VERBOSE)
-                isFirstMove = False
-                        
-            while sum(map(lambda x: x.score(), dealer)) < 17:
-                d,c = deal(dealer, d, c)
-            if sum(map(lambda x: x.score(), dealer)) > 21:
-                dealer = []
-            try:
-                print "\n[DEALER] "+20*"-"+"> ",sum(map(lambda x: x.score(), dealer))
-            except Exception:
-                print 0
-            
-            for p in players:
-                if p.__score__() > sum(map(lambda x: x.score(), dealer)):
-                    print "[+]"+" "*4, 
-                    p.chips += (2*p.stake)
-                else:
-                    print "[-]"+" "*4,
-                l=len(p.nicename())
-                print p.nicename()," "*2, p.__score__(), " "*(8-len(str(p.__score__()))), p.chips,
-                
-                print " "*(12-len(str(p.__score__())+str(p.chips))),
-                for a in range(len(p.hand)):
-                    print p.hand[a].letter(),
-                
-                print ""
-                p.hand = []
-                p.stake = 0
-                p.stand = False
-                
-            dealer = []
+    d = deck()
+    c = []
+    dealer=[]
+    s=list(players)
     
+    # Outermost game loop
+    for j in range(hands):
+        
+        for jj in [0,1]:            # do this twice..
+            for i in players:       # for each player:
+                if i.hasDough and (jj == 0):    # if this is the first pass
+                    i.dChips(-10)               # charge 'em money
+                    i.stake = 10
+                    
+                if i.hasDough:                  # if he's got the money
+                    d, c = deal(i, d, c)        # deal him in
+                    
+                else:
+                    player.stand = True         # gtfo broke
+                
+            d,c = deal(dealer, d, c)
+            
+        # now hide one of the dealer's cards...
+        random.choice(dealer).hidden = True
+        
+        isFirstMove = True
+        
+        # now let them play....   
+        while (False in map(lambda x: x.stand, players)): # while SOMEONE is still up,
+            for player in players:
+                if not player.stand:
+                    d,c = doShit(player, d, c, isFirstMove, v = VERBOSE)
+            isFirstMove = False
+                    
+        while sum(map(lambda x: x.score(), dealer)) < 17:
+            d,c = deal(dealer, d, c)
+        if sum(map(lambda x: x.score(), dealer)) > 21:
+            dealer = []
+            
+        print "\n\n[+/-]        Bot's Name         Score     Chips       Hand" 
+
+        try:
+            print "[DEALER] "+20*"-"+"> ",sum(map(lambda x: x.score(), dealer))
+        except Exception:
+            print 0
+        
+        for p in players:
+            if p.__score__() > sum(map(lambda x: x.score(), dealer)):
+                print "[+]"+" "*4, 
+                p.chips += (2*p.stake)
+            else:
+                print "[-]"+" "*4,
+            l=len(p.nicename())
+            print p.nicename()," "*2, p.__score__(), " "*(8-len(str(p.__score__()))), p.chips,
+            
+            print " "*(12-len(str(p.__score__())+str(p.chips))),
+            for a in range(len(p.hand)):
+                print p.hand[a].letter(),
+            
+            print ""
+            p.hand = []
+            p.stake = 0
+            p.stand = False
+            
+        dealer = []
+    print "\n\n\tScores:"
     for player in s:
         if player != dealer:
             print player.nicename(), player.chips
         player.rounds += 1
         player.__reset__()
+    print "\n"
         
 def scores(players):
     a=[]
@@ -189,22 +190,22 @@ def trimBrokes(players):
             l.append(i)
     return l
         
-def tourney(players, NUM_ROUNDS = 1, NUM_HANDS = 3):
-    for i in range(NUM_ROUNDS):
-        print "-"*80, "\n", "ROUND NUMBER", (i+1), "\n", "-"*80
-        sets = list(itertools.combinations(players, 4))
-        
-        for f in sets:
-            f=trimBrokes(f)
-            if f != []:
-                r_min = min(map(lambda x: x.rounds, f))
-                s = [t for t in f if t.rounds == r_min]
-                runTable(s, hands = NUM_HANDS)
+def tourney(players, NUM_ROUNDS = 5, NUM_HANDS = 5):
+    c=0    
+    while False in map(lambda x: x.rounds == NUM_ROUNDS, players):  # while NOT all players have played NUM_ROUNDS rnds:
+        players=trimBrokes(players)                                 # trim out the brokes...
+        random.shuffle(players)                                     # shufle the list of players to try and mix up the tables
+        if players != []:                                           # if there are still bots who can play
+            r_min = min(map(lambda x: x.rounds, players))           # find the MINUMUM of the number of rounds played by all the bots
+            s = [t for t in players if t.rounds == r_min][0:4]      # collect all bots with that many games played, slice to first four
+            print "#"*80, "\n", "ROUND NUMBER", (r_min+1), "\n", "#"*80
+            runTable(s, hands = NUM_HANDS)                          # play'em off
+            c+=1
 
     #### FORMAL RESULTS PRINTING
-    print "\n","-"*80
+    print "\n","-"*80, "\nFinal Tournament Scores:"
     for p in players:
-        print p.nicename(pad = False), p.chips
+        print p.nicename(pad = False), p.chips, p.rounds
         
     winner = max(scores(players))
     print "\tWinner is %s" %(winner[1].nicename(pad = False))
@@ -231,7 +232,7 @@ Usage: ./blackjack_contest.py [[matches to run] [-i] [-v|-vv]]\n\t-i specifies i
             pass
         
         if not ("-i" in sys.argv):
-            tourney(players, NUM_ROUNDS = num_iters)
+            tourney(players)
         
         else:
             print \
