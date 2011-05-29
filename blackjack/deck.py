@@ -45,14 +45,7 @@ class deck:
     
     def shuffle(self):
         self.__deck__ = self.__clean__
-        for i in range(3000):
-            a=random.randint(0,51)
-            b=random.randint(0,51)
-            c=None
-            
-            c = self.__deck__[a]
-            self.__deck__[a] = self.__deck__[b] 
-            self.__deck__[b] = c 
+        random.shuffle(self.__deck__)   # gotta love python
         
     def draw(self):
         return self.__deck__.pop()

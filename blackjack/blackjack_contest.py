@@ -16,25 +16,31 @@ import itertools
 import multiprocessing
 import string
 
-############## CRITICAL IMPORT ############
+############## CRITICAL IMPORTS ############
 from bot import *
 from cardshark import *
 from deck import *
-from errors import *
 
 ####    CONFIG
+global VERBOSE, WARRIORS_DIR, SRC_DIR, NUM_ROUNDS, NUM_HANDS, HOUSE_SCORE, DEALER
+
 WARRIORS_DIR    = "./warriors/"     # path to the final executable bots
 SRC_DIR         = "./src"           # path to the bot source code
 NUM_ROUNDS = 1
+NUM_HANDS = 5
 HOUSE_SCORE = 17
+VERBOSE = 0 # VARBOSE an integer range 0,2
+            # 0 - basic printing
+            # 1 - reasonable debugging
+            # 2 - blow-by-blow
 DEALER = cardshark("./dealer.py")
 
 ####    FUNCTIONS
-def doShit(player, d, c, isFirstMove, v = False):
+def doShit(player, d, c, isFirstMove, v = 0):
     try:
         if player.__score__() > 21:
             raise Exception
-        if v:
+        if v>1:
             print "    ||",player.nicename(pad = False),"has: ",
             for a in range(len(player.hand)):
                 print player.hand[a],
@@ -47,24 +53,28 @@ def doShit(player, d, c, isFirstMove, v = False):
         
         if "b" in s:
             # then s should be of the format ['b', '50'] or something like
-            b = abs(int(s[1])) # just in case
-            player.dChips(-1*b)
-            players.stake += b
-            if v: print "Bet $",b
+            b = abs(int(s[1])) # just in case bots try to make negative bets... >:-)
+            if player.chips >= b:
+                player.dChips(-1*b)
+                players.stake += b
+                if v>1: print "Bet $",b
         
         elif "h" in s:
             d,c = deal(player, d, c)
-            if v: print "Draw, got:", c[-1]
+            if v>1: print "Draw, got:", c[-1]
         
         elif ("d" in s) and isFirstMove:
             d, c = deal(player, d, c)
             player.stand = True
-            player.dChips(player.stake)
+            player.dChips(-1*player.stake)
             player.stake *= 2
-            if v: print "DoubleDown, got:", c[-1]
+            if v>1: print "DoubleDown, got:", c[-1]
+            
+        elif ("d" in s) and not isFirstMove:
+            player.stand = True
             
         elif "s" in s:
-            if v: print "Stand"
+            if v>1: print "Stand"
             player.stand = True
             
         elif "p" in s:
@@ -72,7 +82,7 @@ def doShit(player, d, c, isFirstMove, v = False):
             player.__die__()
         
         else:
-            if v: print "[!] WARNING - NO ACTION TAKEN\n\n     ORIGINAL OUTPUT WAS:",s,"\n\n[!] CONTINUING\n\n"
+            if True: print "[!] WARNING - NO ACTION TAKEN BY "+player.nicename(pad=False)+"\n\n     ORIGINAL OUTPUT WAS:",s,"\n\n[!] CONTINUING\n\n"
              
     except Exception:
         player.stand = True
@@ -89,69 +99,81 @@ def deal(player, d, c):
             # the deck is empty....
             # deal from a new deck or something...
             d = deck()
+            sys.stderr.write("\n[WARNING] - NEW DECK CREATED\n")
             continue
     return d, c
 
-def runTable(players, dealer = DEALER, hands = NUM_ROUNDS):
-    for hand in range(hands):
-        print "\n\n","*"*80
-        print "#### Deck number: "+str(hand)
-        print "*"*80
-        d = deck()
-        c = []
-        s=list(players)
-        s.append(dealer)
-        
-        for j in range(5):
-            isFirstMove = True
-
-            # subtract the buy-in cost, deal
-            for i in range(len(players)):
-                player = players[i]
-                if player.hasDough:
-                    player.dChips(-10)
-                    d, c = deal(player, d, c)
-                    player.stake = 10                    
-                else:
-                    player.stand = True
-        
-            d, c = deal(dealer, d, c)
-            
-            # now let them play....   
-            while (False in map(lambda x: x.stand, players)): # while SOMEONE is still up,
-                for player in players:
-                    if not player.stand:
-                        d,c = doShit(player, d, c, isFirstMove)
-                        
-            while not dealer.stand:
-                d, c = doShit(dealer, d, c, False)
-            print "\n[DEALER]\t",dealer.__score__()
-                
-            for p in players:
-                if p.__score__() > dealer.__score__():
-                    print "[+]"+" "*4, 
-                    p.chips += (2*p.stake)
-                else:
-                    print "[-]"+" "*4,
-                print p.nicename(),"\t", p.__score__(), "\t", p.chips,
-                
-                print " "*(12-len(str(p.__score__())+str(p.chips))),
-                for a in range(len(p.hand)):
-                    print p.hand[a],
-                    if(0 <= a < len(p.hand)-1):
-                        print " "*(20-len(str(p.hand[a-1]))),
-                
-                print ""
-                p.hand = []
-                p.stake = 0
-                p.stand = False
-                
-            dealer.hand = []
+def runTable(players, hands = NUM_HANDS, dealer=DEALER, v = VERBOSE):
+    d = deck()
+    c = []
+    s=list(players)
     
+    # Outermost game loop
+    for j in range(hands):
+        
+        for jj in [0,1]:            # do this twice..
+            for i in players:       # for each player:
+                if i.hasDough and (jj == 0):    # if this is the first pass
+                    i.dChips(-10)               # charge 'em money
+                    i.stake = 10
+                    
+                if i.hasDough:                  # if he's got the money
+                    d, c = deal(i, d, c)        # deal him in
+                    
+                else:
+                    player.stand = True         # gtfo broke
+                
+            d,c = deal(dealer, d, c)
+            
+        # now hide one of the dealer's cards...
+        random.choice(dealer.hand).hidden = True
+        
+        isFirstMove = True
+        
+        # now let them play....   
+        while (False in map(lambda x: x.stand, players)): # while SOMEONE is still up,
+            for player in players:
+                if not player.stand:
+                    d,c = doShit(player, d, c, isFirstMove, v = VERBOSE)
+            isFirstMove = False
+                    
+        while not dealer.stand:
+            d,c = doShit(dealer, d, c, False) 
+            
+        print "\n\n[+/-]        Bot's Name         Score     Chips       Hand" 
+
+        try:
+            print "[DEALER] "+20*"-"+"> ",dealer.__score__()
+        except Exception:
+            print 0
+        
+        for p in players:
+            if p.__score__() > dealer.__score__():
+                print "[+]"+" "*4, 
+                p.chips += (2*p.stake)
+            else:
+                print "[-]"+" "*4,
+            l=len(p.nicename())
+            print p.nicename()," "*2, p.__score__(), " "*(8-len(str(p.__score__()))), p.chips,
+            
+            print " "*(12-len(str(p.__score__())+str(p.chips))),
+            for a in range(len(p.hand)):
+                print p.hand[a].letter(),
+            
+            print ""
+            p.hand = []
+            p.stake = 0
+            p.stand = False
+            
+        dealer.hand = [];dealer.stand = False  
+        
+    print "\n\n\tScores:"
     for player in s:
         if player != dealer:
             print player.nicename(), player.chips
+        player.rounds += 1
         player.__reset__()
+    print "\n"
         
 def scores(players):
     a=[]
@@ -165,21 +187,22 @@ def trimBrokes(players):
             l.append(i)
     return l
         
-def tourney(players, NUM_ROUNDS = 1, NUM_HANDS = 3):
-    for i in range(NUM_ROUNDS):
-        print "-"*80, "\n", "ROUND NUMBER", (i+1), "\n", "-"*80
-        sets = list(itertools.combinations(players, 4))
-        
-        for f in sets:
-            f=trimBrokes(f)
-            if f != []:
-                runTable(f, hands = NUM_HANDS)
-        
-        
+def tourney(players, NUM_ROUNDS = 5, NUM_HANDS = 5):
+    c=0    
+    while False in map(lambda x: x.rounds == NUM_ROUNDS, players):  # while NOT all players have played NUM_ROUNDS rnds:
+        players=trimBrokes(players)                                 # trim out the brokes...
+        random.shuffle(players)                                     # shufle the list of players to try and mix up the tables
+        if players != []:                                           # if there are still bots who can play
+            r_min = min(map(lambda x: x.rounds, players))           # find the MINUMUM of the number of rounds played by all the bots
+            s = [t for t in players if t.rounds == r_min][0:4]      # collect all bots with that many games played, slice to first four
+            print "#"*80, "\n", "ROUND NUMBER", (r_min+1), "\n", "#"*80
+            runTable(s, hands = NUM_HANDS)                          # play'em off
+            c+=1
+
     #### FORMAL RESULTS PRINTING
-    print "\n","-"*80
+    print "\n","-"*80, "\nFinal Tournament Scores:"
     for p in players:
-        print p.nicename(pad = False), p.chips
+        print p.nicename(pad = False), p.chips, p.rounds
         
     winner = max(scores(players))
     print "\tWinner is %s" %(winner[1].nicename(pad = False))
@@ -187,31 +210,39 @@ def tourney(players, NUM_ROUNDS = 1, NUM_HANDS = 3):
 if __name__ == "__main__":
     if(('-?' in sys.argv) or ('--help' in sys.argv)):
         print """\nblackjack_contest.py\nAuthor: rmckenzie (http://codegolf.stackexchange.com/users/1370/rmckenzie)\n
-Usage: ./blackjack_contest.py [[matches to run]]\n"""
+Usage: ./blackjack_contest.py [[matches to run] [-i] [-v|-vv]]\n\t-i specifies interactive mode via a simple cli\n\t-v enables a very verbose printing of players' moves\n-vv makes the scoring code print EVERYTHING\n"""
     
     else:
         players = buildBots(WARRIORS_DIR, SRC_DIR, botType=cardshark)
         num_iters = 1
+        
+        if "-v" in sys.argv:
+            VERBOSE = 1
+        elif "-vv" in sys.argv:
+            VERBOSE = 2
+        else:
+            VERBOSE = 0
+        
         try:
             num_iters = int(sys.argv[1])
         except Exception:
             pass
         
         if not ("-i" in sys.argv):
-            tourney(players, NUM_ROUNDS = num_iters)
+            tourney(players)
         
         else:
             print \
 """
 ########################################################################
 ## \\\\/\\\\/ELCOME to the BlackJack Contest CLI                          ##
-##  Use quit to exit                                                  ##
+##  Use quit, ctrl-d or ctr-c to exit the interpreter                 ##
 ##  Use help to list commands, Help [command] for more information    ##
 ##                                                                    ##
 ##  WARNING:                                                          ##
-##      DO NOT CTRL+C OR CTRL+D WHILE THE CONTEST IS RUNNING          ##
+##      DO NOT CTRL+C OR CTRL+D WHILE THE CONTEST IS RUNNING.         ##
 ##      AT PRESENT, THIS SOFTWARE DOESN'T HAVE SUPPORT FOR THOSE      ##
-##      ERRORS AND THE SCORING CODE WILL CRASH                        ##
+##      ERRORS WHILE RUNNING CONTESTS AND THE SCORING CODE WILL CRASH ##
 ########################################################################
 """
             # CLI implimentation here
@@ -302,9 +333,9 @@ Usage: ./blackjack_contest.py [[matches to run]]\n"""
                                     print "\t", c
 
                         if(cmd[0] == "match"):
-                            flag = ('-v' in cmd)
+                            flag = 2 if ('-v' in cmd) else 0
                             try:
-                                runTable(dealer, champ_dict[cmd[1]])
+                                runTable(dealer, list(champ_dict[cmd[1]]), v=flag)
                             except Exception:                            
                                 print "[!] BAD COMMAND ERROR - TRY THIS COMMAND: help match"
                                 continue
@@ -312,12 +343,11 @@ Usage: ./blackjack_contest.py [[matches to run]]\n"""
                         if(cmd[0] == "run"):
                             itters = 5
                             rounds = 100
-                            pop = []
                             try:
                                 pop = pop_dict[cmd[1]]
                             except Exception:
-                                print "[!] BAD POPULATION PROVIDED - TRY THIS COMMAND: help tourney OR: list"
-                                continue
+                                print "[!] BAD POPULATION PROVIDED - using default"
+                                pop = pop_dict["default"]
                             
                             try:
                                 itters = int(cmd[2])
@@ -333,10 +363,14 @@ Usage: ./blackjack_contest.py [[matches to run]]\n"""
                         else:
                             continue
                         
-                except Exception:
-                    if Exception in (EOFError, KeyboardInterrupt):
-                        print "Bye."
+                except EOFError:
+                        print "\n\nBye.\n"
                         exit(0)
-                    else:
+                
+                except KeyboardInterrupt:
+                        print "\n\nBye.\n"
+                        exit(0)
+                        
+                except Exception:
                         print "[!] ERROR IN REPL LOOP - TOP LEVEL"
                         continue

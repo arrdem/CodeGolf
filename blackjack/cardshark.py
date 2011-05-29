@@ -34,7 +34,7 @@
 #          <stake>          the  number of chips which the bot has bet this hand
 #          <chips>          the number of chips which the bot has
 #       SAMPLE INPUT
-#          $ ./foo.bar KJA KQKJA3592A 25 145
+#          $ ./foo.bar 21 KJA KQKJA3592A 25 145
 #
 #       OUTPUT SPECIFICATION
 #          "H"|"S"|"D"      (no quotes in output)
@@ -45,7 +45,6 @@
 import subprocess 
 from cards import card
 from bot import *
-import errors
 
 DEFAULT_CHIPS = 200
 TEST_CASE = "21 KJA KQKJA3592A 25 145"
@@ -60,6 +59,7 @@ class cardshark(bot):
         self.stake = 0
         self.wins = 0
         self.hasDough = True
+        self.rounds = 0
         
     def __reset__(self):
         self.hand = []
@@ -74,11 +74,19 @@ class cardshark(bot):
     def __score__(self):
         s = sum(map(lambda x: x.score(aceEleven = True), self.hand))
         if True in map(lambda x: x.isAce(), self.hand):
-            if s > 21:
-                s = sum(map(lambda x: x.score(aceEleven = False), self.hand))
+            aces = [a for a in self.hand if a.isAce()]
+            nonaces = [c for c in self.hand if not (c in aces)]
+            
+            for m in range(len(aces)):                
+                sb = sum(map(lambda x: x.score(aceEleven = False), nonaces))
+                for i in range(len(aces)):
+                    s = sb + sum(map(lambda x: x.score(aceEleven = False), aces[0:i])) +sum(map(lambda x: x.score(aceEleven = False), aces[i-1::]))
+                    if s <= 21:
+                        break
+                        
         if s > 21:
             self.stand = True
-            self.hand = []
+            s = 0
         return s
         
     def __hand__(self, cards):
