@@ -8,6 +8,7 @@
 # Author: rmckenzie (http://codegolf.stackexchange.com/users/1370/rmckenzie)
 
 ####    DEPENDS
+from __future__ import division
 import os
 import sys
 import random
@@ -29,7 +30,7 @@ SRC_DIR         = "./src"           # path to the bot source code
 NUM_ROUNDS = 1
 NUM_HANDS = 5
 HOUSE_SCORE = 17
-VERBOSE = 0 # VARBOSE an integer range 0,2
+VERBOSE = 0 # VERBOSE an integer range 0,2
             # 0 - basic printing
             # 1 - reasonable debugging
             # 2 - blow-by-blow
@@ -180,7 +181,7 @@ def runTable(players, hands = NUM_HANDS, dealer=DEALER, v = VERBOSE):
         
 def scores(players):
     a=[]
-    for i in players: a.append((i.chips, i))
+    for i in players: a.append( ((sum(i.__history__)/len(i.__history__)), i) )
     return a
     
 def trimBrokes(players):
@@ -190,22 +191,32 @@ def trimBrokes(players):
             l.append(i)
     return l
         
-def tourney(players, NUM_ROUNDS = 5, NUM_HANDS = 5):
-    c=0    
-    while False in map(lambda x: x.rounds == NUM_ROUNDS, players):  # while NOT all players have played NUM_ROUNDS rnds:
-        players=trimBrokes(players)                                 # trim out the brokes...
-        random.shuffle(players)                                     # shufle the list of players to try and mix up the tables
-        if players != []:                                           # if there are still bots who can play
-            r_min = min(map(lambda x: x.rounds, players))           # find the MINUMUM of the number of rounds played by all the bots
-            s = [t for t in players if t.rounds == r_min][0:4]      # collect all bots with that many games played, slice to first four
-            print "#"*80, "\n", "ROUND NUMBER", (r_min+1), "\n", "#"*80
-            runTable(s, hands = NUM_HANDS)                          # play'em off
-            c+=1
+def tourney(players, NUM_TOURNEYS = 15, NUM_ROUNDS = 5, NUM_HANDS = 5):
+    
+    __players__ = players
+    
+    for i in range(NUM_TOURNEYS):
+        players = list(__players__)
+        c=0    
+        while False in map(lambda x: x.rounds == NUM_ROUNDS, players):  # while NOT all players have played NUM_ROUNDS rnds:
+            players=trimBrokes(players)                                 # trim out the brokes...
+            random.shuffle(players)                                     # shufle the list of players to try and mix up the tables
+            if players != []:                                           # if there are still bots who can play
+                r_min = min(map(lambda x: x.rounds, players))           # find the MINUMUM of the number of rounds played by all the bots
+                s = [t for t in players if t.rounds == r_min][0:4]      # collect all bots with that many games played, slice to first four
+                print "#"*80, "\n", "ROUND NUMBER", (r_min+1), "\n", "#"*80
+                runTable(s, hands = NUM_HANDS)                          # play'em off
+                c+=1
+        for p in __players__:
+            p.__history__.append(p.chips)
+            p.__reset__()
+            p.chips = 200
+            p.rounds = 0
 
     #### FORMAL RESULTS PRINTING
     print "\n","-"*80, "\nFinal Tournament Scores:"
     for p in players:
-        print p.nicename(pad = False), p.chips, p.rounds
+        print p.nicename(pad = False), (sum(p.__history__)/len(p.__history__))
         
     winner = max(scores(players))
     print "\tWinner is %s" %(winner[1].nicename(pad = False))
