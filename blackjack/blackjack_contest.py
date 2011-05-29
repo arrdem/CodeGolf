@@ -22,7 +22,11 @@ from cardshark import *
 from deck import *
 
 ####    CONFIG
+<<<<<<< HEAD
 global VERBOSE, WARRIORS_DIR, SRC_DIR, NUM_ROUNDS, NUM_HANDS, HOUSE_SCORE
+=======
+global VERBOSE, WARRIORS_DIR, SRC_DIR, NUM_ROUNDS, NUM_HANDS, HOUSE_SCORE, DEALER
+>>>>>>> 84d72ae4d1edf2b0509dcba633a973ab4bf8665c
 
 WARRIORS_DIR    = "./warriors/"     # path to the final executable bots
 SRC_DIR         = "./src"           # path to the bot source code
@@ -33,6 +37,10 @@ VERBOSE = 0 # VARBOSE an integer range 0,2
             # 0 - basic printing
             # 1 - reasonable debugging
             # 2 - blow-by-blow
+<<<<<<< HEAD
+=======
+DEALER = cardshark("./dealer.py")
+>>>>>>> 84d72ae4d1edf2b0509dcba633a973ab4bf8665c
 
 ####    FUNCTIONS
 def doShit(player, d, c, isFirstMove, v = 0):
@@ -102,12 +110,18 @@ def deal(player, d, c):
             continue
     return d, c
 
+<<<<<<< HEAD
 def runTable(players, hands = NUM_HANDS):
     global VERBOSE
     v = VERBOSE
     d = deck()
     c = []
     dealer=[]
+=======
+def runTable(players, hands = NUM_HANDS, dealer=DEALER, v = VERBOSE):
+    d = deck()
+    c = []
+>>>>>>> 84d72ae4d1edf2b0509dcba633a973ab4bf8665c
     s=list(players)
     
     # Outermost game loop
@@ -128,7 +142,11 @@ def runTable(players, hands = NUM_HANDS):
             d,c = deal(dealer, d, c)
             
         # now hide one of the dealer's cards...
+<<<<<<< HEAD
         random.choice(dealer).hidden = True
+=======
+        random.choice(dealer.hand).hidden = True
+>>>>>>> 84d72ae4d1edf2b0509dcba633a973ab4bf8665c
         
         isFirstMove = True
         
@@ -139,20 +157,33 @@ def runTable(players, hands = NUM_HANDS):
                     d,c = doShit(player, d, c, isFirstMove, v = VERBOSE)
             isFirstMove = False
                     
+<<<<<<< HEAD
         while sum(map(lambda x: x.score(), dealer)) < 17:
             d,c = deal(dealer, d, c)
         if sum(map(lambda x: x.score(), dealer)) > 21:
             dealer = []
+=======
+        while not dealer.stand:
+            d,c = doShit(dealer, d, c, False) 
+>>>>>>> 84d72ae4d1edf2b0509dcba633a973ab4bf8665c
             
         print "\n\n[+/-]        Bot's Name         Score     Chips       Hand" 
 
         try:
+<<<<<<< HEAD
             print "[DEALER] "+20*"-"+"> ",sum(map(lambda x: x.score(), dealer))
+=======
+            print "[DEALER] "+20*"-"+"> ",dealer.__score__()
+>>>>>>> 84d72ae4d1edf2b0509dcba633a973ab4bf8665c
         except Exception:
             print 0
         
         for p in players:
+<<<<<<< HEAD
             if p.__score__() > sum(map(lambda x: x.score(), dealer)):
+=======
+            if p.__score__() > dealer.__score__():
+>>>>>>> 84d72ae4d1edf2b0509dcba633a973ab4bf8665c
                 print "[+]"+" "*4, 
                 p.chips += (2*p.stake)
             else:
@@ -169,7 +200,12 @@ def runTable(players, hands = NUM_HANDS):
             p.stake = 0
             p.stand = False
             
+<<<<<<< HEAD
         dealer = []
+=======
+        dealer.hand = [];dealer.stand = False  
+        
+>>>>>>> 84d72ae4d1edf2b0509dcba633a973ab4bf8665c
     print "\n\n\tScores:"
     for player in s:
         if player != dealer:
@@ -336,9 +372,9 @@ Usage: ./blackjack_contest.py [[matches to run] [-i] [-v|-vv]]\n\t-i specifies i
                                     print "\t", c
 
                         if(cmd[0] == "match"):
-                            flag = ('-v' in cmd)
+                            flag = 2 if ('-v' in cmd) else 0
                             try:
-                                runTable(dealer, champ_dict[cmd[1]])
+                                runTable(dealer, list(champ_dict[cmd[1]]), v=flag)
                             except Exception:                            
                                 print "[!] BAD COMMAND ERROR - TRY THIS COMMAND: help match"
                                 continue
@@ -346,12 +382,11 @@ Usage: ./blackjack_contest.py [[matches to run] [-i] [-v|-vv]]\n\t-i specifies i
                         if(cmd[0] == "run"):
                             itters = 5
                             rounds = 100
-                            pop = []
                             try:
                                 pop = pop_dict[cmd[1]]
                             except Exception:
-                                print "[!] BAD POPULATION PROVIDED - TRY THIS COMMAND: help tourney OR: list"
-                                continue
+                                print "[!] BAD POPULATION PROVIDED - using default"
+                                pop = pop_dict["default"]
                             
                             try:
                                 itters = int(cmd[2])
