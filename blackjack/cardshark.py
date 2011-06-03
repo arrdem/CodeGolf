@@ -30,21 +30,27 @@
 #          $ ./foo.bar <hand-score> <hand> <visible cards> <stake> <chips>
 #          <hand-score>     is the present integer value of the player's hand.
 #          <hand>           is a space-free string of the characters [1-9],A,J,Q,K
-#          <visible cards>  every dealt card on the table
+#          <visible cards>  every dealt card on the table. when new shoes are brought
+#                           into play, cards drawn therefrom are simply added to this list
+#                           NOTE: the first TWO (2) cards in this list belong to the dealer.
+#                             one however will be "hidden" by a "#". the other is visible.
+#                           !!! THE LIST IS CLEARED AT THE END OF HANDS, NOT SHOES !!!
 #          <stake>          the  number of chips which the bot has bet this hand
 #          <chips>          the number of chips which the bot has
 #       SAMPLE INPUT
 #          $ ./foo.bar 21 KJA KQKJA3592A 25 145
 #
 #       OUTPUT SPECIFICATION
-#          "H"|"S"|"D"      (no quotes in output)
+#          "H"|"S"|"D"|"B"  (no quotes in output)
 #          "H"              HIT - deal a card
 #          "S"              STAND - the dealer's turn
 #          "D"              DOUBLEDOWN - double the bet, take one card. FIRST MOVE ONLY
+#          "B 15"           BET - raises the bot's stakes by $15.
 
 import subprocess 
 from cards import card
 from bot import *
+import sys
 
 DEFAULT_CHIPS = 200
 TEST_CASE = "21 KJA KQKJA3592A 25 145"
@@ -61,6 +67,7 @@ class cardshark(bot):
         self.hasDough = True
         self.rounds = 0
         self.__history__ = []
+        self.bad = 0
         
     def __reset__(self):
         self.hand = []
@@ -98,25 +105,29 @@ class cardshark(bot):
         
     def dChips(self, s):
         self.chips += s
-        self.hasDough = (self.chips > 0)
+        self.hasDough = ((self.chips > 10) or (self.stake > 0))
         
-    def run(self, cards_dealt):
-        if self.hasDough:
-            process = subprocess.Popen(self.exec_code+" "+\
+    def __execstr__(self, cards_dealt):
+        return self.exec_code+" "+\
                                        str(self.__score__())+" "+\
                                        self.__hand__(self.hand)+" "+\
                                        self.__hand__(cards_dealt)+" "+\
                                        str(self.stake)+" "+\
-                                       str(self.chips),stdout=subprocess.PIPE,shell=True)
+                                       str(self.chips)
+        
+    def run(self, cards_dealt):
+        if (self.hasDough and (self.bad < 15)):
+            process = subprocess.Popen(self.__execstr__(cards_dealt),stdout=subprocess.PIPE,shell=True)
             o = process.communicate()[0].strip().lower()
             
             if o=="s":
                 self.stand = True
             
             return o
+        else:
+            print self.__execstr__(cards_dealt)
+            sys.exit(1)
     
     def append(self, c):
-        if type(c) == type(card("Clubs", "Nine")):
-            self.hand.append(c)
-        else:
-            raise Exception
+        self.hand.append(c)
+        self.__score__()
