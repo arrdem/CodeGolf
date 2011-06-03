@@ -27,69 +27,88 @@ global VERBOSE, WARRIORS_DIR, SRC_DIR, NUM_ROUNDS, NUM_HANDS, HOUSE_SCORE, DEALE
 
 WARRIORS_DIR    = "./warriors/"     # path to the final executable bots
 SRC_DIR         = "./src"           # path to the bot source code
-NUM_ROUNDS = 1
-NUM_HANDS = 5
-HOUSE_SCORE = 17
-VERBOSE = 0 # VERBOSE an integer range 0,2
-            # 0 - basic printing
-            # 1 - reasonable debugging
-            # 2 - blow-by-blow
+NUM_ROUNDS      = 1
+NUM_HANDS       = 5
+HOUSE_SCORE     = 17
+VERBOSE         = 0 # VERBOSE an integer range 0,2
+                    # 0 - basic printing
+                    # 1 - reasonable debugging
+                    # 2 - blow-by-blow
+
+if "-v" in sys.argv:
+    VERBOSE = 1
+elif "-vv" in sys.argv:
+    VERBOSE = 2
+else:
+    VERBOSE = 0
 
 DEALER = cardshark("./dealer.py")
 
 ####    FUNCTIONS
-def doShit(player, d, c, isFirstMove, v = 0):
-    try:
-        if player.__score__() > 21:
-            raise Exception
-        if v>1:
-            print "    ||",player.nicename(pad = False),"has: ",
-            for a in range(len(player.hand)):
-                print player.hand[a],
-                if(0 <= a < len(player.hand)-1):
-                    print " "*(20-len(str(player.hand[a-1]))),
-        
-            print "\n    ||      chose to :",
-        
-        s = player.run(c).strip("\n").split(" ")
-        
-        if "b" in s:
-            # then s should be of the format ['b', '50'] or something like
-            b = abs(int(s[1])) # just in case bots try to make negative bets... >:-)
-            if player.chips >= b:
-                player.dChips(-1*b)
-                players.stake += b
-                if v>1: print "Bet $",b
-        
-        elif "h" in s:
-            d,c = deal(player, d, c)
-            if v>1: print "Draw, got:", c[-1]
-        
-        elif ("d" in s) and isFirstMove:
-            d, c = deal(player, d, c)
-            player.stand = True
-            player.dChips(-1*player.stake)
-            player.stake *= 2
-            if v>1: print "DoubleDown, got:", c[-1]
-            
-        elif ("d" in s) and not isFirstMove:
-            player.stand = True
-            
-        elif "s" in s:
-            if v>1: print "Stand"
-            player.stand = True
-            
-        elif "p" in s:
-            # UNSUPPPORTED
-            player.__die__()
-        
+def doShit(player, d, c, isFirstMove, v = VERBOSE):
+    if player.__score__() > 21:
+        sys.stdout.write("[!!] BUSTED")
+        raise Exception
+    if v>1:
+        sys.stdout.write("    ||\n    || "+player.nicename(pad = False)+" has: ")
+        for a in range(len(player.hand)):
+            sys.stdout.write(str(player.hand[a]))
+            if(0 <= a < len(player.hand)-1):
+                sys.stdout.write(" "*(20-len(str(player.hand[a-1]))))
+
+        sys.stdout.write("\n    ||      chose to : ")
+
+    s = player.run(c).strip("\n").split(" ")
+
+    if "b" in s:
+        # then s should be of the format ['b', '50'] or something like
+        b = abs(int(s[1])) # just in case bots try to make negative bets... >:-)
+        if player.chips >= b:
+            player.dChips(-1*b)
+            player.stake += b
         else:
-            if True: print "[!] WARNING - NO ACTION TAKEN BY "+player.nicename(pad=False)+"\n\n     ORIGINAL OUTPUT WAS:",s,"\n\n[!] CONTINUING\n\n"
-             
-    except Exception:
+            player.stand = True
+        if v>1:
+            sys.stdout.write("Bet $ "+str(b)+", had $"+str(player.chips))
+            if player.chips < b:
+                sys.stdout.write(", Forced to stand for a bad bet")
+
+    elif "h" in s:
+        d,c = deal(player, d, c)
+        if v>1: 
+            sys.stdout.write("Draw, got: "+str(c[-1]))
+            if player.stand:
+                sys.stdout.write("\n    ||      .....and busted.")
+
+    elif ("d" in s) and isFirstMove:
+        d, c = deal(player, d, c)
         player.stand = True
-    finally:
-        return d, c
+        player.dChips(-1*player.stake)
+        player.stake *= 2
+        if v>1:
+            sys.stdout.write("DoubleDown, got: "+str(c[-1]))
+        
+    elif ("d" in s) and not isFirstMove:
+        player.stand = True
+        
+    elif "p" in s:
+        # UNSUPPPORTED
+        player.__die__()
+        
+    # now deal with errors, standing as a block
+    
+    elif "s" in s:
+        if v>1:
+            sys.stdout.write("Stand")
+        player.stand = True
+
+    elif s != "":
+        player.stand = True
+        print "\n[!] WARNING - NO ACTION TAKEN BY "+player.nicename(pad=False)+"\n     ORIGINAL OUTPUT WAS:",repr(s)
+        if (s == "") or (VERBOSE >= 2): print "[!]    "+player.nicename(pad=False)+"\n[!]    INPUT WAS "+player.__execstr__(c)
+
+    if v>1: sys.stdout.write("\n")
+    return d, c
 
 def deal(player, d, c):
     while True:
@@ -105,13 +124,16 @@ def deal(player, d, c):
             continue
     return d, c
 
-def runTable(players, hands = NUM_HANDS, dealer=DEALER, v = VERBOSE):
+def runTable(players, hands = NUM_HANDS, dealer=DEALER):
     d = deck()
     c = []
     s=list(players)
     
     # Outermost game loop
     for j in range(hands):
+        
+        d,c = deal(dealer, d, c)
+        d,c = deal(dealer, d, c)
         
         for jj in [0,1]:            # do this twice..
             for i in players:       # for each player:
@@ -123,9 +145,7 @@ def runTable(players, hands = NUM_HANDS, dealer=DEALER, v = VERBOSE):
                     d, c = deal(i, d, c)        # deal him in
                     
                 else:
-                    player.stand = True         # gtfo broke
-                
-            d,c = deal(dealer, d, c)
+                    i.stand = True         # gtfo broke
             
         # now hide one of the dealer's cards...
         random.choice(dealer.hand).hidden = True
@@ -136,7 +156,7 @@ def runTable(players, hands = NUM_HANDS, dealer=DEALER, v = VERBOSE):
         while (False in map(lambda x: x.stand, players)): # while SOMEONE is still up,
             for player in players:
                 if not player.stand:
-                    d,c = doShit(player, d, c, isFirstMove, v = VERBOSE)
+                    d,c = doShit(player, d, c, isFirstMove)
             isFirstMove = False
                     
         while not dealer.stand:
@@ -169,8 +189,10 @@ def runTable(players, hands = NUM_HANDS, dealer=DEALER, v = VERBOSE):
             
         dealer.hand = []
         dealer.stand = False  
+        for l in c: 
+            l.hidden = False        # unhide the dealer's old cards
         
-    print "\n\n\tScores:"
+    print "\n\n Scores:"
     for player in s:
         if player != dealer:
             print player.nicename(), player.chips
@@ -189,14 +211,17 @@ def trimBrokes(players):
     for i in players:
         if i.hasDough:
             l.append(i)
+        else:
+            print "\n[!] "+i.nicename(pad=False)+" went bust and was eliminated\n"
     return l
         
-def tourney(players, NUM_TOURNEYS = 15, NUM_ROUNDS = 5, NUM_HANDS = 5):
+def tourney(players, NUM_TOURNEYS = 25, NUM_ROUNDS = 5, NUM_HANDS = 5):
     
     __players__ = players
     
     for i in range(NUM_TOURNEYS):
         players = list(__players__)
+        #print "\n", len(__players__), len(players)
         c=0    
         while False in map(lambda x: x.rounds == NUM_ROUNDS, players):  # while NOT all players have played NUM_ROUNDS rnds:
             players=trimBrokes(players)                                 # trim out the brokes...
@@ -207,6 +232,9 @@ def tourney(players, NUM_TOURNEYS = 15, NUM_ROUNDS = 5, NUM_HANDS = 5):
                 print "#"*80, "\n", "ROUND NUMBER", (r_min+1), "\n", "#"*80
                 runTable(s, hands = NUM_HANDS)                          # play'em off
                 c+=1
+        
+        #print "\n", len(__players__), len(players)
+                
         for p in __players__:
             p.__history__.append(p.chips)
             p.__reset__()
@@ -215,10 +243,10 @@ def tourney(players, NUM_TOURNEYS = 15, NUM_ROUNDS = 5, NUM_HANDS = 5):
 
     #### FORMAL RESULTS PRINTING
     print "\n","-"*80, "\nFinal Tournament Scores:"
-    for p in players:
-        print p.nicename(pad = False), (sum(p.__history__)/len(p.__history__))
+    for p in __players__:
+        print "   ",p.nicename(pad = False), (sum(p.__history__)/len(p.__history__))
         
-    winner = max(scores(players))
+    winner = max(scores(__players__))
     print "\tWinner is %s" %(winner[1].nicename(pad = False))
 
 if __name__ == "__main__":
@@ -229,13 +257,6 @@ Usage: ./blackjack_contest.py [[matches to run] [-i] [-v|-vv]]\n\t-i specifies i
     else:
         players = buildBots(WARRIORS_DIR, SRC_DIR, botType=cardshark)
         num_iters = 1
-        
-        if "-v" in sys.argv:
-            VERBOSE = 1
-        elif "-vv" in sys.argv:
-            VERBOSE = 2
-        else:
-            VERBOSE = 0
         
         try:
             num_iters = int(sys.argv[1])
