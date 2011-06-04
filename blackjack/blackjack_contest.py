@@ -26,17 +26,17 @@ SRC_DIR         = "./src"           # path to the bot source code
 NUM_ROUNDS      = 1
 NUM_HANDS       = 5
 HOUSE_SCORE     = 17
-VERBOSE         = 0 # VERBOSE an integer range 0,2
-                    # 0 - basic printing
+VERBOSE         = 1 # VERBOSE an integer range 0,2
+                    # 0 - minimum printing
                     # 1 - reasonable debugging
                     # 2 - blow-by-blow
 
-if "-v" in sys.argv:
-    VERBOSE = 1
+if "-q" in sys.argv:
+    VERBOSE = 0
 elif "-vv" in sys.argv:
     VERBOSE = 2
 else:
-    VERBOSE = 0
+    VERBOSE = 1
 
 DEALER = cardshark("./dealer.py")
 
@@ -97,17 +97,17 @@ def doShit(player, d, c, isFirstMove, v = VERBOSE):
 
     elif s != "":
         player.stand = True
-        print "\n[!] WARNING - NO ACTION TAKEN BY "+player.nicename(pad=False)+"\n[!]    ORIGINAL OUTPUT WAS:",repr(s)
-        print "[!]    ",
-        for m in c:
-            print m.letter(),
-        print ""
-        print "[!]    "+player.nicename(pad=False)+"\n[!]    INPUT WAS "+player.__execstr__(c)
+        if v>0:
+            print "\n[!] WARNING - NO ACTION TAKEN BY "+player.nicename(pad=False)+"\n[!]    ORIGINAL OUTPUT WAS:",repr(s)
+            print "[!]    ",
+            for m in c:
+                print m.letter(),
+            print "\n[!]    "+player.nicename(pad=False)+"\n[!]    INPUT WAS "+player.__execstr__(c)
 
     if v>1: sys.stdout.write("\n")
     return d, c
 
-def deal(player, d, c):
+def deal(player, d, c, v=VERBOSE):
     while True:
         try:
             c.append(d.draw())
@@ -117,11 +117,11 @@ def deal(player, d, c):
             # the deck is empty....
             # deal from a new deck or something...
             d = deck()
-            sys.stderr.write("\n[WARNING] - NEW DECK CREATED\n")
+            if v>1: sys.stderr.write("\n[WARNING] - NEW DECK CREATED\n")
             continue
     return d, c
 
-def runTable(players, hands = NUM_HANDS, dealer=DEALER):
+def runTable(players, hands = NUM_HANDS, dealer=DEALER, v=VERBOSE):
     __players__ = players
     d = deck()
     c = []
@@ -158,27 +158,29 @@ def runTable(players, hands = NUM_HANDS, dealer=DEALER):
         while not dealer.stand:
             d,c = doShit(dealer, d, c, False) 
             
-        print "\n\n[+/-]        Bot's Name         Score     Chips       Hand" 
+        if v>0:
+            print "\n\n[+/-]        Bot's Name         Score     Chips       Hand" 
 
-        try:
-            print "[DEALER] "+20*"-"+"> ",dealer.__score__()
-        except Exception:
-            print 0
+            try:
+                print "[DEALER] "+20*"-"+"> ",dealer.__score__()
+            except Exception:
+                print 0
         
         for p in players:
             if p.__score__() > dealer.__score__():
-                print "[+]"+" "*4, 
+                if v>0: print "[+]"+" "*4, 
                 p.chips += (2*p.stake)
             else:
-                print "[-]"+" "*4,
-            l=len(p.nicename())
-            print p.nicename()," "*2, p.__score__(), " "*(8-len(str(p.__score__()))), p.chips,
-            
-            print " "*(12-len(str(p.__score__())+str(p.chips))),
-            for a in range(len(p.hand)):
-                print p.hand[a].letter(),
-            
-            print ""
+                if v>0: print "[-]"+" "*4,
+            if v>0:
+                l=len(p.nicename())
+                print p.nicename()," "*2, p.__score__(), " "*(8-len(str(p.__score__()))), p.chips,
+                
+                print " "*(12-len(str(p.__score__())+str(p.chips))),
+                for a in range(len(p.hand)):
+                    print p.hand[a].letter(),
+                
+                if v>0: print ""
             p.hand = []
             p.stake = 0
             p.stand = False
@@ -188,37 +190,36 @@ def runTable(players, hands = NUM_HANDS, dealer=DEALER):
         for l in c: 
             l.hidden = False        # unhide the dealer's old cards
         
-    print "\n\n Scores:"
+    if v>0: print "\n\n Scores:"
     for player in __players__:
         if player != dealer:
-            print player.nicename(), player.chips
+            if v>0: print player.nicename(), player.chips
         player.rounds += 1
         
         player.__reset__()
-    print "\n"
+    if v>0: print "\n"
         
 def scores(players):
     a=[]
     for i in players: a.append( ((sum(i.__history__)/len(i.__history__)), i) )
     return a
     
-def trimBrokes(players):
+def trimBrokes(players, v=VERBOSE):
     l=[]
     for i in players:
         if i.hasDough:
             l.append(i)
         else:
-            print "\n[!] "+i.nicename(pad=False)+" is broke\n"
+            if v>1: print "\n[!] "+i.nicename(pad=False)+" is broke\n"
     return l
         
-def tourney(players, NUM_TOURNEYS = 25, NUM_ROUNDS = 5, NUM_HANDS = 5):
+def tourney(players, NUM_TOURNEYS = 25, NUM_ROUNDS = 5, NUM_HANDS = 5, v=VERBOSE):
     
     __players__ = list(players)
     del players
     
     for i in range(NUM_TOURNEYS):
         players = list(__players__)
-        #print "\n", len(__players__), len(players)
         c=0    
         while False in map(lambda x: x.rounds == NUM_ROUNDS, players):  # while NOT all players have played NUM_ROUNDS rnds:
             players=trimBrokes(players)                                 # trim out the brokes...
@@ -226,12 +227,12 @@ def tourney(players, NUM_TOURNEYS = 25, NUM_ROUNDS = 5, NUM_HANDS = 5):
             if players != []:                                           # if there are still bots who can play
                 r_min = min(map(lambda x: x.rounds, players))           # find the MINUMUM of the number of rounds played by all the bots
                 s = [t for t in players if t.rounds == r_min][0:4]      # collect all bots with that many games played, slice to first four
-                print "#"*80, "\n", "ROUND NUMBER", (r_min+1), "\n", "#"*80
+                if v>0: print "#"*80, "\n", "ROUND NUMBER", (r_min+1), "\n", "#"*80
                 runTable(s, hands = NUM_HANDS)                          # play'em off
                 c+=1
         
         #print "\n", len(__players__), len(players)
-        sys.stderr.write("[!] END OF TOURNEY ROUND, PRINTING SCORES & RESETTING\n")
+        if v>1: sys.stderr.write("[!] END OF TOURNEY ROUND, PRINTING SCORES & RESETTING\n")
         for p in __players__:
             p.__history__.append(p.chips or 0)
             p.chips = 200
@@ -241,7 +242,7 @@ def tourney(players, NUM_TOURNEYS = 25, NUM_ROUNDS = 5, NUM_HANDS = 5):
         del players
 
     #### FORMAL RESULTS PRINTING
-    print "\n","-"*80, "\nFinal Tournament Scores:"
+    if v>0: print "\n","-"*80, "\nFinal Tournament Scores:"
     for p in __players__:
         print "   ",p.nicename(pad = False), (sum(p.__history__)/len(p.__history__))
         
@@ -251,7 +252,7 @@ def tourney(players, NUM_TOURNEYS = 25, NUM_ROUNDS = 5, NUM_HANDS = 5):
 if __name__ == "__main__":
     if(('-?' in sys.argv) or ('--help' in sys.argv)):
         print """\nblackjack_contest.py\nAuthor: rmckenzie (http://codegolf.stackexchange.com/users/1370/rmckenzie)\n
-Usage: ./blackjack_contest.py [[matches to run] [-i] [-v|-vv]]\n\t-i specifies interactive mode via a simple cli\n\t-v enables a very verbose printing of players' moves\n-vv makes the scoring code print EVERYTHING\n"""
+Usage: ./blackjack_contest.py [[matches to run] [-i] [-v|-q]]\n\t-i specifies interactive mode via a simple cli\n\t-v enables a blow-by-blow output of hands, draws, bets and moves\n-q silences most output aside from the final results\n"""
     
     else:
         players = buildBots(WARRIORS_DIR, SRC_DIR, botType=cardshark)
