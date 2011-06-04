@@ -11,11 +11,7 @@
 from __future__ import division
 import os
 import sys
-import random
-import py_compile
 import itertools
-import multiprocessing
-import string
 
 ############## CRITICAL IMPORTS ############
 from bot import *
@@ -46,9 +42,6 @@ DEALER = cardshark("./dealer.py")
 
 ####    FUNCTIONS
 def doShit(player, d, c, isFirstMove, v = VERBOSE):
-    if player.__score__() > 21:
-        sys.stdout.write("[!!] BUSTED")
-        raise Exception
     if v>1:
         sys.stdout.write("    ||\n    || "+player.nicename(pad = False)+" has: ")
         for a in range(len(player.hand)):
@@ -104,8 +97,12 @@ def doShit(player, d, c, isFirstMove, v = VERBOSE):
 
     elif s != "":
         player.stand = True
-        print "\n[!] WARNING - NO ACTION TAKEN BY "+player.nicename(pad=False)+"\n     ORIGINAL OUTPUT WAS:",repr(s)
-        if (s == "") or (VERBOSE >= 2): print "[!]    "+player.nicename(pad=False)+"\n[!]    INPUT WAS "+player.__execstr__(c)
+        print "\n[!] WARNING - NO ACTION TAKEN BY "+player.nicename(pad=False)+"\n[!]    ORIGINAL OUTPUT WAS:",repr(s)
+        print "[!]    ",
+        for m in c:
+            print m.letter(),
+        print ""
+        print "[!]    "+player.nicename(pad=False)+"\n[!]    INPUT WAS "+player.__execstr__(c)
 
     if v>1: sys.stdout.write("\n")
     return d, c
@@ -125,15 +122,17 @@ def deal(player, d, c):
     return d, c
 
 def runTable(players, hands = NUM_HANDS, dealer=DEALER):
+    __players__ = players
     d = deck()
     c = []
-    s=list(players)
     
     # Outermost game loop
     for j in range(hands):
+        players=list(__players__)
         
         d,c = deal(dealer, d, c)
         d,c = deal(dealer, d, c)
+        c[-1].hidden = True
         
         for jj in [0,1]:            # do this twice..
             for i in players:       # for each player:
@@ -146,10 +145,7 @@ def runTable(players, hands = NUM_HANDS, dealer=DEALER):
                     
                 else:
                     i.stand = True         # gtfo broke
-            
-        # now hide one of the dealer's cards...
-        random.choice(dealer.hand).hidden = True
-        
+
         isFirstMove = True
         
         # now let them play....   
@@ -193,7 +189,7 @@ def runTable(players, hands = NUM_HANDS, dealer=DEALER):
             l.hidden = False        # unhide the dealer's old cards
         
     print "\n\n Scores:"
-    for player in s:
+    for player in __players__:
         if player != dealer:
             print player.nicename(), player.chips
         player.rounds += 1
@@ -212,12 +208,13 @@ def trimBrokes(players):
         if i.hasDough:
             l.append(i)
         else:
-            print "\n[!] "+i.nicename(pad=False)+" went bust and was eliminated\n"
+            print "\n[!] "+i.nicename(pad=False)+" is broke\n"
     return l
         
 def tourney(players, NUM_TOURNEYS = 25, NUM_ROUNDS = 5, NUM_HANDS = 5):
     
-    __players__ = players
+    __players__ = list(players)
+    del players
     
     for i in range(NUM_TOURNEYS):
         players = list(__players__)
@@ -234,12 +231,14 @@ def tourney(players, NUM_TOURNEYS = 25, NUM_ROUNDS = 5, NUM_HANDS = 5):
                 c+=1
         
         #print "\n", len(__players__), len(players)
-                
+        sys.stderr.write("[!] END OF TOURNEY ROUND, PRINTING SCORES & RESETTING\n")
         for p in __players__:
-            p.__history__.append(p.chips)
-            p.__reset__()
+            p.__history__.append(p.chips or 0)
             p.chips = 200
             p.rounds = 0
+            p.__reset__()
+            
+        del players
 
     #### FORMAL RESULTS PRINTING
     print "\n","-"*80, "\nFinal Tournament Scores:"
