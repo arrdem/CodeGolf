@@ -139,7 +139,7 @@ def buildBots(bots_dir, src_dir, botType = bot):
                 
                 if ext in ('.c','.cpp'):
                     print "[!] COMPILING ", foo, 
-                    subprocess.call(["gcc", "-o", bots_dir + "/" + base, "./src/" + foo])
+                    subprocess.call(["gcc", "-o -std=c99 -q", bots_dir + "/" + base, "./src/" + foo])
                     print ", DONE!"
                 
                 elif (ext == '.java'):
