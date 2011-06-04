@@ -73,6 +73,7 @@ class cardshark(bot):
         self.hand = []
         self.stand = False
         self.stake = 0
+        self.hasDough =(self.chips >= 10)
 
     def __test__(self):
         process = subprocess.Popen(self.exec_code+" "+TEST_CASE,stdout=subprocess.PIPE,shell=True)
@@ -108,12 +109,21 @@ class cardshark(bot):
         self.hasDough = ((self.chips > 10) or (self.stake > 0))
         
     def __execstr__(self, cards_dealt):
-        return self.exec_code+" "+\
-                                       str(self.__score__())+" "+\
-                                       self.__hand__(self.hand)+" "+\
-                                       self.__hand__(cards_dealt)+" "+\
-                                       str(self.stake)+" "+\
-                                       str(self.chips)
+        s= self.exec_code+" "+\
+           str(self.__score__())+" "+\
+           self.__hand__(self.hand)+" "+\
+           self.__hand__(cards_dealt)+" "+\
+           str(self.stake)+" "+\
+           str(self.chips)
+        if not (s==""):
+            return s
+        print "[!]",s
+        print "[!]",s
+        print "[!]",
+        for c in cards_dealt:
+            print str(c),
+        print ""
+        sys.exit(1, msg="BAD EXECSTRING GENERATED")
         
     def run(self, cards_dealt):
         if (self.hasDough and (self.bad < 15)):
