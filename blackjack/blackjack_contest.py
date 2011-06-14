@@ -166,7 +166,8 @@ def runTable(players, hands = NUM_HANDS, dealer=DEALER, v=VERBOSE):
             except Exception:
                 print 0
         
-        for p in players:
+        for p in __players__:
+            p.hands += 1
             if p.__score__() > dealer.__score__():
                 if v>0: print "[+]"+" "*4, 
                 p.chips += (2*p.stake)
@@ -211,6 +212,7 @@ def trimBrokes(players, v=VERBOSE):
             l.append(i)
         else:
             if v>1: print "\n[!] "+i.nicename(pad=False)+" is broke\n"
+            i.__history__.append(0)
     return l
         
 def tourney(players, NUM_TOURNEYS = 25, NUM_ROUNDS = 5, NUM_HANDS = 5, v=VERBOSE):
@@ -244,7 +246,7 @@ def tourney(players, NUM_TOURNEYS = 25, NUM_ROUNDS = 5, NUM_HANDS = 5, v=VERBOSE
     #### FORMAL RESULTS PRINTING
     if v>0: print "\n","-"*80, "\nFinal Tournament Scores:"
     for p in __players__:
-        print "   ",p.nicename(pad = False), (sum(p.__history__)/len(p.__history__))
+        print "   ",p.nicename(pad = False), (sum(p.__history__)/len(p.__history__)), p.hands
         
     winner = max(scores(__players__))
     print "\tWinner is %s" %(winner[1].nicename(pad = False))

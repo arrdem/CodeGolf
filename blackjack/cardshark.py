@@ -68,6 +68,7 @@ class cardshark(bot):
         self.rounds = 0
         self.__history__ = []
         self.bad = 0
+        self.hands = 0
         
     def __reset__(self):
         self.hand = []
